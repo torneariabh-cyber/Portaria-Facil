@@ -1,4 +1,4 @@
-
+<html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -53,7 +53,7 @@ textarea{min-height:160px;font-family:ui-monospace,Consolas,monospace;font-size:
 
 body.display-mode #floatingReportBtn{display:none!important}
 
-/* Ajustes de compatibilidade visual para iPhone/Safari; preserva as funções existentes */
+/* Ajustes de compatibilidade visual para iPhone/Safari */
 html { -webkit-text-size-adjust: 100%; }
 body { padding-bottom: env(safe-area-inset-bottom); }
 button, input, select, textarea { touch-action: manipulation; }
@@ -76,9 +76,90 @@ input, select, textarea { font-size: 16px; }
   body.display-mode #displayView .display-screen.showing-qr #qrOutput canvas { width: min(72vw, 300px) !important; height: auto !important; max-height: 40svh; }
 }
 
+/* Página de navegação (abre no celular do prestador após ler o QR) */
+.nav-page{max-width:560px;margin:0 auto;padding:18px 14px 40px;font-family:Arial,Helvetica,sans-serif}
+.nav-page .nav-header{background:var(--navy);color:#fff;border-radius:15px;padding:20px;text-align:center;margin-bottom:16px;box-shadow:0 4px 16px #18304b20}
+.nav-page .nav-header .tag{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#a9c5e6;font-weight:700}
+.nav-page .nav-header h1{font-size:clamp(22px,5vw,30px);margin:8px 0 0;line-height:1.25}
+.nav-page .nav-header .sub{margin-top:8px;color:#d7e5f7;font-size:15px}
+.nav-page .card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:14px;box-shadow:0 4px 16px #18304b0a}
+.nav-page .info-line{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.nav-page .info-line:last-child{border-bottom:0}
+.nav-page .info-line .lbl{color:var(--muted);font-weight:700}
+.nav-page .info-line .val{color:var(--ink);font-weight:700;text-align:right;word-break:break-word}
+.nav-page .big-link{display:flex;align-items:center;gap:14px;width:100%;padding:18px;border-radius:14px;border:1px solid var(--line);background:#fff;text-decoration:none;color:var(--ink);font-weight:700;font-size:17px;margin-bottom:10px;transition:transform .12s ease,box-shadow .12s ease;box-shadow:0 2px 8px #18304b0a}
+.nav-page .big-link:active{transform:scale(.98)}
+.nav-page .big-link .ico{font-size:28px;line-height:1;width:38px;text-align:center;flex-shrink:0}
+.nav-page .big-link .txt{flex:1;text-align:left}
+.nav-page .big-link .txt small{display:block;color:var(--muted);font-weight:400;font-size:13px;margin-top:2px}
+.nav-page .big-link.gmaps{background:#e8f1fe;border-color:#b9d4f5}
+.nav-page .big-link.waze{background:#e6f6ff;border-color:#a8dcf5}
+.nav-page .big-link.apple{background:#f0f0f5;border-color:#d3d3dc}
+.nav-page .big-link.copy{background:#fff8e1;border-color:#f0e0a8}
+.nav-page .big-link.orig{background:#e8f7ee;border-color:#b8e6c8}
+.nav-page .notice{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
+.nav-page .copy-feedback{color:var(--green);font-size:13px;margin-top:6px;text-align:center;min-height:18px}
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     PÁGINA PÚBLICA DE NAVEGAÇÃO (abre no celular após ler o QR)
+     ============================================================ -->
+<div id="navPage" style="display:none">
+  <div class="nav-page">
+    <div class="nav-header">
+      <div class="tag">LOCALIZAÇÃO DO IMÓVEL</div>
+      <h1 id="navTitle">Residencial Reserva Celeste 3</h1>
+      <div class="sub" id="navSub">Escolha como deseja abrir a rota</div>
+    </div>
+
+    <div class="card">
+      <div class="info-line"><span class="lbl">Proprietário/Morador</span><span class="val" id="navProprietario">—</span></div>
+      <div class="info-line"><span class="lbl">Rua / Avenida</span><span class="val" id="navRua">—</span></div>
+      <div class="info-line"><span class="lbl">Quadra</span><span class="val" id="navQuadra">—</span></div>
+      <div class="info-line"><span class="lbl">Lote</span><span class="val" id="navLote">—</span></div>
+      <div class="info-line"><span class="lbl">Tipo de serviço</span><span class="val" id="navService">—</span></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 12px;font-size:16px">Abrir rota em:</h3>
+
+      <a class="big-link gmaps" id="navGmaps" href="#" target="_blank" rel="noopener">
+        <span class="ico">🗺️</span>
+        <span class="txt">Google Maps<small>Navegação padrão</small></span>
+      </a>
+
+      <a class="big-link waze" id="navWaze" href="#" target="_blank" rel="noopener">
+        <span class="ico">🚗</span>
+        <span class="txt">Waze<small>Melhor para trânsito em tempo real</small></span>
+      </a>
+
+      <a class="big-link apple" id="navApple" href="#" target="_blank" rel="noopener">
+        <span class="ico">🍎</span>
+        <span class="txt">Apple Maps<small>Para iPhone / iPad</small></span>
+      </a>
+
+      <a class="big-link orig" id="navOriginal" href="#" target="_blank" rel="noopener">
+        <span class="ico">🌐</span>
+        <span class="txt">Abrir link original<small>Endereço exato cadastrado pelo condomínio</small></span>
+      </a>
+
+      <button class="big-link copy" id="navCopyBtn" type="button">
+        <span class="ico">📋</span>
+        <span class="txt">Copiar endereço<small id="navCopyPreview">—</small></span>
+      </button>
+      <div class="copy-feedback" id="navCopyFeedback"></div>
+    </div>
+
+    <p class="notice">Se algum aplicativo não abrir, use o Google Maps e cole o endereço copiado.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     APLICAÇÃO PRINCIPAL
+     ============================================================ -->
+<div id="appRoot">
 <header>
   <div><h1>Portaria Fácil <a href="https://maps.google.com/" target="_blank" rel="noopener noreferrer" title="Abrir Google Maps" aria-label="Abrir Google Maps" style="display:inline-flex;align-items:center;vertical-align:middle;margin-left:7px;text-decoration:none;font-size:25px">📍</a></h1><p>Localização rápida e inteligente Condominial</p></div>
   <div class="header-right" id="liveClock" aria-label="Hora atual">--:--:--</div>
@@ -119,7 +200,7 @@ input, select, textarea { font-size: 16px; }
       <button class="secondary" id="openMapBtn" disabled>Abrir mapa neste dispositivo</button>
       <button class="secondary" id="printQrBtn" disabled>Imprimir QR Code</button>
     </div>
-    <p class="hint">O prestador de serviço pode escanear este QR Code com a câmera do celular para abrir a localização.</p>
+    <p class="hint">O prestador de serviço pode escanear este QR Code com a câmera do celular para abrir a localização e escolher o app de navegação.</p>
   </div>
 </section>
 
@@ -215,8 +296,93 @@ input, select, textarea { font-size: 16px; }
   </div>
 </section>
 </main>
+<button id="floatingReportBtn" type="button" title="Baixar relatório de entregas" aria-label="Baixar relatório de entregas" style="position:fixed;right:18px;bottom:18px;z-index:9999;width:58px;height:50px;border:1px solid #d6b64b;border-radius:12px;background:#fff4bd;color:#243247;box-shadow:0 4px 14px #0003;font-size:29px;display:flex;align-items:center;justify-content:center;cursor:pointer">📂</button>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
+/* ============================================================
+   PÁGINA DE NAVEGAÇÃO — PARSE DO QR
+   Quando o QR contém dados de imóvel (?pt=... codificado), esta
+   página é exibida e o app principal fica oculto.
+   ============================================================ */
+(function(){
+  const params=new URLSearchParams(location.search);
+  const payload=params.get('pt');
+  if(!payload)return; // sem payload → app principal
+
+  function b64d(str){
+    try{str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';return decodeURIComponent(escape(atob(str)))}catch(e){return ''}
+  }
+  let data=null;
+  try{data=JSON.parse(b64d(payload))}catch(e){data=null}
+  if(!data||!data.url){document.body.innerHTML='<p style="padding:20px;font-family:Arial">QR Code inválido.</p>';return}
+
+  // Esconde app principal
+  const app=document.getElementById('appRoot');
+  if(app)app.style.display='none';
+  const nav=document.getElementById('navPage');
+  if(nav)nav.style.display='block';
+
+  // Preenche dados
+  const setText=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v||'—'};
+  setText('navProprietario',data.proprietario||'Não cadastrado');
+  setText('navRua',data.rua||'Não cadastrada');
+  setText('navQuadra',data.quadra||'—');
+  setText('navLote',data.lote||'—');
+  setText('navService',data.serviceType||'Não informado');
+  if(data.condoName)setText('navTitle',data.condoName);
+
+  const q=data.query||'';
+  const lat=data.lat, lng=data.lng;
+  const hasCoords=(typeof lat==='number'&&typeof lng==='number');
+
+  // Google Maps
+  const gmaps=hasCoords
+    ? 'https://www.google.com/maps/dir/?api=1&destination='+lat+','+lng
+    : (q ? 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q) : data.url);
+  const elG=document.getElementById('navGmaps');if(elG)elG.href=gmaps;
+
+  // Waze
+  const waze=hasCoords
+    ? 'https://waze.com/ul?ll='+lat+','+lng+'&navigate=yes'
+    : (q ? 'https://waze.com/ul?q='+encodeURIComponent(q)+'&navigate=yes' : data.url);
+  const elW=document.getElementById('navWaze');if(elW)elW.href=waze;
+
+  // Apple Maps
+  const apple=hasCoords
+    ? 'https://maps.apple.com/?daddr='+lat+','+lng
+    : (q ? 'https://maps.apple.com/?q='+encodeURIComponent(q) : data.url);
+  const elA=document.getElementById('navApple');if(elA)elA.href=apple;
+
+  // Link original
+  const elO=document.getElementById('navOriginal');if(elO)elO.href=data.url;
+
+  // Preview copiar
+  const copyText=data.displayAddress||q||data.url;
+  const preview=document.getElementById('navCopyPreview');
+  if(preview)preview.textContent=copyText.length>48?copyText.slice(0,48)+'…':copyText;
+
+  const copyBtn=document.getElementById('navCopyBtn');
+  const copyFb=document.getElementById('navCopyFeedback');
+  if(copyBtn)copyBtn.addEventListener('click',async()=>{
+    try{
+      await navigator.clipboard.writeText(copyText);
+      if(copyFb)copyFb.textContent='✅ Endereço copiado!';
+    }catch(e){
+      // Fallback
+      const ta=document.createElement('textarea');ta.value=copyText;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');if(copyFb)copyFb.textContent='✅ Endereço copiado!'}catch(_){if(copyFb)copyFb.textContent='❌ Não foi possível copiar.'}ta.remove();
+    }
+    setTimeout(()=>{if(copyFb)copyFb.textContent=''},3000);
+  });
+})();
+
+/* ============================================================
+   APLICAÇÃO PRINCIPAL (só roda quando NÃO é página de navegação)
+   ============================================================ */
+(function(){
+  if(document.getElementById('appRoot').style.display==='none')return; // é página de navegação
+
 const STORAGE='portaria_facil_condominio_v2';
 const CHANNEL='portaria_facil_condominio_sync_v2';
 let records=[], current=null, expiryTimer=null, countdownInterval=null, slideInterval=null, slideImages=[], hasSlideVideo=false, slideVideoUrl=null, slideRenderToken=0;
@@ -236,9 +402,10 @@ async function deleteVideoBlob(){try{const db=await openMediaDb();await new Prom
 function broadcastMedia(){try{if('BroadcastChannel'in window){const c=new BroadcastChannel(CHANNEL);c.postMessage({type:'slides',images:slideImages,hasVideo:hasSlideVideo,logo:condoLogo});c.close()}}catch(e){}}
 const LOG_STORAGE='portaria_facil_navigation_logs_v1';
 const DELIVERY_STORAGE='portaria_facil_delivery_report_v1';
-const DELIVERY_AUTODOWNLOAD_STORAGE='portaria_facil_delivery_report_last_auto_v1';
-const DELIVERY_REPORT_INTERVAL=6*60*60*1000;
 let deliveryEntries=[];try{deliveryEntries=JSON.parse(localStorage.getItem(DELIVERY_STORAGE)||'[]')}catch(e){deliveryEntries=[]}
+
+const $=id=>document.getElementById(id);
+
 function recordDelivery(r){
  const now=new Date();const entry={date:now.toLocaleDateString('pt-BR'),time:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),serviceType:$('serviceTypeSelect').value||'Não informado',quadra:r.quadra||'',lote:r.lote||'',rua:r.rua||'',proprietario:r.proprietario||'Não cadastrado'};
  deliveryEntries.push(entry);try{localStorage.setItem(DELIVERY_STORAGE,JSON.stringify(deliveryEntries))}catch(e){}
@@ -249,11 +416,8 @@ function downloadDeliveryReport(auto=false){
  const rows=deliveryEntries.map(e=>[e.date,e.time,e.serviceType,e.quadra,e.lote,e.rua,e.proprietario]);
  const csv='\uFEFF'+[headers,...rows].map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(';')).join('\r\n');
  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='relatorio_entregas_'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
- if(auto)localStorage.setItem(DELIVERY_AUTODOWNLOAD_STORAGE,String(Date.now()));
 }
-function scheduleAutomaticDeliveryReport(){/* Registros mantidos internamente; o download ocorre somente ao clicar na pasta. */}
 
-const $=id=>document.getElementById(id);
 let logs=[];try{logs=JSON.parse(localStorage.getItem(LOG_STORAGE)||'[]')}catch(e){logs=[]}
 function logAction(action,details=''){
   logs.unshift({date:new Date().toLocaleString('pt-BR'),action,details});
@@ -271,6 +435,7 @@ function validUrl(s){try{let u=new URL(s);return u.protocol==='https:'||u.protoc
 function key(q,l){return String(q).trim().toLocaleLowerCase()+'|'+String(l).trim().toLocaleLowerCase()}
 function setStatus(id,msg,error=false){$(id).textContent=msg;$(id).style.color=error?'#b42318':'#12804a'}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
 const AUTH_STORAGE='portaria_facil_admin_auth_v1';
 let authData=null,adminAuthenticated=false;
 try{authData=JSON.parse(localStorage.getItem(AUTH_STORAGE)||'null')}catch(e){authData=null}
@@ -355,55 +520,66 @@ function showRecord(r){
 function updateClock(){
  const el=$('liveClock');if(el)el.textContent=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
 }
-function renderSlidePreviews(){
- const box=$('slidePreviews');if(!box)return;
- const imageCards=slideImages.map((src,i)=>`<div style="border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center"><img src="${src}" alt="Imagem ${i+1}" style="max-width:100%;height:110px;object-fit:contain"><div class="hint">Imagem ${i+1}</div></div>`);
- if(hasSlideVideo)imageCards.push('<div style="border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center"><strong>Vídeo salvo</strong><div class="hint">Será reproduzido na apresentação</div></div>');
- box.innerHTML=imageCards.join('');
+
+/* ------- EXTRAI COORDENADAS / QUERY DE UM LINK DO GOOGLE MAPS ------- */
+function extractGeo(url){
+  // Formatos suportados:
+  // https://www.google.com/maps/@-23.55,-46.63,17z
+  // https://www.google.com/maps/place/.../@-23.55,-46.63,17z
+  // https://maps.google.com/?q=-23.55,-46.63
+  // https://maps.google.com/?ll=-23.55,-46.63
+  // https://maps.app.goo.gl/xxxx (encurtado — não dá para extrair)
+  let lat=null,lng=null,query='';
+  try{
+    const u=new URL(url);
+    // @lat,lng
+    const mAt=u.pathname.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if(mAt){lat=parseFloat(mAt[1]);lng=parseFloat(mAt[2])}
+    // ?q=lat,lng
+    const q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('ll')||u.searchParams.get('daddr')||u.searchParams.get('destination');
+    if(q){
+      const mQ=q.match(/^(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)$/);
+      if(mQ){lat=parseFloat(mQ[1]);lng=parseFloat(mQ[2])}
+      else query=q;
+    }
+    // place/Texto
+    const mPlace=u.pathname.match(/\/place\/([^/]+)/);
+    if(mPlace&&!query){query=decodeURIComponent(mPlace[1].replace(/\+/g,' '))}
+    if(!lat&&u.searchParams.get('destination')){
+      const d=u.searchParams.get('destination');
+      const md=d.match(/^(-?\d+\.\d+),(-?\d+\.\d+)$/);
+      if(md){lat=parseFloat(md[1]);lng=parseFloat(md[2])}
+    }
+  }catch(e){}
+  return {lat,lng,query};
 }
-async function renderSlideshow(){
- const box=$('slideshow');if(!box)return;
- if(slideInterval){clearInterval(slideInterval);slideInterval=null}
- const token=++slideRenderToken;
- if(slideVideoUrl){URL.revokeObjectURL(slideVideoUrl);slideVideoUrl=null}
- box.innerHTML='';
- if(current)return;
- let videoBlob=null;
- if(hasSlideVideo){try{videoBlob=await getVideoBlob()}catch(e){videoBlob=null}}
- if(token!==slideRenderToken||current)return;
- if(videoBlob)slideVideoUrl=URL.createObjectURL(videoBlob);
- const imageItems=slideImages.map(src=>({type:'image',src}));
- const items=[];
- // Quando existem imagens e vídeo, o vídeo toca até o fim e depois passa para as imagens.
- // Se não há imagens, o vídeo fica em repetição infinita.
- if(slideVideoUrl)items.push({type:'video',src:slideVideoUrl});
- items.push(...imageItems);
- if(!items.length){box.innerHTML='<div class="empty">Bem-vindo ao Residencial Reserva Celeste 3</div>';return}
- let index=0, imageTimer=null;
- const clearImageTimer=()=>{if(imageTimer){clearTimeout(imageTimer);imageTimer=null}};
- const showItem=()=>{
-   clearImageTimer();
-   if(current||token!==slideRenderToken)return;
-   box.innerHTML='';const item=items[index];
-   if(item.type==='image'){
-     const img=document.createElement('img');img.alt='Imagem do condomínio';img.src=item.src;img.onerror=()=>{if(token===slideRenderToken){index=(index+1)%items.length;showItem()}};box.appendChild(img);
-     if(items.length>1)imageTimer=setTimeout(()=>{if(current||token!==slideRenderToken)return;index=(index+1)%items.length;showItem()},10000);
-   }else{
-     const video=document.createElement('video');video.src=item.src;video.autoplay=true;video.muted=true;video.defaultMuted=true;video.loop=items.length===1;video.playsInline=true;video.preload='auto';
-     video.setAttribute('playsinline','');video.setAttribute('muted','');video.setAttribute('autoplay','');if(items.length===1)video.setAttribute('loop','');
-     video.style.width='100%';video.style.height='100%';video.style.objectFit='contain';
-     video.addEventListener('ended',()=>{if(items.length>1&&token===slideRenderToken&&!current){index=(index+1)%items.length;showItem()}});
-     video.addEventListener('error',()=>{if(token===slideRenderToken){box.innerHTML='<div class="empty">Não foi possível reproduzir este vídeo. Use MP4/H.264. Para maior compatibilidade, teste um vídeo curto e comprimido.</div>';if(items.length>1){imageTimer=setTimeout(()=>{index=(index+1)%items.length;showItem()},3000)}}});
-     box.appendChild(video);
-     const tryPlay=()=>{video.muted=true;video.defaultMuted=true;video.setAttribute('muted','');const p=video.play();if(p&&p.catch)p.catch(()=>{video.controls=true;video.setAttribute('controls','');});};
-     video.addEventListener('loadedmetadata',tryPlay,{once:true});
-     video.addEventListener('canplay',tryPlay,{once:true});
-     tryPlay();
-     box.addEventListener('click',()=>{video.muted=true;tryPlay()},{once:true});
-   }
- };
- showItem();
+
+/* ------- GERA PAYLOAD BASE64 URL-SAFE PARA O QR ------- */
+function buildNavPayload(record){
+  const url=String(record.url||'').trim();
+  const geo=extractGeo(url);
+  const displayAddress=[record.rua,record.quadra?'Quadra '+record.quadra:'',record.lote?'Lote '+record.lote:''].filter(Boolean).join(' — ');
+  const data={
+    url,
+    lat:geo.lat,
+    lng:geo.lng,
+    query:geo.query,
+    quadra:record.quadra||'',
+    lote:record.lote||'',
+    rua:record.rua||'',
+    proprietario:record.proprietario||'',
+    serviceType:$('serviceTypeSelect').value||'',
+    displayAddress,
+    condoName:'Residencial Reserva Celeste 3'
+  };
+  const json=JSON.stringify(data);
+  const b64=btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  return b64;
 }
+function buildNavPageUrl(record){
+  return location.origin+location.pathname+'?pt='+buildNavPayload(record);
+}
+
 function startCountdown(){
  if(countdownInterval)clearInterval(countdownInterval);
  const el=$('countdown');if(!current){el.hidden=true;return}
@@ -449,18 +625,16 @@ function renderCurrent(){
  if(!current)renderSlideshow();
  $('openMapBtn').disabled=!current;$('printQrBtn').disabled=!current;
  if(!current){$('qrOutput').innerHTML='<div class="empty">Aguardando próxima localização.</div>';return}
- // O QR Code fica vinculado ao link cadastrado deste imóvel.
- // O temporizador limpa apenas a tela; não altera o conteúdo do QR Code.
- const qrUrl=String(current.url||'').trim();
+ // O QR Code agora aponta para a página interna com múltiplas opções de navegação.
+ const qrUrl=buildNavPageUrl(current);
  if(!qrUrl){$('qrOutput').innerHTML='<div class="empty">Este imóvel não possui link cadastrado.</div>';return}
  let generated=false;
  if(window.QRCode){
   try{
-   new QRCode($('qrOutput'),{text:qrUrl,width:300,height:300,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel?QRCode.CorrectLevel.H:3});
+   new QRCode($('qrOutput'),{text:qrUrl,width:300,height:300,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel?QRCode.CorrectLevel.L:1});
    generated=!!$('qrOutput').querySelector('canvas, img');
   }catch(err){generated=false;$('qrOutput').innerHTML=''}
  }
- // Alternativa caso a biblioteca principal não carregue.
  if(!generated){
   const img=document.createElement('img');
   img.alt='QR Code do link de localização cadastrado';img.width=300;img.height=300;
@@ -541,16 +715,73 @@ window.addEventListener('storage',e=>{if(e.key===STORAGE){try{records=JSON.parse
 if('BroadcastChannel'in window){const channel=new BroadcastChannel(CHANNEL);channel.onmessage=e=>{if(e.data?.type==='records'){records=e.data.records||[];renderAll()}if(e.data?.type==='current'){current=e.data.record||null;renderCurrent();scheduleExpiry()}if(e.data?.type==='slides'){slideImages=e.data.images||[];if(typeof e.data.hasVideo==='boolean')hasSlideVideo=e.data.hasVideo;if(typeof e.data.logo==='string'){condoLogo=e.data.logo;try{localStorage.setItem(CONDO_LOGO_STORAGE,condoLogo)}catch(_){}const bg=$('displayBgLogo');if(bg)bg.style.backgroundImage=condoLogo?`url("${condoLogo}")`:'none'};try{localStorage.setItem(SLIDES_STORAGE,JSON.stringify(slideImages));if(hasSlideVideo)localStorage.setItem(VIDEO_META_STORAGE,'1');else localStorage.removeItem(VIDEO_META_STORAGE)}catch(_){}renderSlidePreviews();renderSlideshow()}}}
 if(location.hash==='#tela-prestador'){document.body.classList.add('display-mode');switchView('displayView');}
 
+// ============================================================
+// SLIDESHOW
+// ============================================================
+function renderSlidePreviews(){
+ const box=$('slidePreviews');if(!box)return;
+ const imageCards=slideImages.map((src,i)=>`<div style="border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center"><img src="${src}" alt="Imagem ${i+1}" style="max-width:100%;height:110px;object-fit:contain"><div class="hint">Imagem ${i+1}</div></div>`);
+ if(hasSlideVideo)imageCards.push('<div style="border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center"><strong>Vídeo salvo</strong><div class="hint">Será reproduzido na apresentação</div></div>');
+ box.innerHTML=imageCards.join('');
+}
+async function renderSlideshow(){
+ const box=$('slideshow');if(!box)return;
+ if(slideInterval){clearInterval(slideInterval);slideInterval=null}
+ const token=++slideRenderToken;
+ if(slideVideoUrl){URL.revokeObjectURL(slideVideoUrl);slideVideoUrl=null}
+ box.innerHTML='';
+ if(current)return;
+ let videoBlob=null;
+ if(hasSlideVideo){try{videoBlob=await getVideoBlob()}catch(e){videoBlob=null}}
+ if(token!==slideRenderToken||current)return;
+ if(videoBlob)slideVideoUrl=URL.createObjectURL(videoBlob);
+ const imageItems=slideImages.map(src=>({type:'image',src}));
+ const items=[];
+ if(slideVideoUrl)items.push({type:'video',src:slideVideoUrl});
+ items.push(...imageItems);
+ if(!items.length){box.innerHTML='<div class="empty">Bem-vindo ao Residencial Reserva Celeste 3</div>';return}
+ let index=0, imageTimer=null;
+ const clearImageTimer=()=>{if(imageTimer){clearTimeout(imageTimer);imageTimer=null}};
+ const showItem=()=>{
+   clearImageTimer();
+   if(current||token!==slideRenderToken)return;
+   box.innerHTML='';const item=items[index];
+   if(item.type==='image'){
+     const img=document.createElement('img');img.alt='Imagem do condomínio';img.src=item.src;img.onerror=()=>{if(token===slideRenderToken){index=(index+1)%items.length;showItem()}};box.appendChild(img);
+     if(items.length>1)imageTimer=setTimeout(()=>{if(current||token!==slideRenderToken)return;index=(index+1)%items.length;showItem()},10000);
+   }else{
+     const video=document.createElement('video');video.src=item.src;video.autoplay=true;video.muted=true;video.defaultMuted=true;video.loop=items.length===1;video.playsInline=true;video.preload='auto';
+     video.setAttribute('playsinline','');video.setAttribute('muted','');video.setAttribute('autoplay','');if(items.length===1)video.setAttribute('loop','');
+     video.style.width='100%';video.style.height='100%';video.style.objectFit='contain';
+     video.addEventListener('ended',()=>{if(items.length>1&&token===slideRenderToken&&!current){index=(index+1)%items.length;showItem()}});
+     video.addEventListener('error',()=>{if(token===slideRenderToken){box.innerHTML='<div class="empty">Não foi possível reproduzir este vídeo. Use MP4/H.264.</div>';if(items.length>1){imageTimer=setTimeout(()=>{index=(index+1)%items.length;showItem()},3000)}}});
+     box.appendChild(video);
+     const tryPlay=()=>{video.muted=true;video.defaultMuted=true;video.setAttribute('muted','');const p=video.play();if(p&&p.catch)p.catch(()=>{video.controls=true;video.setAttribute('controls','');});};
+     video.addEventListener('loadedmetadata',tryPlay,{once:true});
+     video.addEventListener('canplay',tryPlay,{once:true});
+     tryPlay();
+     box.addEventListener('click',()=>{video.muted=true;tryPlay()},{once:true});
+   }
+ };
+ showItem();
+}
 
+// Inicialização
 renderAll();renderSlidePreviews();renderSlideshow();renderCurrent();updateClock();setInterval(updateClock,1000);showAuthPanel();
-</script>
-<button id="floatingReportBtn" type="button" title="Baixar relatório de entregas" aria-label="Baixar relatório de entregas" style="position:fixed;right:18px;bottom:18px;z-index:9999;width:58px;height:50px;border:1px solid #d6b64b;border-radius:12px;background:#fff4bd;color:#243247;box-shadow:0 4px 14px #0003;font-size:29px;display:flex;align-items:center;justify-content:center;cursor:pointer">📂</button>
-<script>
-(function(){
-  const btn = document.getElementById('floatingReportBtn');
-  if (btn) btn.addEventListener('click', function(){
-    if (typeof downloadDeliveryReport === 'function') downloadDeliveryReport(false);
-  });
+
+// Botão flutuante de relatório
+const frBtn=document.getElementById('floatingReportBtn');
+if(frBtn)frBtn.addEventListener('click',()=>downloadDeliveryReport(false));
+
+// Logs — botões exportar/limpar
+const exLogs=$('exportLogsBtn');
+if(exLogs)exLogs.addEventListener('click',()=>{
+  const csv='\uFEFF'+['Data e hora','Ação','Detalhes'].join(';')+'\r\n'+logs.map(x=>[x.date,x.action,x.details||''].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='logs_portaria_'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(a.href);
+});
+const clLogs=$('clearLogsBtn');
+if(clLogs)clLogs.addEventListener('click',()=>{if(confirm('Apagar todos os logs deste navegador?')){logs=[];try{localStorage.removeItem(LOG_STORAGE)}catch(e){};renderLogs();}});
+
 })();
 </script>
 </body>

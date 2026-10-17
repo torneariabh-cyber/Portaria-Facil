@@ -465,8 +465,8 @@ input, select, textarea { font-size: 16px; }
    ⚙️ CONFIGURAÇÃO DO SUPABASE
    Substitua pelos valores do seu projeto Supabase.
    ============================================================ */
-const SUPABASE_URL = 'COLE_AQUI_SUA_PROJECT_URL';
-const SUPABASE_ANON_KEY = 'COLE_AQUI_SUA_ANON_KEY';
+const SUPABASE_URL = 'https://uyakrrwqzvwlqhqjnscc.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5YWtycndxenZ3bHFocWpuc2NjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyMDQxNTYsImV4cCI6MjEwNzc4MDE1Nn0.sL_yIcxaiYYEHRdLcKpeIRpf8lbjYxMiL0g0xKrCajc';
 
 let supabaseClient = null;
 function getSupabase(){

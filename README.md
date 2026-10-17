@@ -213,15 +213,15 @@ input, select, textarea { font-size: 16px; }
       <p>Selecione o imóvel e abra a localização direto no seu GPS.</p>
     </div>
     <div class="card">
-      <h3>📍 Para onde você vai?</h3>
-      <div class="sub">ESCOLHA A RUA, A QUADRA E O LOTE DO MORADOR.</div>
+      <h3>📍 PARA ONDE VOCÊ VAI?</h3>
+      <div class="sub">Escolha a Rua, Quadra e o Lote do Morador.</div>
       <div id="totemLoading" class="hint" style="text-align:center;padding:20px">⏳ Carregando imóveis...</div>
       <div id="totemFormFields" style="display:none">
-        <label for="totemRua">Rua / Avenida</label>
+        <label for="totemRua">RUA / Avenida</label>
         <select id="totemRua"><option value="">Todas as ruas e avenidas</option></select>
-        <label for="totemQuadra">Quadra</label>
+        <label for="totemQuadra">QUADRA</label>
         <select id="totemQuadra" disabled><option value="">Selecione a quadra</option></select>
-        <label for="totemLote">Lote</label>
+        <label for="totemLote">LOTE</label>
         <select id="totemLote" disabled><option value="">Selecione o lote</option></select>
         <label for="totemService">Tipo de serviço (opcional)</label>
         <select id="totemService">
@@ -246,7 +246,7 @@ input, select, textarea { font-size: 16px; }
     <div id="totemSpeedBadge" class="speed-badge" style="display:none;align-self:center">
       <span class="ico">🚦</span>
       <span>Velocidade permitida dentro do Condomínio Sujeito a Multa!</span>
-      <span class="val" id="totemSpeedValue">30 km/h</span>
+      <span class="val" id="totemSpeedValue">30 KM/h</span>
     </div>
     <div class="footer-area">
       <button id="totemAdminLink" style="background:transparent;border:0;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;padding:8px">🔒 Sou administrador</button>
@@ -304,7 +304,7 @@ input, select, textarea { font-size: 16px; }
 
 <div id="appRoot">
 <header>
-  <div><h1>Portaria Fácil <a href="https://maps.google.com/" target="_blank" rel="noopener noreferrer" title="Abrir Google Maps" aria-label="Abrir Google Maps" style="display:inline-flex;align-items:center;vertical-align:middle;margin-left:7px;text-decoration:none;font-size:22px">📍</a></h1><p>Localização rápida e inteligente Condominial</p></div>
+  <div><h1>Indique-nos 6699209-4946 <a href="https://maps.google.com/" target="_blank" rel="noopener noreferrer" title="Abrir Google Maps" aria-label="Abrir Google Maps" style="display:inline-flex;align-items:center;vertical-align:middle;margin-left:7px;text-decoration:none;font-size:22px">📍</a></h1><p>Localização rápida e inteligente Condominial</p></div>
   <div class="header-right">
     <span id="cloudBadge" class="cloud-pill load" title="Status da conexão com a nuvem">☁️ conectando...</span>
     <span id="liveClock">--:--:--</span>

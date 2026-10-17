@@ -53,7 +53,6 @@ textarea{min-height:160px;font-family:ui-monospace,Consolas,monospace;font-size:
 
 body.display-mode #floatingReportBtn{display:none!important}
 
-/* Ajustes de compatibilidade visual para iPhone/Safari */
 html { -webkit-text-size-adjust: 100%; }
 body { padding-bottom: env(safe-area-inset-bottom); }
 button, input, select, textarea { touch-action: manipulation; }
@@ -76,7 +75,7 @@ input, select, textarea { font-size: 16px; }
   body.display-mode #displayView .display-screen.showing-qr #qrOutput canvas { width: min(72vw, 300px) !important; height: auto !important; max-height: 40svh; }
 }
 
-/* Página de navegação (abre no celular do prestador após ler o QR) */
+/* Página de navegação pública */
 .nav-page{max-width:560px;margin:0 auto;padding:18px 14px 40px;font-family:Arial,Helvetica,sans-serif}
 .nav-page .nav-header{background:var(--navy);color:#fff;border-radius:15px;padding:20px;text-align:center;margin-bottom:16px;box-shadow:0 4px 16px #18304b20}
 .nav-page .nav-header .tag{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#a9c5e6;font-weight:700}
@@ -87,7 +86,7 @@ input, select, textarea { font-size: 16px; }
 .nav-page .info-line:last-child{border-bottom:0}
 .nav-page .info-line .lbl{color:var(--muted);font-weight:700}
 .nav-page .info-line .val{color:var(--ink);font-weight:700;text-align:right;word-break:break-word}
-.nav-page .big-link{display:flex;align-items:center;gap:14px;width:100%;padding:18px;border-radius:14px;border:1px solid var(--line);background:#fff;text-decoration:none;color:var(--ink);font-weight:700;font-size:17px;margin-bottom:10px;transition:transform .12s ease,box-shadow .12s ease;box-shadow:0 2px 8px #18304b0a}
+.nav-page .big-link{display:flex;align-items:center;gap:14px;width:100%;padding:18px;border-radius:14px;border:1px solid var(--line);background:#fff;text-decoration:none;color:var(--ink);font-weight:700;font-size:17px;margin-bottom:10px;transition:transform .12s ease;box-shadow:0 2px 8px #18304b0a;cursor:pointer}
 .nav-page .big-link:active{transform:scale(.98)}
 .nav-page .big-link .ico{font-size:28px;line-height:1;width:38px;text-align:center;flex-shrink:0}
 .nav-page .big-link .txt{flex:1;text-align:left}
@@ -103,9 +102,7 @@ input, select, textarea { font-size: 16px; }
 </head>
 <body>
 
-<!-- ============================================================
-     PÁGINA PÚBLICA DE NAVEGAÇÃO (abre no celular após ler o QR)
-     ============================================================ -->
+<!-- ========================= PÁGINA DE NAVEGAÇÃO (abre ao ler QR) ========================= -->
 <div id="navPage" style="display:none">
   <div class="nav-page">
     <div class="nav-header">
@@ -113,7 +110,6 @@ input, select, textarea { font-size: 16px; }
       <h1 id="navTitle">Residencial Reserva Celeste 3</h1>
       <div class="sub" id="navSub">Escolha como deseja abrir a rota</div>
     </div>
-
     <div class="card">
       <div class="info-line"><span class="lbl">Proprietário/Morador</span><span class="val" id="navProprietario">—</span></div>
       <div class="info-line"><span class="lbl">Rua / Avenida</span><span class="val" id="navRua">—</span></div>
@@ -121,44 +117,30 @@ input, select, textarea { font-size: 16px; }
       <div class="info-line"><span class="lbl">Lote</span><span class="val" id="navLote">—</span></div>
       <div class="info-line"><span class="lbl">Tipo de serviço</span><span class="val" id="navService">—</span></div>
     </div>
-
     <div class="card">
       <h3 style="margin:0 0 12px;font-size:16px">Abrir rota em:</h3>
-
       <a class="big-link gmaps" id="navGmaps" href="#" target="_blank" rel="noopener">
-        <span class="ico">🗺️</span>
-        <span class="txt">Google Maps<small>Navegação padrão</small></span>
+        <span class="ico">🗺️</span><span class="txt">Google Maps<small>Navegação padrão</small></span>
       </a>
-
       <a class="big-link waze" id="navWaze" href="#" target="_blank" rel="noopener">
-        <span class="ico">🚗</span>
-        <span class="txt">Waze<small>Melhor para trânsito em tempo real</small></span>
+        <span class="ico">🚗</span><span class="txt">Waze<small>Melhor para trânsito em tempo real</small></span>
       </a>
-
       <a class="big-link apple" id="navApple" href="#" target="_blank" rel="noopener">
-        <span class="ico">🍎</span>
-        <span class="txt">Apple Maps<small>Para iPhone / iPad</small></span>
+        <span class="ico">🍎</span><span class="txt">Apple Maps<small>Para iPhone / iPad</small></span>
       </a>
-
       <a class="big-link orig" id="navOriginal" href="#" target="_blank" rel="noopener">
-        <span class="ico">🌐</span>
-        <span class="txt">Abrir link original<small>Endereço exato cadastrado pelo condomínio</small></span>
+        <span class="ico">🌐</span><span class="txt">Abrir link original<small>Endereço exato cadastrado</small></span>
       </a>
-
       <button class="big-link copy" id="navCopyBtn" type="button">
-        <span class="ico">📋</span>
-        <span class="txt">Copiar endereço<small id="navCopyPreview">—</small></span>
+        <span class="ico">📋</span><span class="txt">Copiar endereço<small id="navCopyPreview">—</small></span>
       </button>
       <div class="copy-feedback" id="navCopyFeedback"></div>
     </div>
-
     <p class="notice">Se algum aplicativo não abrir, use o Google Maps e cole o endereço copiado.</p>
   </div>
 </div>
 
-<!-- ============================================================
-     APLICAÇÃO PRINCIPAL
-     ============================================================ -->
+<!-- ========================= APLICAÇÃO PRINCIPAL ========================= -->
 <div id="appRoot">
 <header>
   <div><h1>Portaria Fácil <a href="https://maps.google.com/" target="_blank" rel="noopener noreferrer" title="Abrir Google Maps" aria-label="Abrir Google Maps" style="display:inline-flex;align-items:center;vertical-align:middle;margin-left:7px;text-decoration:none;font-size:25px">📍</a></h1><p>Localização rápida e inteligente Condominial</p></div>
@@ -200,7 +182,7 @@ input, select, textarea { font-size: 16px; }
       <button class="secondary" id="openMapBtn" disabled>Abrir mapa neste dispositivo</button>
       <button class="secondary" id="printQrBtn" disabled>Imprimir QR Code</button>
     </div>
-    <p class="hint">O prestador de serviço pode escanear este QR Code com a câmera do celular para abrir a localização e escolher o app de navegação.</p>
+    <p class="hint">O prestador pode escanear este QR Code para abrir a localização e escolher o app de navegação.</p>
   </div>
 </section>
 
@@ -211,7 +193,7 @@ input, select, textarea { font-size: 16px; }
     <div id="setupFields" hidden>
       <label for="setupUser">Criar usuário administrador</label><input id="setupUser" autocomplete="username" placeholder="Ex.: portaria.admin">
       <label for="setupPass">Criar senha</label><input id="setupPass" type="password" autocomplete="new-password" placeholder="Mínimo de 6 caracteres">
-      <label for="setupRecovery">Código de recuperação (guarde em local seguro)</label><input id="setupRecovery" type="password" autocomplete="off" placeholder="Palavra ou código para recuperar a senha">
+      <label for="setupRecovery">Código de recuperação (guarde em local seguro)</label><input id="setupRecovery" type="password" autocomplete="off" placeholder="Palavra ou código">
       <div class="actions"><button class="primary" id="createAuthBtn">Criar acesso</button></div>
     </div>
     <div id="loginFields">
@@ -235,23 +217,22 @@ input, select, textarea { font-size: 16px; }
     <label for="condoLogoFile">Logo de fundo para a tela do QR Code (opcional)</label>
     <input id="condoLogoFile" type="file" accept="image/*">
     <div class="actions"><button class="green" id="saveCondoLogoBtn">Salvar logo de fundo</button><button class="secondary" id="clearCondoLogoBtn">Remover logo</button></div>
-    <p class="hint">Ao mostrar o QR Code, a tela fica branca e a logo aparece bem suave e desfocada ao fundo, sem atrapalhar a leitura do QR Code.</p>
-    <p class="hint">Escolha até 3 imagens (logo do condomínio, avisos ou artes). Elas ficarão passando na segunda tela quando não houver QR Code. Ao gerar um QR Code, as imagens somem e voltam automaticamente quando os 2 minutos terminarem.</p>
+    <p class="hint">Ao mostrar o QR Code, a tela fica branca e a logo aparece bem suave e desfocada ao fundo, sem atrapalhar a leitura.</p>
+    <p class="hint">Escolha até 3 imagens. Elas ficarão passando na segunda tela quando não houver QR Code.</p>
     <label for="slideFiles">Selecionar logo/imagens (até 3)</label>
     <input id="slideFiles" type="file" accept="image/*" multiple>
     <div class="actions"><button class="green" id="saveSlidesBtn">Salvar imagens</button><button class="secondary" id="clearSlidesBtn">Remover imagens</button></div>
     <label for="videoFile">Selecionar um vídeo para a apresentação</label>
     <input id="videoFile" type="file" accept="video/mp4,video/webm,video/ogg">
-    <p class="hint">O vídeo será alternado com as imagens a cada 10 segundos. Se houver somente vídeo ou somente imagens, esse conteúdo continuará sendo exibido sozinho. Para vídeos, prefira MP4 e arquivos de tamanho moderado.</p>
     <div class="actions"><button class="green" id="saveVideoBtn">Salvar vídeo</button><button class="secondary" id="clearVideoBtn">Remover vídeo</button></div>
     <div class="status" id="slideStatus" role="status"></div>
     <div id="slidePreviews" class="grid"></div>
   </div>
   <div class="panel">
     <h2>Importar todos os links de uma vez</h2>
-    <p class="hint">Cole uma linha por imóvel no formato <b>Quadra;Lote;Link</b> (formato antigo) ou <b>Quadra;Lote;Rua/Avenida;Proprietário;Link</b>. Você também pode importar um arquivo CSV. O link deve ser o link compartilhável da localização alfinetada no mapa.</p>
+    <p class="hint">Cole uma linha por imóvel no formato <b>Quadra;Lote;Link</b> ou <b>Quadra;Lote;Rua/Avenida;Proprietário;Link</b>.</p>
     <label for="bulkInput">Lista de imóveis</label>
-    <textarea id="bulkInput" placeholder="Quadra;Lote;Rua/Avenida;Proprietário;Link&#10;A;01;Avenida A;João da Silva;https://maps.google.com/...&#10;A;02;Rua 6;Maria Souza;https://maps.google.com/..."></textarea>
+    <textarea id="bulkInput" placeholder="Quadra;Lote;Rua/Avenida;Proprietário;Link&#10;A;01;Avenida A;João da Silva;https://maps.google.com/..."></textarea>
     <div class="actions">
       <button class="primary" id="importBtn">Importar lista</button>
       <button class="secondary" id="fileBtn">Escolher arquivo CSV</button>
@@ -259,7 +240,6 @@ input, select, textarea { font-size: 16px; }
       <button class="secondary" id="exportBtn">Exportar CSV</button>
       <button class="danger" id="clearBtn">Apagar todos</button>
     </div>
-    <p class="hint">Linhas repetidas com a mesma quadra e lote atualizam o link existente. Cadastros ficam guardados neste navegador.</p>
     <div class="status" id="adminStatus" role="status"></div>
   </div>
   <div class="panel">
@@ -279,9 +259,9 @@ input, select, textarea { font-size: 16px; }
   </div>
     <div class="panel" id="changePassPanel" hidden>
       <h2>Alterar senha</h2>
-      <label for="currentPass">Senha atual</label><input id="currentPass" type="password" autocomplete="current-password">
-      <label for="changeNewPass">Nova senha</label><input id="changeNewPass" type="password" autocomplete="new-password">
-      <label for="changeRecovery">Código de recuperação atual</label><input id="changeRecovery" type="password" autocomplete="off">
+      <label for="currentPass">Senha atual</label><input id="currentPass" type="password">
+      <label for="changeNewPass">Nova senha</label><input id="changeNewPass" type="password">
+      <label for="changeRecovery">Código de recuperação atual</label><input id="changeRecovery" type="password">
       <div class="actions"><button class="primary" id="saveNewPassBtn">Salvar nova senha</button><button class="secondary" id="cancelChangePassBtn">Cancelar</button></div>
       <div class="status" id="changePassStatus" role="status"></div>
     </div>
@@ -290,98 +270,102 @@ input, select, textarea { font-size: 16px; }
 <section id="logsView" class="view">
   <div class="panel">
     <h2>Logs de navegação</h2>
-    <p class="hint">Histórico armazenado somente neste navegador.</p>
-    <div class="actions"><button class="secondary" id="exportLogsBtn">Exportar logs CSV</button><button class="danger" id="clearLogsBtn">Limpar logs</button></div><p class="hint">As entregas ficam registradas neste navegador. Clique no ícone de pasta no canto inferior direito para baixar o relatório CSV quando precisar.</p>
+    <div class="actions"><button class="secondary" id="exportLogsBtn">Exportar logs CSV</button><button class="danger" id="clearLogsBtn">Limpar logs</button></div>
     <div class="table-wrap"><table><thead><tr><th>Data e hora</th><th>Ação</th><th>Detalhes</th></tr></thead><tbody id="logsBody"><tr><td colspan="3" class="empty">Nenhum registro.</td></tr></tbody></table></div>
   </div>
 </section>
 </main>
-<button id="floatingReportBtn" type="button" title="Baixar relatório de entregas" aria-label="Baixar relatório de entregas" style="position:fixed;right:18px;bottom:18px;z-index:9999;width:58px;height:50px;border:1px solid #d6b64b;border-radius:12px;background:#fff4bd;color:#243247;box-shadow:0 4px 14px #0003;font-size:29px;display:flex;align-items:center;justify-content:center;cursor:pointer">📂</button>
+<button id="floatingReportBtn" type="button" title="Baixar relatório de entregas" style="position:fixed;right:18px;bottom:18px;z-index:9999;width:58px;height:50px;border:1px solid #d6b64b;border-radius:12px;background:#fff4bd;color:#243247;box-shadow:0 4px 14px #0003;font-size:29px;display:flex;align-items:center;justify-content:center;cursor:pointer">📂</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 /* ============================================================
-   PÁGINA DE NAVEGAÇÃO — PARSE DO QR
-   Quando o QR contém dados de imóvel (?pt=... codificado), esta
-   página é exibida e o app principal fica oculto.
+   ETAPA 1 — PÁGINA DE NAVEGAÇÃO (abre quando URL tem ?nav=)
+   Formato do parâmetro: NAV|rua|quadra|lote|morador|lat,lng|serviço|linkOrig
    ============================================================ */
 (function(){
   const params=new URLSearchParams(location.search);
-  const payload=params.get('pt');
-  if(!payload)return; // sem payload → app principal
+  const nav=params.get('nav');
+  if(!nav){return} // sem payload → app principal
 
-  function b64d(str){
-    try{str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';return decodeURIComponent(escape(atob(str)))}catch(e){return ''}
-  }
-  let data=null;
-  try{data=JSON.parse(b64d(payload))}catch(e){data=null}
-  if(!data||!data.url){document.body.innerHTML='<p style="padding:20px;font-family:Arial">QR Code inválido.</p>';return}
-
-  // Esconde app principal
+  // Esconde app principal, mostra navPage
   const app=document.getElementById('appRoot');
   if(app)app.style.display='none';
-  const nav=document.getElementById('navPage');
-  if(nav)nav.style.display='block';
+  const navEl=document.getElementById('navPage');
+  if(navEl)navEl.style.display='block';
 
-  // Preenche dados
+  // Split preservando campos vazios
+  const parts=nav.split('|');
+  const rua=parts[0]||'',quadra=parts[1]||'',lote=parts[2]||'',morador=parts[3]||'',coords=parts[4]||'',servico=parts[5]||'',linkOrig=parts[6]||'';
+
   const setText=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v||'—'};
-  setText('navProprietario',data.proprietario||'Não cadastrado');
-  setText('navRua',data.rua||'Não cadastrada');
-  setText('navQuadra',data.quadra||'—');
-  setText('navLote',data.lote||'—');
-  setText('navService',data.serviceType||'Não informado');
-  if(data.condoName)setText('navTitle',data.condoName);
+  setText('navProprietario',morador||'Não cadastrado');
+  setText('navRua',rua||'Não cadastrada');
+  setText('navQuadra',quadra);
+  setText('navLote',lote);
+  setText('navService',servico||'Não informado');
 
-  const q=data.query||'';
-  const lat=data.lat, lng=data.lng;
-  const hasCoords=(typeof lat==='number'&&typeof lng==='number');
+  // Parse coords "lat,lng"
+  let lat=null,lng=null;
+  if(coords){
+    const m=coords.match(/^(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)$/);
+    if(m){lat=parseFloat(m[1]);lng=parseFloat(m[2])}
+  }
+
+  const displayAddress=[rua,quadra?'Quadra '+quadra:'',lote?'Lote '+lote:''].filter(Boolean).join(' — ');
+  const fullAddress=displayAddress+(morador?' ('+morador+')':'');
 
   // Google Maps
-  const gmaps=hasCoords
+  const gmaps=(lat!==null)
     ? 'https://www.google.com/maps/dir/?api=1&destination='+lat+','+lng
-    : (q ? 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q) : data.url);
+    : (linkOrig||('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(fullAddress)));
   const elG=document.getElementById('navGmaps');if(elG)elG.href=gmaps;
 
   // Waze
-  const waze=hasCoords
+  const waze=(lat!==null)
     ? 'https://waze.com/ul?ll='+lat+','+lng+'&navigate=yes'
-    : (q ? 'https://waze.com/ul?q='+encodeURIComponent(q)+'&navigate=yes' : data.url);
+    : 'https://waze.com/ul?q='+encodeURIComponent(fullAddress)+'&navigate=yes';
   const elW=document.getElementById('navWaze');if(elW)elW.href=waze;
 
   // Apple Maps
-  const apple=hasCoords
+  const apple=(lat!==null)
     ? 'https://maps.apple.com/?daddr='+lat+','+lng
-    : (q ? 'https://maps.apple.com/?q='+encodeURIComponent(q) : data.url);
+    : 'https://maps.apple.com/?q='+encodeURIComponent(fullAddress);
   const elA=document.getElementById('navApple');if(elA)elA.href=apple;
 
   // Link original
-  const elO=document.getElementById('navOriginal');if(elO)elO.href=data.url;
+  const elO=document.getElementById('navOriginal');
+  if(elO){
+    if(linkOrig){elO.href=linkOrig;elO.style.display='flex'}
+    else elO.style.display='none';
+  }
 
   // Preview copiar
-  const copyText=data.displayAddress||q||data.url;
   const preview=document.getElementById('navCopyPreview');
-  if(preview)preview.textContent=copyText.length>48?copyText.slice(0,48)+'…':copyText;
+  if(preview){const t=fullAddress||'Endereço';preview.textContent=t.length>48?t.slice(0,48)+'…':t}
 
   const copyBtn=document.getElementById('navCopyBtn');
   const copyFb=document.getElementById('navCopyFeedback');
   if(copyBtn)copyBtn.addEventListener('click',async()=>{
-    try{
-      await navigator.clipboard.writeText(copyText);
-      if(copyFb)copyFb.textContent='✅ Endereço copiado!';
-    }catch(e){
-      // Fallback
-      const ta=document.createElement('textarea');ta.value=copyText;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');if(copyFb)copyFb.textContent='✅ Endereço copiado!'}catch(_){if(copyFb)copyFb.textContent='❌ Não foi possível copiar.'}ta.remove();
+    const texto=fullAddress||(lat!==null?(lat+','+lng):'');
+    if(!texto){if(copyFb)copyFb.textContent='Nada para copiar.';return}
+    try{await navigator.clipboard.writeText(texto);if(copyFb)copyFb.textContent='✅ Endereço copiado!'}
+    catch(e){
+      const ta=document.createElement('textarea');ta.value=texto;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');if(copyFb)copyFb.textContent='✅ Endereço copiado!'}catch(_){if(copyFb)copyFb.textContent='❌ Não foi possível copiar.'}
+      ta.remove();
     }
     setTimeout(()=>{if(copyFb)copyFb.textContent=''},3000);
   });
 })();
 
 /* ============================================================
-   APLICAÇÃO PRINCIPAL (só roda quando NÃO é página de navegação)
+   ETAPA 2 — APLICAÇÃO PRINCIPAL (só roda quando NÃO é navPage)
    ============================================================ */
 (function(){
-  if(document.getElementById('appRoot').style.display==='none')return; // é página de navegação
+  const params=new URLSearchParams(location.search);
+  if(params.get('nav'))return; // é página de navegação → não roda o app
 
 const STORAGE='portaria_facil_condominio_v2';
 const CHANNEL='portaria_facil_condominio_sync_v2';
@@ -395,9 +379,9 @@ let condoLogo='';
 try{condoLogo=localStorage.getItem(CONDO_LOGO_STORAGE)||''}catch(e){}
 try{slideImages=JSON.parse(localStorage.getItem(SLIDES_STORAGE)||'[]')}catch(e){slideImages=[]}
 try{hasSlideVideo=localStorage.getItem(VIDEO_META_STORAGE)==='1'}catch(e){hasSlideVideo=false}
-function openMediaDb(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('Este navegador não oferece armazenamento de vídeo.'));return}const req=indexedDB.open(VIDEO_DB_NAME,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(VIDEO_STORE))req.result.createObjectStore(VIDEO_STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error('Não foi possível abrir o armazenamento de mídia.'))})}
-async function saveVideoBlob(file){const db=await openMediaDb();return new Promise((resolve,reject)=>{const tx=db.transaction(VIDEO_STORE,'readwrite');tx.objectStore(VIDEO_STORE).put(file,'presentation-video');tx.oncomplete=()=>{db.close();resolve()};tx.onerror=()=>{db.close();reject(tx.error||new Error('Falha ao salvar o vídeo.'))};tx.onabort=()=>{db.close();reject(tx.error||new Error('Falha ao salvar o vídeo.'))}})}
-async function getVideoBlob(){const db=await openMediaDb();return new Promise((resolve,reject)=>{const tx=db.transaction(VIDEO_STORE,'readonly');const req=tx.objectStore(VIDEO_STORE).get('presentation-video');req.onsuccess=()=>{const result=req.result||null;db.close();resolve(result)};req.onerror=()=>{db.close();reject(req.error||new Error('Não foi possível ler o vídeo.'))}})}
+function openMediaDb(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('Sem suporte a IndexedDB'));return}const req=indexedDB.open(VIDEO_DB_NAME,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(VIDEO_STORE))req.result.createObjectStore(VIDEO_STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error('Erro IndexedDB'))})}
+async function saveVideoBlob(file){const db=await openMediaDb();return new Promise((resolve,reject)=>{const tx=db.transaction(VIDEO_STORE,'readwrite');tx.objectStore(VIDEO_STORE).put(file,'presentation-video');tx.oncomplete=()=>{db.close();resolve()};tx.onerror=()=>{db.close();reject(tx.error)};tx.onabort=()=>{db.close();reject(tx.error)}})}
+async function getVideoBlob(){const db=await openMediaDb();return new Promise((resolve,reject)=>{const tx=db.transaction(VIDEO_STORE,'readonly');const req=tx.objectStore(VIDEO_STORE).get('presentation-video');req.onsuccess=()=>{const r=req.result||null;db.close();resolve(r)};req.onerror=()=>{db.close();reject(req.error)}})}
 async function deleteVideoBlob(){try{const db=await openMediaDb();await new Promise((resolve,reject)=>{const tx=db.transaction(VIDEO_STORE,'readwrite');tx.objectStore(VIDEO_STORE).delete('presentation-video');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)});db.close()}catch(e){}}
 function broadcastMedia(){try{if('BroadcastChannel'in window){const c=new BroadcastChannel(CHANNEL);c.postMessage({type:'slides',images:slideImages,hasVideo:hasSlideVideo,logo:condoLogo});c.close()}}catch(e){}}
 const LOG_STORAGE='portaria_facil_navigation_logs_v1';
@@ -407,7 +391,7 @@ let deliveryEntries=[];try{deliveryEntries=JSON.parse(localStorage.getItem(DELIV
 const $=id=>document.getElementById(id);
 
 function recordDelivery(r){
- const now=new Date();const entry={date:now.toLocaleDateString('pt-BR'),time:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),serviceType:$('serviceTypeSelect').value||'Não informado',quadra:r.quadra||'',lote:r.lote||'',rua:r.rua||'',proprietario:r.proprietario||'Não cadastrado'};
+ const now=new Date();const entry={date:now.toLocaleDateString('pt-BR'),time:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),serviceType:($('serviceTypeSelect')?.value)||'Não informado',quadra:r.quadra||'',lote:r.lote||'',rua:r.rua||'',proprietario:r.proprietario||'Não cadastrado'};
  deliveryEntries.push(entry);try{localStorage.setItem(DELIVERY_STORAGE,JSON.stringify(deliveryEntries))}catch(e){}
  logAction('Entrega/serviço registrado',`${entry.serviceType} — Quadra ${entry.quadra}, lote ${entry.lote}; morador: ${entry.proprietario}`);
 }
@@ -433,7 +417,7 @@ try{records=JSON.parse(localStorage.getItem(STORAGE)||'[]')}catch(e){records=[]}
 function persist(){try{localStorage.setItem(STORAGE,JSON.stringify(records))}catch(e){};try{if('BroadcastChannel'in window){let c=new BroadcastChannel(CHANNEL);c.postMessage({type:'records',records});c.close()}}catch(e){}}
 function validUrl(s){try{let u=new URL(s);return u.protocol==='https:'||u.protocol==='http:'}catch(e){return false}}
 function key(q,l){return String(q).trim().toLocaleLowerCase()+'|'+String(l).trim().toLocaleLowerCase()}
-function setStatus(id,msg,error=false){$(id).textContent=msg;$(id).style.color=error?'#b42318':'#12804a'}
+function setStatus(id,msg,error=false){const el=$(id);if(!el)return;el.textContent=msg;el.style.color=error?'#b42318':'#12804a'}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
 const AUTH_STORAGE='portaria_facil_admin_auth_v1';
@@ -450,7 +434,7 @@ function showAuthPanel(){
 function grantAdmin(){adminAuthenticated=true;$('loginPanel').hidden=true;$('adminContent').hidden=false;}
 $('createAuthBtn').addEventListener('click',()=>{
  const username=$('setupUser').value.trim(),password=$('setupPass').value,recovery=$('setupRecovery').value;
- if(!username||password.length<6||recovery.length<4){setStatus('authStatus','Informe usuário, senha com pelo menos 6 caracteres e código de recuperação com pelo menos 4 caracteres.',true);return}
+ if(!username||password.length<6||recovery.length<4){setStatus('authStatus','Informe usuário, senha ≥6 e código ≥4.',true);return}
  authData={username:username.toLowerCase(),passwordHash:simpleHash(password),recoveryHash:simpleHash(recovery)};
  try{localStorage.setItem(AUTH_STORAGE,JSON.stringify(authData))}catch(e){}
  $('loginUser').value=username;$('loginPass').value='';showAuthPanel();setStatus('authStatus','Acesso criado. Entre com o usuário e a senha.',false);
@@ -464,7 +448,7 @@ $('forgotPassBtn').addEventListener('click',()=>{$('loginFields').hidden=true;$(
 $('cancelRecoverBtn').addEventListener('click',()=>showAuthPanel());
 $('resetPassBtn').addEventListener('click',()=>{
  const username=$('recoverUser').value.trim().toLowerCase(),code=$('recoverCode').value,newPass=$('newPass').value;
- if(!authData||username!==authData.username||simpleHash(code)!==authData.recoveryHash||newPass.length<6){setStatus('authStatus','Dados de recuperação inválidos ou senha menor que 6 caracteres.',true);return}
+ if(!authData||username!==authData.username||simpleHash(code)!==authData.recoveryHash||newPass.length<6){setStatus('authStatus','Dados inválidos ou senha <6.',true);return}
  authData.passwordHash=simpleHash(newPass);try{localStorage.setItem(AUTH_STORAGE,JSON.stringify(authData))}catch(e){};
  $('loginUser').value=username;$('loginPass').value='';showAuthPanel();setStatus('authStatus','Senha redefinida. Entre com a nova senha.',false);
 });
@@ -473,7 +457,7 @@ $('changePassBtn').addEventListener('click',()=>{$('changePassPanel').hidden=!$(
 $('cancelChangePassBtn').addEventListener('click',()=>{$('changePassPanel').hidden=true});
 $('saveNewPassBtn').addEventListener('click',()=>{
  const currentPass=$('currentPass').value,newPass=$('changeNewPass').value,recovery=$('changeRecovery').value;
- if(!authData||simpleHash(currentPass)!==authData.passwordHash||simpleHash(recovery)!==authData.recoveryHash||newPass.length<6){setStatus('changePassStatus','Confira a senha atual, o código de recuperação e use uma nova senha com pelo menos 6 caracteres.',true);return}
+ if(!authData||simpleHash(currentPass)!==authData.passwordHash||simpleHash(recovery)!==authData.recoveryHash||newPass.length<6){setStatus('changePassStatus','Confira os dados e use senha ≥6.',true);return}
  authData.passwordHash=simpleHash(newPass);try{localStorage.setItem(AUTH_STORAGE,JSON.stringify(authData))}catch(e){};
  $('currentPass').value='';$('changeNewPass').value='';$('changeRecovery').value='';$('changePassPanel').hidden=true;setStatus('changePassStatus','Senha alterada com sucesso.');
 });
@@ -501,7 +485,7 @@ function renderTable(){
  $('recordsBody').innerHTML=records.length?records.map(r=>`<tr><td>${escapeHtml(r.quadra)}</td><td>${escapeHtml(r.lote)}</td><td>${escapeHtml(r.rua||'')}</td><td>${escapeHtml(r.proprietario||'')}</td><td><a href="${escapeHtml(r.url)}" target="_blank" rel="noopener">Abrir link</a></td><td><button class="secondary" data-edit="${escapeHtml(key(r.quadra,r.lote))}">Editar</button> <button class="danger" data-remove="${escapeHtml(key(r.quadra,r.lote))}">Excluir</button></td></tr>`).join(''):'<tr><td colspan="6" class="empty">Nenhum imóvel cadastrado.</td></tr>';
 }
 function renderAll(){sortRecords();renderSelectors();renderTable()}
-function switchView(id){if(id==='cadastroView'&&!isAdminAuthenticated()){showAuthPanel();id='cadastroView'}document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='displayView')renderCurrent();if(id==='logsView')renderLogs();logAction('Navegação',id)}
+function switchView(id){if(id==='cadastroView'&&!isAdminAuthenticated()){showAuthPanel()}document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='displayView')renderCurrent();if(id==='logsView')renderLogs();logAction('Navegação',id)}
 function findRecord(q,l){return records.find(r=>key(r.quadra,r.lote)===key(q,l))}
 function scheduleExpiry(){
  if(expiryTimer)clearTimeout(expiryTimer);
@@ -518,99 +502,83 @@ function showRecord(r){
  renderCurrent();scheduleExpiry();
 }
 function updateClock(){
- const el=$('liveClock');if(el)el.textContent=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+ try{const el=$('liveClock');if(el)el.textContent=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(e){}
 }
 
-/* ------- EXTRAI COORDENADAS / QUERY DE UM LINK DO GOOGLE MAPS ------- */
+/* ============================================================
+   EXTRAI COORDENADAS DE UM LINK DO GOOGLE MAPS
+   ============================================================ */
 function extractGeo(url){
-  // Formatos suportados:
-  // https://www.google.com/maps/@-23.55,-46.63,17z
-  // https://www.google.com/maps/place/.../@-23.55,-46.63,17z
-  // https://maps.google.com/?q=-23.55,-46.63
-  // https://maps.google.com/?ll=-23.55,-46.63
-  // https://maps.app.goo.gl/xxxx (encurtado — não dá para extrair)
-  let lat=null,lng=null,query='';
+  let lat=null,lng=null;
   try{
     const u=new URL(url);
-    // @lat,lng
     const mAt=u.pathname.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
     if(mAt){lat=parseFloat(mAt[1]);lng=parseFloat(mAt[2])}
-    // ?q=lat,lng
-    const q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('ll')||u.searchParams.get('daddr')||u.searchParams.get('destination');
-    if(q){
-      const mQ=q.match(/^(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)$/);
-      if(mQ){lat=parseFloat(mQ[1]);lng=parseFloat(mQ[2])}
-      else query=q;
+    if(lat===null){
+      const q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('ll')||u.searchParams.get('daddr')||u.searchParams.get('destination');
+      if(q){
+        const mQ=q.match(/^(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)$/);
+        if(mQ){lat=parseFloat(mQ[1]);lng=parseFloat(mQ[2])}
+      }
     }
-    // place/Texto
-    const mPlace=u.pathname.match(/\/place\/([^/]+)/);
-    if(mPlace&&!query){query=decodeURIComponent(mPlace[1].replace(/\+/g,' '))}
-    if(!lat&&u.searchParams.get('destination')){
-      const d=u.searchParams.get('destination');
-      const md=d.match(/^(-?\d+\.\d+),(-?\d+\.\d+)$/);
-      if(md){lat=parseFloat(md[1]);lng=parseFloat(md[2])}
+    if(lat===null){
+      const mPlace=u.pathname.match(/\/place\/(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if(mPlace){lat=parseFloat(mPlace[1]);lng=parseFloat(mPlace[2])}
     }
   }catch(e){}
-  return {lat,lng,query};
+  return {lat,lng};
 }
 
-/* ------- GERA PAYLOAD BASE64 URL-SAFE PARA O QR ------- */
-function buildNavPayload(record){
-  const url=String(record.url||'').trim();
-  const geo=extractGeo(url);
-  const displayAddress=[record.rua,record.quadra?'Quadra '+record.quadra:'',record.lote?'Lote '+record.lote:''].filter(Boolean).join(' — ');
-  const data={
-    url,
-    lat:geo.lat,
-    lng:geo.lng,
-    query:geo.query,
-    quadra:record.quadra||'',
-    lote:record.lote||'',
-    rua:record.rua||'',
-    proprietario:record.proprietario||'',
-    serviceType:$('serviceTypeSelect').value||'',
-    displayAddress,
-    condoName:'Residencial Reserva Celeste 3'
-  };
-  const json=JSON.stringify(data);
-  const b64=btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  return b64;
-}
-function buildNavPageUrl(record){
-  return location.origin+location.pathname+'?pt='+buildNavPayload(record);
+/* ============================================================
+   MONTA URL DE NAVEGAÇÃO (curta, com URLSearchParams)
+   ============================================================ */
+function buildNavUrl(record){
+  const geo=extractGeo(String(record.url||''));
+  const coords=(geo.lat!==null&&geo.lng!==null)?(geo.lat+','+geo.lng):'';
+  const svc=($('serviceTypeSelect')?.value)||'';
+  // Formato: NAV|rua|quadra|lote|morador|lat,lng|servico|link
+  const payload=['NAV',record.rua||'',record.quadra||'',record.lote||'',record.proprietario||'',coords,svc,record.url||''].join('|');
+  // URL base (funciona em file:// também, usando location.href sem query/hash)
+  const base=location.href.split('?')[0].split('#')[0];
+  return base+'?nav='+encodeURIComponent(payload);
 }
 
 function startCountdown(){
  if(countdownInterval)clearInterval(countdownInterval);
- const el=$('countdown');if(!current){el.hidden=true;return}
+ const el=$('countdown');if(!el)return;
+ if(!current){el.hidden=true;return}
  el.hidden=false;
  const tick=()=>{const ms=Math.max(0,(Number(current?._expiresAt)||Date.now())-Date.now());const sec=Math.ceil(ms/1000);el.textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');if(sec<=0&&countdownInterval){clearInterval(countdownInterval);countdownInterval=null}};
  tick();countdownInterval=setInterval(tick,250);
 }
 async function imageToDataUrl(file){
- if(!file.type.startsWith('image/'))throw new Error('Selecione apenas arquivos de imagem.');
+ if(!file.type.startsWith('image/'))throw new Error('Selecione apenas imagens.');
  const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)});
  const img=await new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=data});
  const scale=Math.min(1,1400/img.width,1000/img.height);const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
  return canvas.toDataURL('image/jpeg',0.82);
 }
 $('saveCondoLogoBtn').addEventListener('click',async()=>{
- const file=$('condoLogoFile').files[0];if(!file){setStatus('slideStatus','Selecione uma imagem para usar como logo de fundo.',true);return}
- try{condoLogo=await imageToDataUrl(file);localStorage.setItem(CONDO_LOGO_STORAGE,condoLogo);const bg=$('displayBgLogo');if(bg)bg.style.backgroundImage=`url("${condoLogo}")`;broadcastMedia();setStatus('slideStatus','Logo de fundo salva com sucesso.');$('condoLogoFile').value=''}catch(e){setStatus('slideStatus','Não foi possível salvar a logo. Tente uma imagem menor.',true)}
+ const file=$('condoLogoFile').files[0];if(!file){setStatus('slideStatus','Selecione uma imagem.',true);return}
+ try{condoLogo=await imageToDataUrl(file);localStorage.setItem(CONDO_LOGO_STORAGE,condoLogo);const bg=$('displayBgLogo');if(bg)bg.style.backgroundImage=`url("${condoLogo}")`;broadcastMedia();setStatus('slideStatus','Logo salva.');$('condoLogoFile').value=''}catch(e){setStatus('slideStatus','Não foi possível salvar a logo.',true)}
 });
-$('clearCondoLogoBtn').addEventListener('click',()=>{condoLogo='';try{localStorage.removeItem(CONDO_LOGO_STORAGE)}catch(e){}const bg=$('displayBgLogo');if(bg)bg.style.backgroundImage='none';broadcastMedia();setStatus('slideStatus','Logo de fundo removida.')});
+$('clearCondoLogoBtn').addEventListener('click',()=>{condoLogo='';try{localStorage.removeItem(CONDO_LOGO_STORAGE)}catch(e){}const bg=$('displayBgLogo');if(bg)bg.style.backgroundImage='none';broadcastMedia();setStatus('slideStatus','Logo removida.')});
 $('saveSlidesBtn').addEventListener('click',async()=>{
- const files=[...$('slideFiles').files];if(!files.length){setStatus('slideStatus','Selecione até 3 imagens antes de salvar.',true);return}
- if(files.length>3){setStatus('slideStatus','Selecione no máximo 3 imagens.',true);return}
- try{const converted=[];for(const f of files)converted.push(await imageToDataUrl(f));slideImages=converted;localStorage.setItem(SLIDES_STORAGE,JSON.stringify(slideImages));broadcastMedia();renderSlidePreviews();renderSlideshow();setStatus('slideStatus',`${slideImages.length} imagem(ns) salva(s).`);$('slideFiles').value=''}catch(e){setStatus('slideStatus','Não foi possível carregar as imagens. Tente arquivos menores.',true)}
+ const files=[...$('slideFiles').files];if(!files.length){setStatus('slideStatus','Selecione até 3 imagens.',true);return}
+ if(files.length>3){setStatus('slideStatus','Máximo 3 imagens.',true);return}
+ try{const converted=[];for(const f of files)converted.push(await imageToDataUrl(f));slideImages=converted;localStorage.setItem(SLIDES_STORAGE,JSON.stringify(slideImages));broadcastMedia();renderSlidePreviews();renderSlideshow();setStatus('slideStatus',`${slideImages.length} imagem(ns) salva(s).`);$('slideFiles').value=''}catch(e){setStatus('slideStatus','Não foi possível carregar as imagens.',true)}
 });
 $('clearSlidesBtn').addEventListener('click',()=>{slideImages=[];try{localStorage.removeItem(SLIDES_STORAGE)}catch(e){}broadcastMedia();renderSlidePreviews();renderSlideshow();setStatus('slideStatus','Imagens removidas.')});
 $('saveVideoBtn').addEventListener('click',async()=>{
- const file=$('videoFile').files[0];if(!file){setStatus('slideStatus','Selecione um vídeo antes de salvar.',true);return}
- if(!file.type.startsWith('video/')){setStatus('slideStatus','Selecione um arquivo de vídeo válido.',true);return}
- try{await saveVideoBlob(file);hasSlideVideo=true;localStorage.setItem(VIDEO_META_STORAGE,'1');broadcastMedia();renderSlidePreviews();await renderSlideshow();setStatus('slideStatus','Vídeo salvo com sucesso.');$('videoFile').value=''}catch(e){setStatus('slideStatus','Não foi possível salvar o vídeo. Tente um arquivo menor ou outro navegador.',true)}
+ const file=$('videoFile').files[0];if(!file){setStatus('slideStatus','Selecione um vídeo.',true);return}
+ if(!file.type.startsWith('video/')){setStatus('slideStatus','Arquivo de vídeo inválido.',true);return}
+ try{await saveVideoBlob(file);hasSlideVideo=true;localStorage.setItem(VIDEO_META_STORAGE,'1');broadcastMedia();renderSlidePreviews();await renderSlideshow();setStatus('slideStatus','Vídeo salvo.');$('videoFile').value=''}catch(e){setStatus('slideStatus','Não foi possível salvar o vídeo.',true)}
 });
 $('clearVideoBtn').addEventListener('click',async()=>{await deleteVideoBlob();hasSlideVideo=false;try{localStorage.removeItem(VIDEO_META_STORAGE)}catch(e){}broadcastMedia();renderSlidePreviews();renderSlideshow();setStatus('slideStatus','Vídeo removido.')});
+
+/* ============================================================
+   RENDERIZA TELA DE LOCALIZAÇÃO + QR CODE
+   ============================================================ */
 function renderCurrent(){
  const screen=document.querySelector('#displayView .display-screen');
  const bgLogo=$('displayBgLogo');if(bgLogo)bgLogo.style.backgroundImage=condoLogo?`url("${condoLogo}")`:'none';
@@ -625,22 +593,34 @@ function renderCurrent(){
  if(!current)renderSlideshow();
  $('openMapBtn').disabled=!current;$('printQrBtn').disabled=!current;
  if(!current){$('qrOutput').innerHTML='<div class="empty">Aguardando próxima localização.</div>';return}
- // O QR Code agora aponta para a página interna com múltiplas opções de navegação.
- const qrUrl=buildNavPageUrl(current);
- if(!qrUrl){$('qrOutput').innerHTML='<div class="empty">Este imóvel não possui link cadastrado.</div>';return}
+
+ const qrUrl=buildNavUrl(current);
+ if(!qrUrl){$('qrOutput').innerHTML='<div class="empty">Sem link cadastrado.</div>';return}
+
+ // Mensagem de debug no console
+ console.log('[Portaria Fácil] URL do QR:',qrUrl,'Tamanho:',qrUrl.length);
+
  let generated=false;
  if(window.QRCode){
   try{
-   new QRCode($('qrOutput'),{text:qrUrl,width:300,height:300,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel?QRCode.CorrectLevel.L:1});
+   new QRCode($('qrOutput'),{
+     text:qrUrl,
+     width:300,
+     height:300,
+     colorDark:'#000000',
+     colorLight:'#ffffff',
+     correctLevel:QRCode.CorrectLevel ? QRCode.CorrectLevel.M : 2
+   });
    generated=!!$('qrOutput').querySelector('canvas, img');
-  }catch(err){generated=false;$('qrOutput').innerHTML=''}
+  }catch(err){console.error('[Portaria Fácil] Erro QRCode:',err);generated=false;$('qrOutput').innerHTML=''}
  }
  if(!generated){
+  // Fallback: API externa
   const img=document.createElement('img');
-  img.alt='QR Code do link de localização cadastrado';img.width=300;img.height=300;
+  img.alt='QR Code';img.width=300;img.height=300;
   img.style.width='300px';img.style.height='300px';img.style.maxWidth='min(65vw, 360px)';
   img.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data='+encodeURIComponent(qrUrl);
-  img.onerror=()=>{$('qrOutput').innerHTML='<div class="empty">Não foi possível gerar o QR Code. Verifique a conexão com a internet e recarregue a página.</div>'};
+  img.onerror=()=>{$('qrOutput').innerHTML='<div class="empty">Não foi possível gerar o QR Code.</div>'};
   $('qrOutput').appendChild(img);
  }
 }
@@ -650,14 +630,14 @@ $('loteSelect').addEventListener('change',()=>{const r=findRecord($('quadraSelec
 $('showBtn').addEventListener('click',()=>{
  const q=$('quadraSelect').value,l=$('loteSelect').value;
  if(!q||!l){setStatus('portariaStatus','Selecione a quadra e o lote.',true);return}
- const r=findRecord(q,l);if(!r||($('ruaSelect').value&&(r.rua||'').trim()!==$('ruaSelect').value)){setStatus('portariaStatus','Imóvel não encontrado. Confira a rua/avenida, quadra e lote.',true);return}
+ const r=findRecord(q,l);if(!r||($('ruaSelect').value&&(r.rua||'').trim()!==$('ruaSelect').value)){setStatus('portariaStatus','Imóvel não encontrado.',true);return}
  showRecord(r);recordDelivery(r);logAction('QR Code exibido',`Quadra ${r.quadra}, lote ${r.lote}`);setStatus('portariaStatus',`Exibindo QR Code: Quadra ${r.quadra}, Lote ${r.lote}.`);
 });
 $('openDisplayBtn').addEventListener('click',()=>{
  const w=window.open(location.href.split('#')[0]+'#tela-prestador','_blank');
- if(!w){setStatus('portariaStatus','O navegador bloqueou a segunda tela. Permita pop-ups para este arquivo.',true);return}
+ if(!w){setStatus('portariaStatus','O navegador bloqueou a segunda tela.',true);return}
  try{const req=w.document.documentElement.requestFullscreen;if(req){const result=req.call(w.document.documentElement);if(result&&result.catch)result.catch(()=>{});}}catch(_){}
- setStatus('portariaStatus','Segunda tela aberta. O conteúdo se ajusta ao monitor; se o navegador não entrar em tela cheia automaticamente, pressione F11 nessa tela.');
+ setStatus('portariaStatus','Segunda tela aberta.');
 });
 $('openMapBtn').addEventListener('click',()=>{if(current)window.open(current.url,'_blank','noopener')});
 $('printQrBtn').addEventListener('click',()=>window.print());
@@ -668,15 +648,9 @@ function parseLine(line){
   if(parts.length<3)return null;
   const q=parts.shift().trim(),l=parts.shift().trim();
   let rua='',proprietario='',url='';
-  if(parts.length===1){
-    url=parts[0].trim().replace(/^["']|["']$/g,'');
-  }else if(parts.length>=3){
-    rua=parts.shift().trim().replace(/^["']|["']$/g,'');
-    proprietario=parts.shift().trim().replace(/^["']|["']$/g,'');
-    url=parts.join(line.includes(';')?';':',').trim().replace(/^["']|["']$/g,'');
-  }else{
-    url=parts.join(line.includes(';')?';':',').trim().replace(/^["']|["']$/g,'');
-  }
+  if(parts.length===1){url=parts[0].trim().replace(/^["']|["']$/g,'')}
+  else if(parts.length>=3){rua=parts.shift().trim().replace(/^["']|["']$/g,'');proprietario=parts.shift().trim().replace(/^["']|["']$/g,'');url=parts.join(line.includes(';')?';':',').trim().replace(/^["']|["']$/g,'')}
+  else{url=parts.join(line.includes(';')?';':',').trim().replace(/^["']|["']$/g,'')}
   if(!q||!l||!validUrl(url))return null;
   return {quadra:q,lote:l,rua,proprietario,url};
 }
@@ -689,14 +663,14 @@ function importText(text){
   const existing=findRecord(r.quadra,r.lote);
   if(existing){Object.assign(existing,r);updated++}else{records.push(r);added++}
  });
- persist();renderAll();logAction('Importação de imóveis',`${added} novos, ${updated} atualizados, ${skipped} ignorados`);setStatus('adminStatus',`Importação concluída: ${added} novo(s), ${updated} atualizado(s), ${skipped} linha(s) ignorada(s).`,false);
+ persist();renderAll();logAction('Importação de imóveis',`${added} novos, ${updated} atualizados, ${skipped} ignorados`);setStatus('adminStatus',`Importação: ${added} novo(s), ${updated} atualizado(s), ${skipped} ignorada(s).`,false);
 }
 $('importBtn').addEventListener('click',()=>{if(!$('bulkInput').value.trim()){setStatus('adminStatus','Cole sua lista antes de importar.',true);return}importText($('bulkInput').value)});
 $('fileBtn').addEventListener('click',()=>$('csvFile').click());
 $('csvFile').addEventListener('change',async e=>{const f=e.target.files[0];if(f){importText(await f.text());e.target.value=''}});
 $('saveOneBtn').addEventListener('click',()=>{
  const q=$('editQuadra').value.trim(),l=$('editLote').value.trim(),rua=$('editRua').value.trim(),proprietario=$('editProprietario').value.trim(),url=$('editUrl').value.trim();
- if(!q||!l||!validUrl(url)){setStatus('adminStatus','Preencha quadra, lote e um link http:// ou https:// válido.',true);return}
+ if(!q||!l||!validUrl(url)){setStatus('adminStatus','Preencha quadra, lote e link válido.',true);return}
  const old=findRecord(q,l);if(old){Object.assign(old,{rua,proprietario,url})}else{records.push({quadra:q,lote:l,rua,proprietario,url})}
  persist();renderAll();logAction('Imóvel salvo',`Quadra ${q}, lote ${l}`);setStatus('adminStatus',`Quadra ${q}, lote ${l} salvo.`);
  $('editQuadra').value='';$('editLote').value='';$('editRua').value='';$('editProprietario').value='';$('editUrl').value='';
@@ -706,7 +680,7 @@ $('recordsBody').addEventListener('click',e=>{
  if(ed){const r=records.find(x=>key(x.quadra,x.lote)===ed.dataset.edit);if(r){$('editQuadra').value=r.quadra;$('editLote').value=r.lote;$('editRua').value=r.rua||'';$('editProprietario').value=r.proprietario||'';$('editUrl').value=r.url;window.scrollTo({top:0,behavior:'smooth'})}}
  if(rm){const r=records.find(x=>key(x.quadra,x.lote)===rm.dataset.remove);if(r&&confirm(`Excluir Quadra ${r.quadra}, Lote ${r.lote}?`)){records=records.filter(x=>x!==r);if(current&&key(current.quadra,current.lote)===key(r.quadra,r.lote))showRecord(null);persist();renderAll();logAction('Imóvel excluído',`Quadra ${r.quadra}, lote ${r.lote}`);setStatus('adminStatus','Imóvel excluído.')}} 
 });
-$('clearBtn').addEventListener('click',()=>{if(records.length&&confirm('Apagar todos os imóveis cadastrados neste navegador?')){records=[];showRecord(null);persist();renderAll();setStatus('adminStatus','Todos os cadastros foram apagados.')}});
+$('clearBtn').addEventListener('click',()=>{if(records.length&&confirm('Apagar todos os imóveis?')){records=[];showRecord(null);persist();renderAll();setStatus('adminStatus','Todos os cadastros foram apagados.')}});
 $('exportBtn').addEventListener('click',()=>{
  const csv='\uFEFF'+[['Quadra','Lote','Rua/Avenida','Proprietário','Link'],...records.map(r=>[r.quadra,r.lote,r.rua||'',r.proprietario||'',r.url])].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='imoveis_condominio.csv';a.click();URL.revokeObjectURL(a.href);
@@ -715,13 +689,13 @@ window.addEventListener('storage',e=>{if(e.key===STORAGE){try{records=JSON.parse
 if('BroadcastChannel'in window){const channel=new BroadcastChannel(CHANNEL);channel.onmessage=e=>{if(e.data?.type==='records'){records=e.data.records||[];renderAll()}if(e.data?.type==='current'){current=e.data.record||null;renderCurrent();scheduleExpiry()}if(e.data?.type==='slides'){slideImages=e.data.images||[];if(typeof e.data.hasVideo==='boolean')hasSlideVideo=e.data.hasVideo;if(typeof e.data.logo==='string'){condoLogo=e.data.logo;try{localStorage.setItem(CONDO_LOGO_STORAGE,condoLogo)}catch(_){}const bg=$('displayBgLogo');if(bg)bg.style.backgroundImage=condoLogo?`url("${condoLogo}")`:'none'};try{localStorage.setItem(SLIDES_STORAGE,JSON.stringify(slideImages));if(hasSlideVideo)localStorage.setItem(VIDEO_META_STORAGE,'1');else localStorage.removeItem(VIDEO_META_STORAGE)}catch(_){}renderSlidePreviews();renderSlideshow()}}}
 if(location.hash==='#tela-prestador'){document.body.classList.add('display-mode');switchView('displayView');}
 
-// ============================================================
-// SLIDESHOW
-// ============================================================
+/* ============================================================
+   SLIDESHOW
+   ============================================================ */
 function renderSlidePreviews(){
  const box=$('slidePreviews');if(!box)return;
  const imageCards=slideImages.map((src,i)=>`<div style="border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center"><img src="${src}" alt="Imagem ${i+1}" style="max-width:100%;height:110px;object-fit:contain"><div class="hint">Imagem ${i+1}</div></div>`);
- if(hasSlideVideo)imageCards.push('<div style="border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center"><strong>Vídeo salvo</strong><div class="hint">Será reproduzido na apresentação</div></div>');
+ if(hasSlideVideo)imageCards.push('<div style="border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center"><strong>Vídeo salvo</strong></div>');
  box.innerHTML=imageCards.join('');
 }
 async function renderSlideshow(){
@@ -766,21 +740,31 @@ async function renderSlideshow(){
  showItem();
 }
 
-// Inicialização
-renderAll();renderSlidePreviews();renderSlideshow();renderCurrent();updateClock();setInterval(updateClock,1000);showAuthPanel();
+/* ============================================================
+   INICIALIZAÇÃO
+   ============================================================ */
+try{
+  renderAll();
+  renderSlidePreviews();
+  renderSlideshow();
+  renderCurrent();
+  updateClock();
+  setInterval(updateClock,1000);
+  showAuthPanel();
 
-// Botão flutuante de relatório
-const frBtn=document.getElementById('floatingReportBtn');
-if(frBtn)frBtn.addEventListener('click',()=>downloadDeliveryReport(false));
+  const frBtn=document.getElementById('floatingReportBtn');
+  if(frBtn)frBtn.addEventListener('click',()=>downloadDeliveryReport(false));
 
-// Logs — botões exportar/limpar
-const exLogs=$('exportLogsBtn');
-if(exLogs)exLogs.addEventListener('click',()=>{
-  const csv='\uFEFF'+['Data e hora','Ação','Detalhes'].join(';')+'\r\n'+logs.map(x=>[x.date,x.action,x.details||''].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='logs_portaria_'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(a.href);
-});
-const clLogs=$('clearLogsBtn');
-if(clLogs)clLogs.addEventListener('click',()=>{if(confirm('Apagar todos os logs deste navegador?')){logs=[];try{localStorage.removeItem(LOG_STORAGE)}catch(e){};renderLogs();}});
+  const exLogs=$('exportLogsBtn');
+  if(exLogs)exLogs.addEventListener('click',()=>{
+    const csv='\uFEFF'+['Data e hora','Ação','Detalhes'].join(';')+'\r\n'+logs.map(x=>[x.date,x.action,x.details||''].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='logs_portaria_'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(a.href);
+  });
+  const clLogs=$('clearLogsBtn');
+  if(clLogs)clLogs.addEventListener('click',()=>{if(confirm('Apagar todos os logs?')){logs=[];try{localStorage.removeItem(LOG_STORAGE)}catch(e){};renderLogs();}});
+}catch(err){
+  console.error('[Portaria Fácil] Erro na inicialização:',err);
+}
 
 })();
 </script>

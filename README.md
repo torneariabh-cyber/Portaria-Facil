@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -209,12 +209,12 @@ input, select, textarea { font-size: 16px; }
   <div class="totem-page" id="totemForm">
     <div class="totem-header">
       <div class="tag">BEM-VINDO</div>
-      <h1>Residencial Reserva Celeste 3</h1>
+      <h1>Residencial Reserva Celeste III</h1>
       <p>Selecione o imóvel e abra a localização direto no seu GPS.</p>
     </div>
     <div class="card">
       <h3>📍 Para onde você vai?</h3>
-      <div class="sub">Escolha a rua, a quadra e o lote do morador.</div>
+      <div class="sub">ESCOLHA A RUA, A QUADRA E O LOTE DO MORADOR.</div>
       <div id="totemLoading" class="hint" style="text-align:center;padding:20px">⏳ Carregando imóveis...</div>
       <div id="totemFormFields" style="display:none">
         <label for="totemRua">Rua / Avenida</label>
@@ -227,12 +227,17 @@ input, select, textarea { font-size: 16px; }
         <select id="totemService">
           <option value="">Selecione o tipo</option>
           <option>Ifood</option>
+          option>99 Entregas</option>
+          option>Uber Entregas</option>
+          option>Zé Delivery</option>
           <option>Mercado Livre</option>
           <option>Shopee</option>
           <option>TikTok Shop</option>
           <option>Restaurante</option>
           <option>Marmitaria</option>
           <option>Serviços Gerais</option>
+          <option>Eletrecista</option>
+          <option>Ar-Condicionado</option
         </select>
         <button class="bigbtn" id="totemShowBtn" disabled>ABRIR LOCALIZAÇÃO</button>
       </div>

@@ -227,9 +227,9 @@ input, select, textarea { font-size: 16px; }
         <select id="totemService">
           <option value="">Selecione o tipo</option>
           <option>Ifood</option>
-          option>99 Entregas</option>
-          option>Uber Entregas</option>
-          option>Zé Delivery</option>
+          <option>99 Entregas</option>
+          <option>Uber Entregas</option>
+          <option>Zé Delivery</option>
           <option>Mercado Livre</option>
           <option>Shopee</option>
           <option>TikTok Shop</option>
@@ -237,7 +237,7 @@ input, select, textarea { font-size: 16px; }
           <option>Marmitaria</option>
           <option>Serviços Gerais</option>
           <option>Eletrecista</option>
-          <option>Ar-Condicionado</option
+          <option>Ar-Condicionado</option>
         </select>
         <button class="bigbtn" id="totemShowBtn" disabled>ABRIR LOCALIZAÇÃO</button>
       </div>

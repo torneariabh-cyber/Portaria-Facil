@@ -1,0 +1,20 @@
+{
+  "condoName": "Residencial Reserva Celeste 3",
+  "exportedAt": "2026-10-17T02:47:11.710Z",
+  "records": [
+    {
+      "quadra": "01",
+      "lote": "01",
+      "rua": "RUA B",
+      "proprietario": "CLESIO",
+      "url": "https://maps.app.goo.gl/VSRMyXdV8y7vHrJZ7"
+    },
+    {
+      "quadra": "02",
+      "lote": "04",
+      "rua": "RUA 1",
+      "proprietario": "JHONATAN",
+      "url": "https://maps.app.goo.gl/kAWK5whMnLpLuGwu8"
+    }
+  ]
+}

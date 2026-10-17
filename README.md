@@ -245,7 +245,7 @@ input, select, textarea { font-size: 16px; }
     </div>
     <div id="totemSpeedBadge" class="speed-badge" style="display:none;align-self:center">
       <span class="ico">🚦</span>
-      <span>Velocidade permitida Dentro condomínio Sujeito a Multa!</span>
+      <span>Velocidade permitida dentro do Condomínio Sujeito a Multa!</span>
       <span class="val" id="totemSpeedValue">30 km/h</span>
     </div>
     <div class="footer-area">
@@ -874,7 +874,7 @@ $('printPortaoBtn').addEventListener('click',()=>{
   const url=buildPortaoUrl();
   const win=window.open('','_blank');
   if(!win){setStatus('portaoStatus','Permita pop-ups.',true);return}
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>QR Portão</title><style>body{font-family:Arial;text-align:center;padding:40px;margin:0}h1{color:#102b4e;font-size:32px;margin:0 0 10px}h2{color:#1768c4;font-size:20px;margin:0 0 30px}p{color:#66758b;font-size:16px;max-width:500px;margin:20px auto;line-height:1.5}#qr{background:#fff;padding:24px;border:3px solid #102b4e;border-radius:20px;display:inline-block;margin:20px auto}img{display:block}.speed{margin-top:30px;padding:14px;background:#fff3c4;color:#6a4c00;border-radius:12px;font-weight:700;font-size:18px;display:inline-block}</style></head><body><h1>Residencial Reserva Celeste 3</h1><h2>📱 Escaneie para localizar o imóvel</h2><div id="qr"></div><p><b>Entregador:</b> escaneie o QR, escolha a quadra e o lote, e toque em <b>ABRIR LOCALIZAÇÃO</b>.</p><p class="speed">🚦 Velocidade máxima no condomínio: 30 km/h</p><p style="font-size:13px;color:#999">${url}</p><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script><script>new QRCode(document.getElementById('qr'),{text:${JSON.stringify(url)},width:320,height:320,colorDark:'#102b4e',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});setTimeout(()=>window.print(),500);<\/script></body></html>`);
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>QR Portão</title><style>body{font-family:Arial;text-align:center;padding:40px;margin:0}h1{color:#102b4e;font-size:32px;margin:0 0 10px}h2{color:#1768c4;font-size:20px;margin:0 0 30px}p{color:#66758b;font-size:16px;max-width:500px;margin:20px auto;line-height:1.5}#qr{background:#fff;padding:24px;border:3px solid #102b4e;border-radius:20px;display:inline-block;margin:20px auto}img{display:block}.speed{margin-top:30px;padding:14px;background:#fff3c4;color:#6a4c00;border-radius:12px;font-weight:700;font-size:18px;display:inline-block}</style></head><body><h1>Residencial Reserva Celeste 3</h1><h2>📱 Escaneie para localizar o imóvel</h2><div id="qr"></div><p><b>Entregador:</b> escaneie o QR, escolha a quadra e o lote, e toque em <b>ABRIR LOCALIZAÇÃO</b>.</p><p class="speed">🚦 Velocidade máxima no condomínio: 30 KM/h</p><p style="font-size:13px;color:#999">${url}</p><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script><script>new QRCode(document.getElementById('qr'),{text:${JSON.stringify(url)},width:320,height:320,colorDark:'#102b4e',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});setTimeout(()=>window.print(),500);<\/script></body></html>`);
   win.document.close();
 });
 $('downloadPortaoBtn').addEventListener('click',()=>{

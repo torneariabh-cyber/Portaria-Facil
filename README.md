@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -75,7 +75,7 @@ input, select, textarea { font-size: 16px; }
   body.display-mode #displayView .display-screen.showing-qr #qrOutput canvas { width: min(72vw, 300px) !important; height: auto !important; max-height: 40svh; }
 }
 
-/* ========== Página de navegação (abre após ler QR do imóvel) ========== */
+/* ========== Página de navegação (após ler QR do imóvel — usada apenas pelo totem antigo) ========== */
 .nav-page{max-width:560px;margin:0 auto;padding:18px 14px 40px;font-family:Arial,Helvetica,sans-serif}
 .nav-page .nav-header{background:var(--navy);color:#fff;border-radius:15px;padding:20px;text-align:center;margin-bottom:16px;box-shadow:0 4px 16px #18304b20}
 .nav-page .nav-header .tag{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#a9c5e6;font-weight:700}
@@ -111,21 +111,36 @@ input, select, textarea { font-size: 16px; }
 .totem-page label{display:block;font-size:14px;font-weight:700;margin:14px 0 6px;color:var(--ink)}
 .totem-page select{width:100%;border:2px solid #c8d3e1;border-radius:12px;padding:14px;font-size:16px;font-weight:600;background:#fff;color:var(--ink);-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2366758b' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:42px}
 .totem-page select:disabled{background:#f2f5f9;color:#a7b1c0}
-.totem-page .bigbtn{width:100%;padding:20px;font-size:19px;font-weight:800;border:0;border-radius:14px;background:linear-gradient(135deg,#1768c4,#0e56a8);color:#fff;cursor:pointer;margin-top:20px;box-shadow:0 6px 20px #1768c440;letter-spacing:.5px;transition:transform .12s ease}
+.totem-page .bigbtn{width:100%;padding:22px;font-size:20px;font-weight:800;border:0;border-radius:14px;background:linear-gradient(135deg,#12804a,#0d6038);color:#fff;cursor:pointer;margin-top:20px;box-shadow:0 8px 24px #12804a40;letter-spacing:.5px;transition:transform .12s ease}
 .totem-page .bigbtn:active{transform:scale(.98)}
 .totem-page .bigbtn:disabled{background:#c8d3e1;color:#7d8896;box-shadow:none;cursor:not-allowed}
 .totem-page .status{font-size:14px;min-height:20px;margin-top:12px;color:var(--red);text-align:center;font-weight:600}
 .totem-page .footer-link{display:block;text-align:center;color:var(--muted);font-size:13px;margin-top:20px;text-decoration:none}
 
+/* Tela de resultado do totem — com botões de navegação direta */
 .totem-result{max-width:520px;margin:0 auto;padding:18px 14px 40px;font-family:Arial,Helvetica,sans-serif}
-.totem-result .result-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;text-align:center;box-shadow:0 6px 24px #18304b12;margin-bottom:14px}
-.totem-result .result-card .tag{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:700}
-.totem-result .result-card h2{font-size:clamp(22px,5vw,28px);margin:10px 0 4px;color:var(--navy)}
-.totem-result .result-card .addr{color:var(--muted);font-size:15px;margin-bottom:18px}
-.totem-result #totemQrBox{background:#fff;padding:14px;border:1px solid var(--line);border-radius:14px;display:inline-flex;align-items:center;justify-content:center;min-width:240px;min-height:240px;margin:8px auto}
-.totem-result #totemQrBox img,.totem-result #totemQrBox canvas{width:min(72vw,280px)!important;height:auto!important}
-.totem-result .result-hint{color:var(--muted);font-size:13px;margin-top:14px;line-height:1.5}
-.totem-result .backbtn{width:100%;padding:16px;font-size:16px;font-weight:700;border:0;border-radius:12px;background:#e7eef7;color:#17385f;cursor:pointer;margin-top:14px}
+.totem-result .result-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 6px 24px #18304b12;margin-bottom:14px}
+.totem-result .result-header{text-align:center;margin-bottom:18px}
+.totem-result .result-header .tag{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:700}
+.totem-result .result-header h2{font-size:clamp(24px,6vw,32px);margin:10px 0 6px;color:var(--navy);line-height:1.15}
+.totem-result .result-header .addr{color:var(--muted);font-size:15px;line-height:1.4}
+.totem-result .result-header .proprietario{color:var(--ink);font-size:16px;font-weight:700;margin-top:6px}
+
+.totem-result .nav-buttons{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.totem-result .nav-btn{display:flex;align-items:center;gap:16px;width:100%;padding:22px 20px;border-radius:16px;border:2px solid var(--line);background:#fff;text-decoration:none;color:var(--ink);font-weight:800;font-size:19px;cursor:pointer;box-shadow:0 4px 14px #18304b0e;transition:transform .12s ease,box-shadow .12s ease;text-align:left}
+.totem-result .nav-btn:active{transform:scale(.97)}
+.totem-result .nav-btn .ico{font-size:34px;line-height:1;width:46px;text-align:center;flex-shrink:0}
+.totem-result .nav-btn .txt{flex:1}
+.totem-result .nav-btn .txt small{display:block;color:var(--muted);font-weight:500;font-size:13px;margin-top:3px}
+.totem-result .nav-btn.gmaps{background:linear-gradient(135deg,#e8f1fe,#d7e8ff);border-color:#1768c4;color:#0d3f7c}
+.totem-result .nav-btn.gmaps .ico{filter:drop-shadow(0 2px 4px #1768c440)}
+.totem-result .nav-btn.waze{background:linear-gradient(135deg,#e6f6ff,#d0eaff);border-color:#00a8e8;color:#005f8a}
+.totem-result .nav-btn.apple{background:linear-gradient(135deg,#f0f0f5,#e0e0e8);border-color:#666;color:#222}
+.totem-result .nav-btn.copy{background:linear-gradient(135deg,#fff8e1,#fff3c4);border-color:#d4a017;color:#6a4c00}
+.totem-result .nav-btn.copy .ico{font-size:28px}
+
+.totem-result .backbtn{width:100%;padding:16px;font-size:15px;font-weight:700;border:0;border-radius:12px;background:#e7eef7;color:#17385f;cursor:pointer;margin-top:8px}
+.totem-result .feedback{color:var(--green);font-size:14px;text-align:center;min-height:20px;margin-top:6px;font-weight:600}
 
 /* Preview do QR do portão no admin */
 .qr-portao-preview{background:#fff;padding:24px;border:1px solid var(--line);border-radius:16px;display:inline-flex;align-items:center;justify-content:center;min-width:260px;min-height:260px;margin:14px 0}
@@ -134,7 +149,7 @@ input, select, textarea { font-size: 16px; }
 </head>
 <body>
 
-<!-- ========================= PÁGINA DE NAVEGAÇÃO (após ler QR do imóvel) ========================= -->
+<!-- ========================= PÁGINA DE NAVEGAÇÃO (fallback opcional) ========================= -->
 <div id="navPage" style="display:none">
   <div class="nav-page">
     <div class="nav-header">
@@ -151,21 +166,11 @@ input, select, textarea { font-size: 16px; }
     </div>
     <div class="card">
       <h3 style="margin:0 0 12px;font-size:16px">Abrir rota em:</h3>
-      <a class="big-link gmaps" id="navGmaps" href="#" target="_blank" rel="noopener">
-        <span class="ico">🗺️</span><span class="txt">Google Maps<small>Navegação padrão</small></span>
-      </a>
-      <a class="big-link waze" id="navWaze" href="#" target="_blank" rel="noopener">
-        <span class="ico">🚗</span><span class="txt">Waze<small>Melhor para trânsito em tempo real</small></span>
-      </a>
-      <a class="big-link apple" id="navApple" href="#" target="_blank" rel="noopener">
-        <span class="ico">🍎</span><span class="txt">Apple Maps<small>Para iPhone / iPad</small></span>
-      </a>
-      <a class="big-link orig" id="navOriginal" href="#" target="_blank" rel="noopener">
-        <span class="ico">🌐</span><span class="txt">Abrir link original<small>Endereço exato cadastrado</small></span>
-      </a>
-      <button class="big-link copy" id="navCopyBtn" type="button">
-        <span class="ico">📋</span><span class="txt">Copiar endereço<small id="navCopyPreview">—</small></span>
-      </button>
+      <a class="big-link gmaps" id="navGmaps" href="#" target="_blank" rel="noopener"><span class="ico">🗺️</span><span class="txt">Google Maps<small>Navegação padrão</small></span></a>
+      <a class="big-link waze" id="navWaze" href="#" target="_blank" rel="noopener"><span class="ico">🚗</span><span class="txt">Waze<small>Melhor para trânsito em tempo real</small></span></a>
+      <a class="big-link apple" id="navApple" href="#" target="_blank" rel="noopener"><span class="ico">🍎</span><span class="txt">Apple Maps<small>Para iPhone / iPad</small></span></a>
+      <a class="big-link orig" id="navOriginal" href="#" target="_blank" rel="noopener"><span class="ico">🌐</span><span class="txt">Abrir link original<small>Endereço exato cadastrado</small></span></a>
+      <button class="big-link copy" id="navCopyBtn" type="button"><span class="ico">📋</span><span class="txt">Copiar endereço<small id="navCopyPreview">—</small></span></button>
       <div class="copy-feedback" id="navCopyFeedback"></div>
     </div>
     <p class="notice">Se algum aplicativo não abrir, use o Google Maps e cole o endereço copiado.</p>
@@ -178,7 +183,7 @@ input, select, textarea { font-size: 16px; }
     <div class="totem-header">
       <div class="tag">BEM-VINDO</div>
       <h1>Residencial Reserva Celeste 3</h1>
-      <p>Selecione o imóvel para onde você vai fazer a entrega ou serviço.</p>
+      <p>Selecione o imóvel e abra a localização direto no seu GPS.</p>
     </div>
 
     <div class="card">
@@ -206,7 +211,7 @@ input, select, textarea { font-size: 16px; }
         <option>Serviços Gerais</option>
       </select>
 
-      <button class="bigbtn" id="totemShowBtn" disabled>VER LOCALIZAÇÃO</button>
+      <button class="bigbtn" id="totemShowBtn" disabled>ABRIR LOCALIZAÇÃO</button>
       <div class="status" id="totemStatus" role="status"></div>
     </div>
     <a class="footer-link" href="#" id="totemAdminLink">Sou administrador</a>
@@ -214,11 +219,34 @@ input, select, textarea { font-size: 16px; }
 
   <div class="totem-result" id="totemResult" style="display:none">
     <div class="result-card">
-      <div class="tag">LOCALIZAÇÃO DO IMÓVEL</div>
-      <h2 id="totemResultTitle">Quadra A, Lote 01</h2>
-      <div class="addr" id="totemResultAddr">—</div>
-      <div id="totemQrBox"><div class="empty">Gerando...</div></div>
-      <div class="result-hint">📱 Abra a câmera do seu celular, aponte para o QR Code acima e escolha o aplicativo de navegação (Google Maps, Waze, Apple Maps).</div>
+      <div class="result-header">
+        <div class="tag">📍 LOCALIZAÇÃO ENCONTRADA</div>
+        <h2 id="totemResultTitle">Quadra A, Lote 01</h2>
+        <div class="addr" id="totemResultAddr">—</div>
+        <div class="proprietario" id="totemResultProprietario"></div>
+      </div>
+
+      <div class="nav-buttons">
+        <a class="nav-btn gmaps" id="totemBtnGmaps" href="#" target="_blank" rel="noopener">
+          <span class="ico">🗺️</span>
+          <span class="txt">Abrir no Google Maps<small>Navegação padrão (recomendado)</small></span>
+        </a>
+        <a class="nav-btn waze" id="totemBtnWaze" href="#" target="_blank" rel="noopener">
+          <span class="ico">🚗</span>
+          <span class="txt">Abrir no Waze<small>Trânsito em tempo real</small></span>
+        </a>
+        <a class="nav-btn apple" id="totemBtnApple" href="#" target="_blank" rel="noopener">
+          <span class="ico">🍎</span>
+          <span class="txt">Abrir no Apple Maps<small>Somente iPhone/iPad</small></span>
+        </a>
+        <button class="nav-btn copy" id="totemBtnCopy" type="button">
+          <span class="ico">📋</span>
+          <span class="txt">Copiar endereço<small id="totemCopyPreview">—</small></span>
+        </button>
+      </div>
+
+      <div class="feedback" id="totemFeedback"></div>
+
       <button class="backbtn" id="totemBackBtn">↩ Escolher outro imóvel</button>
     </div>
   </div>
@@ -274,7 +302,7 @@ input, select, textarea { font-size: 16px; }
 <section id="portaoView" class="view">
   <div class="panel">
     <h2>QR Code fixo do portão</h2>
-    <p class="hint">Imprima este QR Code e cole no portão da entrada. Qualquer prestador ou entregador que escanear com o celular abrirá uma tela para escolher a quadra e o lote, e receberá automaticamente a localização exata daquele imóvel — sem precisar falar com a portaria.</p>
+    <p class="hint">Imprima este QR Code e cole no portão da entrada. Qualquer prestador ou entregador que escanear com o celular abrirá uma tela para escolher a rua, quadra e lote, e o botão <b>ABRIR LOCALIZAÇÃO</b> levará direto ao Google Maps/Waze com a rota do imóvel.</p>
 
     <div style="text-align:center">
       <div class="qr-portao-preview" id="qrPortaoPreview"><div class="empty">Gerando QR Code do portão...</div></div>
@@ -292,12 +320,12 @@ input, select, textarea { font-size: 16px; }
     <div style="margin-top:22px;padding:16px;background:#f5f8fc;border-radius:12px;border:1px solid var(--line)">
       <h3 style="margin-top:0">⚠️ Para funcionar em outros celulares</h3>
       <p class="hint" style="margin:0 0 10px">Este QR Code aponta para <code id="portaoUrlDisplay">—</code></p>
-      <p class="hint" style="margin:0">Se o arquivo estiver no seu computador (<code>file://</code>), o QR só funciona no mesmo dispositivo. Para o QR do portão funcionar em <b>qualquer celular de qualquer pessoa</b>, publique este arquivo HTML em um servidor gratuito como <b>GitHub Pages</b>, <b>Netlify</b> ou <b>Vercel</b>. O QR Code apontará automaticamente para o endereço público.</p>
+      <p class="hint" style="margin:0">Se o arquivo estiver no seu computador (<code>file://</code>), o QR só funciona no mesmo dispositivo. Para o QR do portão funcionar em <b>qualquer celular de qualquer pessoa</b>, publique este arquivo HTML em um servidor gratuito como <b>GitHub Pages</b>, <b>Netlify</b> ou <b>Vercel</b>.</p>
     </div>
 
     <div style="margin-top:16px;padding:16px;background:#fff8e1;border-radius:12px;border:1px solid #f0e0a8">
       <h3 style="margin-top:0">💾 Exportar dados do condomínio</h3>
-      <p class="hint" style="margin:0 0 10px">Exporte um arquivo JSON com todos os imóveis cadastrados. Você pode hospedar esse arquivo junto com o HTML no servidor, e o totem carregará os dados automaticamente em qualquer celular.</p>
+      <p class="hint" style="margin:0 0 10px">Exporte um arquivo JSON com todos os imóveis cadastrados. Hospede esse arquivo junto com o HTML no servidor, e o totem carregará os dados automaticamente em qualquer celular.</p>
       <div class="actions" style="margin-top:0">
         <button class="green" id="exportJsonBtn">⬇️ Exportar imoveis.json</button>
         <button class="secondary" id="importJsonBtn">⬆️ Importar imoveis.json</button>
@@ -401,7 +429,28 @@ input, select, textarea { font-size: 16px; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 /* ============================================================
-   ETAPA 1 — PÁGINA DE NAVEGAÇÃO (?nav=...)
+   UTILITÁRIOS COMPARTILHADOS
+   ============================================================ */
+function extractGeo(url){
+  let lat=null,lng=null;
+  try{
+    const u=new URL(url);
+    const mAt=u.pathname.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if(mAt){lat=parseFloat(mAt[1]);lng=parseFloat(mAt[2])}
+    if(lat===null){
+      const q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('ll')||u.searchParams.get('daddr')||u.searchParams.get('destination');
+      if(q){const mQ=q.match(/^(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)$/);if(mQ){lat=parseFloat(mQ[1]);lng=parseFloat(mQ[2])}}
+    }
+    if(lat===null){
+      const mPlace=u.pathname.match(/\/place\/(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if(mPlace){lat=parseFloat(mPlace[1]);lng=parseFloat(mPlace[2])}
+    }
+  }catch(e){}
+  return {lat,lng};
+}
+
+/* ============================================================
+   ETAPA 1 — PÁGINA DE NAVEGAÇÃO (?nav=...) — mantida como fallback
    ============================================================ */
 (function(){
   const params=new URLSearchParams(location.search);
@@ -449,7 +498,7 @@ input, select, textarea { font-size: 16px; }
    ============================================================ */
 (function(){
   const params=new URLSearchParams(location.search);
-  if(params.get('nav'))return;
+  if(params.get('nav')||params.get('portao'))return;
 
 const STORAGE='portaria_facil_condominio_v2';
 const CHANNEL='portaria_facil_condominio_sync_v2';
@@ -586,20 +635,6 @@ function showRecord(r){
 }
 function updateClock(){
  try{const el=$('liveClock');if(el)el.textContent=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(e){}
-}
-
-function extractGeo(url){
-  let lat=null,lng=null;
-  try{
-    const u=new URL(url);
-    const mAt=u.pathname.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-    if(mAt){lat=parseFloat(mAt[1]);lng=parseFloat(mAt[2])}
-    if(lat===null){
-      const q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('ll')||u.searchParams.get('daddr')||u.searchParams.get('destination');
-      if(q){const mQ=q.match(/^(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)$/);if(mQ){lat=parseFloat(mQ[1]);lng=parseFloat(mQ[2])}}
-    }
-  }catch(e){}
-  return {lat,lng};
 }
 
 function buildNavUrl(record){
@@ -768,7 +803,7 @@ $('printPortaoBtn').addEventListener('click',()=>{
   <h1>Residencial Reserva Celeste 3</h1>
   <h2>📱 Escaneie para localizar o imóvel</h2>
   <div id="qr"></div>
-  <p><b>Entregador ou prestador:</b> aponte a câmera do celular para o QR Code ao lado, escolha a quadra e o lote, e receba a localização exata do imóvel.</p>
+  <p><b>Entregador ou prestador:</b> aponte a câmera do celular para o QR Code, escolha a quadra e o lote, e toque em <b>ABRIR LOCALIZAÇÃO</b> para ir direto ao GPS.</p>
   <p style="font-size:13px;color:#999">${url}</p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>
   <script>
@@ -801,7 +836,7 @@ $('exportJsonBtn').addEventListener('click',()=>{
   const blob=new Blob([json],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='imoveis.json';a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-  setStatus('portaoStatus','Arquivo imoveis.json exportado. Hospede junto com o HTML no servidor.',false);
+  setStatus('portaoStatus','Arquivo imoveis.json exportado.',false);
 });
 $('importJsonBtn').addEventListener('click',()=>$('importJsonFile').click());
 $('importJsonFile').addEventListener('change',async e=>{
@@ -818,7 +853,6 @@ $('importJsonFile').addEventListener('change',async e=>{
   }catch(err){setStatus('portaoStatus','Erro ao ler o arquivo JSON.',true)}
 });
 
-/* Carrega imoveis.json automaticamente (se hospedado ao lado do HTML) */
 async function tryLoadRemoteJson(){
   try{
     const res=await fetch('imoveis.json',{cache:'no-store'});
@@ -905,13 +939,12 @@ try{
 })();
 
 /* ============================================================
-   ETAPA 3 — TOTEM DO PORTÃO (?portao=1)
+   ETAPA 3 — TOTEM DO PORTÃO (?portao=1) — botão abre DIRETO no GPS
    ============================================================ */
 (function(){
   const params=new URLSearchParams(location.search);
   if(!params.get('portao'))return;
 
-  // Esconde app principal, mostra totem
   const app=document.getElementById('appRoot');
   if(app)app.style.display='none';
   const totem=document.getElementById('totemPage');
@@ -919,6 +952,7 @@ try{
 
   const $=id=>document.getElementById(id);
   const STORAGE='portaria_facil_condominio_v2';
+  const CHANNEL='portaria_facil_condominio_sync_v2';
 
   function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
   function key(q,l){return String(q).trim().toLocaleLowerCase()+'|'+String(l).trim().toLocaleLowerCase()}
@@ -926,7 +960,6 @@ try{
   let records=[];
   try{records=JSON.parse(localStorage.getItem(STORAGE)||'[]')}catch(e){records=[]}
 
-  // Tenta carregar imoveis.json do servidor (para totem funcionar em outros celulares)
   (async()=>{
     try{
       const res=await fetch('imoveis.json',{cache:'no-store'});
@@ -937,28 +970,6 @@ try{
       }
     }catch(e){}
   })();
-
-  function extractGeo(url){
-    let lat=null,lng=null;
-    try{
-      const u=new URL(url);
-      const mAt=u.pathname.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-      if(mAt){lat=parseFloat(mAt[1]);lng=parseFloat(mAt[2])}
-      if(lat===null){
-        const q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('ll')||u.searchParams.get('daddr')||u.searchParams.get('destination');
-        if(q){const mQ=q.match(/^(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)$/);if(mQ){lat=parseFloat(mQ[1]);lng=parseFloat(mQ[2])}}
-      }
-    }catch(e){}
-    return {lat,lng};
-  }
-
-  function buildNavUrl(record,service){
-    const geo=extractGeo(String(record.url||''));
-    const coords=(geo.lat!==null&&geo.lng!==null)?(geo.lat+','+geo.lng):'';
-    const payload=['NAV',record.rua||'',record.quadra||'',record.lote||'',record.proprietario||'',coords,service||'',record.url||''].join('|');
-    const base=location.href.split('?')[0].split('#')[0];
-    return base+'?nav='+encodeURIComponent(payload);
-  }
 
   function renderAllTotem(){
     const street=$('totemRua'),oldStreet=street.value;
@@ -986,14 +997,13 @@ try{
   }
   function updateBtn(){
     const q=$('totemQuadra').value,l=$('totemLote').value;
-    const btn=$('totemShowBtn');
-    btn.disabled=!(q&&l);
+    $('totemShowBtn').disabled=!(q&&l);
     const st=$('totemStatus');if(st)st.textContent='';
   }
 
   $('totemRua').addEventListener('change',()=>{renderQuadrasTotem();updateBtn()});
   $('totemQuadra').addEventListener('change',()=>{renderLotesTotem();updateBtn()});
-  $('totemLote').addEventListener('change',()=>updateBtn());
+  $('totemLote').addEventListener('change',updateBtn);
 
   $('totemShowBtn').addEventListener('click',()=>{
     const q=$('totemQuadra').value,l=$('totemLote').value,street=$('totemRua').value,service=$('totemService').value;
@@ -1001,22 +1011,58 @@ try{
     const r=records.find(x=>key(x.quadra,x.lote)===key(q,l)&&(!street||(x.rua||'').trim()===street));
     if(!r){$('totemStatus').textContent='Imóvel não encontrado.';return}
 
-    const navUrl=buildNavUrl(r,service);
-    const title=[r.quadra?'Quadra '+r.quadra:'',r.lote?'Lote '+r.lote:''].filter(Boolean).join(', ');
-    const addr=[r.rua||'',r.proprietario?('Morador: '+r.proprietario):''].filter(Boolean).join(' — ');
+    const geo=extractGeo(String(r.url||''));
+    const hasCoords=(geo.lat!==null&&geo.lng!==null);
+    const displayAddress=[r.rua, r.quadra?'Quadra '+r.quadra:'', r.lote?'Lote '+r.lote:''].filter(Boolean).join(' — ');
+    const fullAddress=displayAddress+(r.proprietario?' — '+r.proprietario:'');
 
+    // Google Maps: com coordenadas → rota direta. Sem → busca textual.
+    const gmaps=hasCoords
+      ? 'https://www.google.com/maps/dir/?api=1&destination='+geo.lat+','+geo.lng+'&travelmode=driving'
+      : (r.url||('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(fullAddress)));
+
+    // Waze
+    const waze=hasCoords
+      ? 'https://waze.com/ul?ll='+geo.lat+','+geo.lng+'&navigate=yes'
+      : 'https://waze.com/ul?q='+encodeURIComponent(fullAddress)+'&navigate=yes';
+
+    // Apple Maps
+    const apple=hasCoords
+      ? 'https://maps.apple.com/?daddr='+geo.lat+','+geo.lng+'&dirflg=d'
+      : 'https://maps.apple.com/?q='+encodeURIComponent(fullAddress);
+
+    // Atualiza a tela de resultado
+    const title=[r.quadra?'Quadra '+r.quadra:'', r.lote?'Lote '+r.lote:''].filter(Boolean).join(', ');
     $('totemResultTitle').textContent=title||'Imóvel';
-    $('totemResultAddr').textContent=addr||'';
-    const box=$('totemQrBox');box.innerHTML='';
-    let ok=false;
-    if(window.QRCode){
-      try{new QRCode(box,{text:navUrl,width:280,height:280,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});ok=!!box.querySelector('canvas, img')}catch(e){ok=false}
-    }
-    if(!ok){
-      const img=document.createElement('img');img.width=280;img.height=280;
-      img.src='https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=10&data='+encodeURIComponent(navUrl);
-      box.appendChild(img);
-    }
+    $('totemResultAddr').textContent=r.rua||'';
+    $('totemResultProprietario').textContent=r.proprietario?('👤 '+r.proprietario):'';
+
+    $('totemBtnGmaps').href=gmaps;
+    $('totemBtnWaze').href=waze;
+    $('totemBtnApple').href=apple;
+
+    const copyPreview=$('totemCopyPreview');
+    if(copyPreview){const t=fullAddress;copyPreview.textContent=t.length>42?t.slice(0,42)+'…':t}
+
+    // Prepara botão copiar
+    const copyBtn=$('totemBtnCopy');
+    const feedback=$('totemFeedback');
+    copyBtn.onclick=async()=>{
+      const texto=hasCoords?(geo.lat+','+geo.lng):fullAddress;
+      try{await navigator.clipboard.writeText(texto);feedback.textContent='✅ Endereço copiado! Cole no app de mapas.'}
+      catch(e){const ta=document.createElement('textarea');ta.value=texto;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');feedback.textContent='✅ Endereço copiado!'}catch(_){feedback.textContent='❌ Não foi possível copiar.'}ta.remove()}
+      setTimeout(()=>{feedback.textContent=''},4000);
+    };
+
+    // Registra entrega (mesmo se for via totem, ajuda no relatório)
+    try{
+      const now=new Date();
+      const entry={date:now.toLocaleDateString('pt-BR'),time:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),serviceType:service||'Não informado',quadra:r.quadra||'',lote:r.lote||'',rua:r.rua||'',proprietario:r.proprietario||'Não cadastrado'};
+      const DELIVERY_STORAGE='portaria_facil_delivery_report_v1';
+      let list=[];try{list=JSON.parse(localStorage.getItem(DELIVERY_STORAGE)||'[]')}catch(_){list=[]}
+      list.push(entry);localStorage.setItem(DELIVERY_STORAGE,JSON.stringify(list));
+    }catch(e){}
+
     $('totemForm').style.display='none';
     $('totemResult').style.display='block';
     window.scrollTo({top:0,behavior:'smooth'});

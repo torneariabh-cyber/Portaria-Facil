@@ -277,7 +277,7 @@ input, select, textarea { font-size: 16px; }
       </div>
       <div class="speed-warn" id="totemResultSpeed" style="display:none">
         <span class="ico">🚦</span>
-        <span>Velocidade máxima no condomínio: <strong id="totemResultSpeedVal">30 km/h</strong></span>
+        <span>Velocidade Máxima no Condomínio: <strong id="totemResultSpeedVal">30 km/h</strong></span>
       </div>
       <div class="feedback" id="totemFeedback"></div>
       <button class="backbtn" id="totemBackBtn">↩ Escolher outro imóvel</button>
@@ -304,7 +304,7 @@ input, select, textarea { font-size: 16px; }
 
 <div id="appRoot">
 <header>
-  <div><h1>Indique-nos 6699209-4946 <a href="https://maps.google.com/" target="_blank" rel="noopener noreferrer" title="Abrir Google Maps" aria-label="Abrir Google Maps" style="display:inline-flex;align-items:center;vertical-align:middle;margin-left:7px;text-decoration:none;font-size:22px">📍</a></h1><p>Localização rápida e inteligente Condominial</p></div>
+  <div><h1>Acess Port <a href="https://maps.google.com/" target="_blank" rel="noopener noreferrer" title="Abrir Google Maps" aria-label="Abrir Google Maps" style="display:inline-flex;align-items:center;vertical-align:middle;margin-left:7px;text-decoration:none;font-size:22px">📍</a></h1><p>Localização rápida e inteligente Condominial</p></div>
   <div class="header-right">
     <span id="cloudBadge" class="cloud-pill load" title="Status da conexão com a nuvem">☁️ conectando...</span>
     <span id="liveClock">--:--:--</span>

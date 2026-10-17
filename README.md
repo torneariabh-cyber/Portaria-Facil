@@ -367,7 +367,7 @@ input, select, textarea { font-size: 16px; }
       <div><label for="editLote">Lote</label><input id="editLote" placeholder="Ex.: 01"></div>
       <div><label for="editRua">Rua / Avenida</label><input id="editRua" placeholder="Ex.: Avenida A"></div>
       <div><label for="editProprietario">Proprietário</label><input id="editProprietario" placeholder="Nome completo"></div>
-    </div>sb_publishable_s1nx3_P9Hr3l8z5ofj7GsQ_kpnhJ6Fe
+    </div>
     <label for="editUrl">Link da localização</label><input id="editUrl" type="url" placeholder="https://maps.google.com/...">
     <div class="actions"><button class="green" id="saveOneBtn">Salvar imóvel</button></div>
   </div>
@@ -404,8 +404,8 @@ input, select, textarea { font-size: 16px; }
    Substitua pelos valores do seu projeto Supabase.
    (Project Settings → API)
    ============================================================ */
-const SUPABASE_URL = 'COLE_AQUI_SUA_PROJECT_URL';
-const SUPABASE_ANON_KEY = 'COLE_AQUI_SUA_ANON_KEY';
+const SUPABASE_URL = 'https://uyakrrwqzvwlqhqjnscc.supabase.co/rest/v1/';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5YWtycndxenZ3bHFocWpuc2NjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyMDQxNTYsImV4cCI6MjEwNzc4MDE1Nn0.sL_yIcxaiYYEHRdLcKpeIRpf8lbjYxMiL0g0xKrCajc';
 
 let supabaseClient = null;
 function getSupabase(){

@@ -245,7 +245,7 @@ input, select, textarea { font-size: 16px; }
     </div>
     <div id="totemSpeedBadge" class="speed-badge" style="display:none;align-self:center">
       <span class="ico">🚦</span>
-      <span>Velocidade permitida no condomínio</span>
+      <span>Velocidade permitida Dentro condomínio Sujeito a Multa!</span>
       <span class="val" id="totemSpeedValue">30 km/h</span>
     </div>
     <div class="footer-area">

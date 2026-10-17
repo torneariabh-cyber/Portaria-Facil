@@ -404,7 +404,7 @@ input, select, textarea { font-size: 16px; }
    Substitua pelos valores do seu projeto Supabase.
    (Project Settings → API)
    ============================================================ */
-const SUPABASE_URL = 'https://uyakrrwqzvwlqhqjnscc.supabase.co/rest/v1/';
+const SUPABASE_URL = 'https://uyakrrwqzvwlqhqjnscc.supabase.co/rest/v1';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5YWtycndxenZ3bHFocWpuc2NjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyMDQxNTYsImV4cCI6MjEwNzc4MDE1Nn0.sL_yIcxaiYYEHRdLcKpeIRpf8lbjYxMiL0g0xKrCajc';
 
 let supabaseClient = null;

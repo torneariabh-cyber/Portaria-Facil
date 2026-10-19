@@ -6,7 +6,7 @@
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">PLATAFORMA DE PORTARIA</div><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><button class="secondary" id="logoutBtn">Sair</button></header><div class="content" id="content"></div></main></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 // Public anon key only. Never place the Supabase service_role key in this file.
-const SUPABASE_URL='https://uyakrrwqzvwlqhqjnscc.supabase.co/rest/v1/';
+const SUPABASE_URL='https://uyakrrwqzvwlqhqjnscc.supabase.co';
 const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5YWtycndxenZ3bHFocWpuc2NjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyMDQxNTYsImV4cCI6MjEwNzc4MDE1Nn0.sL_yIcxaiYYEHRdLcKpeIRpf8lbjYxMiL0g0xKrCajc';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);let session=null,profile=null,condos=[],homes=[],currentView='dashboard';const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const say=(id,msg,error=false)=>{const e=$(id);if(e){e.textContent=msg;e.className='status'+(error?' error':'')}};
 const roleLabel={admin_geral:'Administrador geral',admin_condominio:'Administrador do condomínio',porteiro:'Porteiro'};

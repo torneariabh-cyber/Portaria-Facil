@@ -105,7 +105,7 @@ function printReportTable(title,tableId){const table=$(tableId);if(!table)return
 function applyAppBrand(){
   document.title = APP_BRAND + ' | Acess Port';
   document.querySelectorAll('.brand').forEach(el=>{el.innerHTML=APP_BRAND==='ACESS PORT'?'ACESS <span>PORT</span>':esc(APP_BRAND)});
-  document.querySelectorAll('.subbrand').forEach(el=>{el.textContent=APP_EXPECTED_ROLE==='admin_geral'?'ADMINISTRAÇÃO GERAL':APP_EXPECTED_ROLE==='admin_condominio'?'ÁREA DO CONDOMÍNIO':'SISTEMA DE PORTARIA'});
+  document.querySelectorAll('.subbrand').forEach(el=>{el.textContent=APP_EXPECTED_ROLE==='admin_geral'?'ADMINISTRAÇÃO GERAL':APP_EXPECTED_ROLE==='admin_condominio'?'ÁREA DO CONDOMÍNIO':'Localização Segura'});
 }
 async function init(){
   applyAppBrand();

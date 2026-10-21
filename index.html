@@ -84,8 +84,12 @@ async function init(){
     if(!authListenerReady){authListenerReady=true;sb.auth.onAuthStateChange((event,s)=>{
       session=s;
       if(event==='PASSWORD_RECOVERY'){showLogin();showRecovery();return;}
-      if(!s){profile=null;showLogin();}
-      else if(!recoveryMode){setTimeout(()=>loadProfile().catch(e=>say('loginStatus',friendlyError(e),true)),0);}
+      if(!s){profile=null;showLogin();return;}
+      // Não reconstruir a tela em TOKEN_REFRESHED: isso fazia o usuário voltar
+      // ao painel inicial quando o Supabase renovava a sessão.
+      if(!recoveryMode && (event==='SIGNED_IN' || !profile || profile.id!==s.user?.id)){
+        setTimeout(()=>{if(!profile || profile.id!==s.user?.id) loadProfile().catch(e=>say('loginStatus',friendlyError(e),true));},0);
+      }
     });}
   } catch(err){showLogin();say('loginStatus',friendlyError(err),true);}
 }
@@ -93,9 +97,14 @@ async function loadProfile(){
   if(!session)return;
   const {data,error}=await sb.from('perfis_acesso').select('id,nome,email,papel,condominio_id,ativo').eq('id',session.user.id).maybeSingle();
   if(error||!data||!data.ativo){await sb.auth.signOut();say('loginStatus',error?friendlyError(error):'Conta sem perfil ativo. Solicite ao administrador.',true);return;}
+  const alreadyLoaded=!!profile && profile.id===data.id;
+  const previousView=currentView;
   profile=data;$('loginScreen').classList.add('hidden');$('app').classList.remove('hidden');$('who').textContent=`${profile.nome||profile.email} • ${roleLabel[profile.papel]||profile.papel}`;
   setupIdleLogout();
-  await loadData();renderNav();navigate(profile.papel==='porteiro'?'operacao':'dashboard');
+  await loadData();renderNav();
+  // Quando a sessão já está carregada, manter a aba/menu em que a pessoa estava.
+  if(alreadyLoaded && previousView) navigate(previousView);
+  else navigate(profile.papel==='porteiro'?'operacao':'dashboard');
 }
 $('loginForm').addEventListener('submit',async e=>{
   e.preventDefault();const btn=$('loginButton');btn.disabled=true;say('loginStatus','Validando acesso…');
@@ -178,7 +187,8 @@ async function renderPublicPortal(condoId){
   street.onchange=()=>{const a=destinations.filter(h=>String(h.rua||'')===street.value);fill(block,'Selecione a quadra…',[...new Set(a.map(h=>String(h.quadra??'')))].filter(Boolean).sort((a,b)=>a.localeCompare(b,'pt-BR',{numeric:true})));fill(lot,'Selecione o lote…',[])};
   block.onchange=()=>{const a=destinations.filter(h=>String(h.rua||'')===street.value&&String(h.quadra??'')===block.value);fill(lot,'Selecione o lote…',[...new Set(a.map(h=>String(h.lote??'')))].filter(Boolean).sort((a,b)=>a.localeCompare(b,'pt-BR',{numeric:true})))};
   let navUrls=null;
-  $('publicVisitForm').onsubmit=async e=>{e.preventDefault();const h=chosen();if(!h)return say('publicStatus','Selecione rua, quadra e lote.',true);if(!$('termsAccepted').checked)return say('publicStatus','É necessário aceitar os termos.',true);const service=$('visitorService').value;if(!service)return say('publicStatus','Selecione o tipo de serviço.',true);const dest=`${h.rua} • Quadra ${h.quadra} • Lote ${h.lote}`;const btn=$('publicGoButton');btn.disabled=true;say('publicStatus','Confirmando destino…');try{const {error}=await sb.from('visitas_publicas').insert({condominio_id:condoId,prestador_nome:'Prestador/entregador via QR',empresa:null,tipo_servico:service,imovel_id:String(h.id),quadra:String(h.quadra),lote:String(h.lote),rua:String(h.rua),destino:dest,termos_aceitos:true});if(error)throw error;const address=[condo.nome,condo.endereco,condo.cep,dest,condo.cidade,condo.estado,'Brasil'].filter(Boolean).join(', ');const encoded=encodeURIComponent(address);const googleDestination=h.url&&/^https?:\/\/(www\.)?google\.com\/maps/i.test(h.url)?h.url:`https://www.google.com/maps/dir/?api=1&destination=${encoded}&travelmode=driving`;navUrls={google:googleDestination,apple:`https://maps.apple.com/?daddr=${encoded}`,waze:`https://waze.com/ul?ll=&q=${encoded}&navigate=yes`};$('mapChoices').classList.remove('hidden');$('publicStatus').textContent='Destino confirmado. Escolha seu aplicativo de mapas.';$('publicVisitForm').querySelectorAll('select,input,button[type="submit"]').forEach(x=>x.disabled=true);$('googleMapsBtn').onclick=()=>window.open(navUrls.google,'_blank','noopener,noreferrer');$('appleMapsBtn').onclick=()=>window.open(navUrls.apple,'_blank','noopener,noreferrer');$('wazeBtn').onclick=()=>window.open(navUrls.waze,'_blank','noopener,noreferrer');$('changeDestinationBtn').onclick=()=>{ $('mapChoices').classList.add('hidden');$('publicVisitForm').querySelectorAll('select,input,button[type="submit"]').forEach(x=>x.disabled=false);btn.disabled=false;$('publicStatus').textContent='Você pode alterar o destino e confirmar novamente.';};$('mapChoices').scrollIntoView({behavior:'smooth',block:'start'});}catch(err){say('publicStatus','Não foi possível confirmar. Tente novamente ou procure a portaria. '+friendlyError(err),true);btn.disabled=false}};
+  $('publicVisitForm').onsubmit=async e=>{e.preventDefault();const h=chosen();if(!h)return say('publicStatus','Selecione rua, quadra e lote.',true);if(!$('termsAccepted').checked)return say('publicStatus','É necessário aceitar os termos.',true);const service=$('visitorService').value;if(!service)return say('publicStatus','Selecione o tipo de serviço.',true);const dest=`${h.rua} • Quadra ${h.quadra} • Lote ${h.lote}`;const btn=$('publicGoButton');btn.disabled=true;say('publicStatus','Confirmando destino…');try{const {error}=await sb.from('visitas_publicas').insert({condominio_id:condoId,prestador_nome:'Prestador/entregador via QR',empresa:null,tipo_servico:service,imovel_id:String(h.id),quadra:String(h.quadra),lote:String(h.lote),rua:String(h.rua),destino:dest,termos_aceitos:true});if(error)throw error;const address=[condo.nome,condo.endereco,condo.cep,dest,condo.cidade,condo.estado,'Brasil'].filter(Boolean).join(', ');const encoded=encodeURIComponent(address);// Preserve o link salvo pelo administrador exatamente como foi cadastrado. Isso inclui links compartilhados de pinos Google Maps (maps.app.goo.gl / goo.gl/maps), que não devem ser substituídos por uma busca textual.
+const savedMapUrl=String(h.url||'').trim();const googleDestination=/^https?:\/\//i.test(savedMapUrl)?savedMapUrl:`https://www.google.com/maps/dir/?api=1&destination=${encoded}&travelmode=driving`;navUrls={google:googleDestination,apple:`https://maps.apple.com/?daddr=${encoded}`,waze:`https://waze.com/ul?ll=&q=${encoded}&navigate=yes`};$('mapChoices').classList.remove('hidden');$('publicStatus').textContent='Destino confirmado. Escolha seu aplicativo de mapas.';$('publicVisitForm').querySelectorAll('select,input,button[type="submit"]').forEach(x=>x.disabled=true);$('googleMapsBtn').onclick=()=>window.open(navUrls.google,'_blank','noopener,noreferrer');$('appleMapsBtn').onclick=()=>window.open(navUrls.apple,'_blank','noopener,noreferrer');$('wazeBtn').onclick=()=>window.open(navUrls.waze,'_blank','noopener,noreferrer');$('changeDestinationBtn').onclick=()=>{ $('mapChoices').classList.add('hidden');$('publicVisitForm').querySelectorAll('select,input,button[type="submit"]').forEach(x=>x.disabled=false);btn.disabled=false;$('publicStatus').textContent='Você pode alterar o destino e confirmar novamente.';};$('mapChoices').scrollIntoView({behavior:'smooth',block:'start'});}catch(err){say('publicStatus','Não foi possível confirmar. Tente novamente ou procure a portaria. '+friendlyError(err),true);btn.disabled=false}};
  }catch(err){say('publicStatus','Não foi possível carregar os dados deste condomínio. '+friendlyError(err),true)}
 }
 

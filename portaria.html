@@ -11,12 +11,12 @@ body.screen-display{margin:0!important;background:#000!important;overflow:hidden
 .media-admin{display:grid;grid-template-columns:1fr;gap:16px;margin-top:20px}.media-panel{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fbfdff}.media-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}.media-panel-head h3{margin:0 0 5px}.media-panel .helper{font-size:13px;color:var(--muted);margin:0}.media-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end}.media-row{grid-template-columns:minmax(0,1fr) auto auto}.document-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.document-row:last-child{border-bottom:0}.document-name{overflow-wrap:anywhere;min-width:0}.document-name strong{display:block}.document-name small{color:var(--muted)}.document-row button{padding:8px 10px;font-size:12px}.admin-note{border-radius:10px;background:#fff5d9;color:#715500;padding:12px;font-size:13px;margin-top:12px}.file-drop{border:1px dashed #b8c8dc;border-radius:12px;padding:14px;background:#fff}.file-drop input[type=file]{padding:8px}@media(max-width:700px){.media-toolbar,.document-row{grid-template-columns:1fr}.media-panel-head{display:block}.media-panel-head button{margin-top:10px}}
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Gestão segura de condomínios e portaria</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">O acesso depende de uma conta criada no Supabase e de um perfil autorizado.</p></div></div>
-<div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">PLATAFORMA DE PORTARIA</div><nav class="nav" id="nav"></nav><div class="sidefoot">Controle Portaria Remota</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><button class="secondary" id="logoutBtn">Sair</button></header><div class="content" id="content"></div></main></div>
+<div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">PLATAFORMA DE PORTARIA</div><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><button class="secondary" id="logoutBtn">Sair</button></header><div class="content" id="content"></div></main></div>
 <div id="publicDisplay" aria-live="polite"><div id="displayMedia" class="media-frame"><div style="font-size:clamp(24px,4vw,54px);font-weight:800">ACESS PORT</div></div><div id="displayPcd" hidden></div><div id="displayQr" class="qr-scene" hidden><h1 id="displayCondoName">ACESS PORT</h1><p id="displayAddress"></p><img id="displayQrImage" alt="QR Code de localização"><div id="displayTimer" class="timer">02:00</div><div class="display-brand">Acess Port • Localização rápida e inteligente</div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 'use strict';
 const APP_EXPECTED_ROLE = 'porteiro';
-const APP_BRAND = 'PORTARIA';
+const APP_BRAND = 'ACESS PORT';
 // A URL é o domínio do projeto. A chave pública (anon/publishable) é separada.
 const SUPABASE_URL = 'https://uyakrrwqzvwlqhqjnscc.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5YWtycndxenZ3bHFocWpuc2NjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyMDQxNTYsImV4cCI6MjEwNzc4MDE1Nn0.sL_yIcxaiYYEHRdLcKpeIRpf8lbjYxMiL0g0xKrCajc';
@@ -105,7 +105,7 @@ function printReportTable(title,tableId){const table=$(tableId);if(!table)return
 function applyAppBrand(){
   document.title = APP_BRAND + ' | Acess Port';
   document.querySelectorAll('.brand').forEach(el=>{el.innerHTML=APP_BRAND==='ACESS PORT'?'ACESS <span>PORT</span>':esc(APP_BRAND)});
-  document.querySelectorAll('.subbrand').forEach(el=>{el.textContent=APP_EXPECTED_ROLE==='admin_geral'?'ADMINISTRAÇÃO GERAL':APP_EXPECTED_ROLE==='admin_condominio'?'ÁREA DO CONDOMÍNIO':'Localização Segura'});
+  document.querySelectorAll('.subbrand').forEach(el=>{el.textContent=APP_EXPECTED_ROLE==='admin_geral'?'ADMINISTRAÇÃO GERAL':APP_EXPECTED_ROLE==='admin_condominio'?'ÁREA DO CONDOMÍNIO':'SISTEMA DE PORTARIA'});
 }
 async function init(){
   applyAppBrand();
@@ -216,39 +216,43 @@ function editCondoDetails(id){if(profile.papel!=='admin_geral')return;const c=co
 <div style="grid-column:1/-1"><label>Regulamento / instruções para visitantes</label><textarea id="ecRegras" rows="3">${esc(c.regras_visitante||'')}</textarea></div>
 </div><div class="actions"><button>Salvar alterações do condomínio</button></div></form><div id="editCondoStatus" class="status"></div></div>`;$('editCondoForm').onsubmit=async e=>{e.preventDefault();try{const {error}=await sb.from('condominios').update({nome:$('ecNome').value.trim(),ativo:$('ecAtivo').value==='true',razao_social:$('ecRazaoSocial').value.trim()||null,cnpj:$('ecCnpj').value.trim()||null,inscricao_estadual:$('ecInscricaoEstadual').value.trim()||null,inscricao_municipal:$('ecInscricaoMunicipal').value.trim()||null,telefone:$('ecTelefone').value.trim()||null,email:$('ecEmail').value.trim()||null,responsavel_nome:$('ecResponsavel').value.trim()||null,responsavel_cpf:$('ecCpfResponsavel').value.trim()||null,cep:$('ecCep').value.trim()||null,endereco:$('ecEndereco').value.trim()||null,numero:$('ecNumero').value.trim()||null,complemento:$('ecComplemento').value.trim()||null,bairro:$('ecBairro').value.trim()||null,cidade:$('ecCidade').value.trim()||null,estado:$('ecEstado').value.trim().toUpperCase()||null,regras_visitante:$('ecRegras').value.trim()||null}).eq('id',id);if(error)throw error;await loadData();navigate('condominios')}catch(err){say('editCondoStatus',friendlyError(err),true)}}}
 function renderSecondScreen(){
-  const isAdmin=profile && profile.papel!=='porteiro';
+  const isAdmin=profile && ['admin_geral','admin_condominio'].includes(profile.papel);
   $('content').innerHTML=`<div class="card">
-    <div class="row"><div><h2>Segunda tela da portaria</h2><p class="muted">Abra a tela de exibição em outra janela deste mesmo navegador. Para sincronizar computadores diferentes, será necessária a sincronização pela nuvem.</p></div><button type="button" id="openDisplayBtn">Abrir segunda tela</button></div>
-    <div class="notice">Atenção: nesta versão, a lista de mídias de exibição é salva neste navegador. Os documentos oficiais do condomínio são armazenados separadamente no Supabase Storage.</div>
+    <div class="row"><div><h2>Segunda tela da portaria</h2><p class="muted">Abra a tela de exibição em outra janela deste mesmo navegador. As mensagens e os conteúdos são enviados para a tela de exibição.</p></div><button type="button" id="openDisplayBtn">Abrir segunda tela</button></div>
     ${isAdmin?`<div class="media-admin">
       <section class="media-panel"><div class="media-panel-head"><div><h3>Logo, imagens e vídeos</h3><p class="helper">Fotos e vídeos ficam no armazenamento em nuvem. Cada arquivo pode ter até 100 MB; arquivos maiores serão recusados antes do envio.</p></div></div>
         <div class="media-toolbar"><div><label for="mediaUpload">Adicionar arquivos de imagem/vídeo (máximo 100 MB cada)</label><input id="mediaUpload" type="file" accept="image/*,video/*" multiple><div class="small muted">O upload começa ao selecionar. Depois, clique em “Salvar” na linha do arquivo para exibi-lo.</div></div><div><button type="button" id="clearMedia" class="danger">Apagar todas as mídias</button></div></div>
         <label for="slideText">Slide de texto</label><textarea id="slideText" rows="3" style="width:100%;padding:12px;border:1px solid #ccd7e5;border-radius:10px;font:inherit" placeholder="Digite uma mensagem para aparecer na segunda tela"></textarea><div class="actions"><button type="button" id="addTextSlide">Adicionar slide de texto</button></div>
         <div id="mediaStatus" class="status" role="status"></div><div id="mediaList"></div>
       </section>
-      <section class="media-panel"><div class="media-panel-head"><div><h3>Mensagem de acessibilidade / PCD</h3><p class="helper">A mensagem aparece na segunda tela e é registrada no histórico de avisos.</p></div></div>
-        <form id="pcdForm"><label for="pcdMessage">Mensagem para exibir</label><textarea id="pcdMessage" rows="3" required maxlength="1000" style="width:100%;padding:12px;border:1px solid #ccd7e5;border-radius:10px;font:inherit" placeholder="Digite a mensagem que será exibida na tela"></textarea>
-        <div class="actions"><button type="submit">Exibir mensagem PCD</button><button type="button" class="secondary" id="resumeMediaBtn">Voltar aos slides</button></div><div id="pcdSendStatus" class="status"></div></form>
-      </section>
-    </div>`:`<div class="media-panel"><h3>Controles da tela</h3><p class="helper">O porteiro pode abrir a segunda tela, enviar o QR de localização a partir da operação e retornar aos slides.</p><div class="actions"><button type="button" id="resumeMediaBtn">Voltar aos slides</button></div></div>`}
-    <div class="admin-note">As mídias são armazenadas no Supabase. O navegador que exibe a segunda tela precisa estar autenticado no mesmo projeto para gerar links temporários dos arquivos privados.</div>
+    </div>`:''}
+    <section class="media-panel" style="margin-top:16px"><div class="media-panel-head"><div><h3>Comunicação de acessibilidade / PCD</h3><p class="helper">Digite uma mensagem para exibir imediatamente na segunda tela. O aviso será registrado no histórico, quando seu perfil tiver permissão.</p></div></div>
+      <form id="pcdForm"><label for="pcdMessage">Mensagem para exibir</label><textarea id="pcdMessage" rows="3" required maxlength="1000" style="width:100%;padding:12px;border:1px solid #ccd7e5;border-radius:10px;font:inherit" placeholder="Digite a mensagem que será exibida na tela"></textarea>
+      <div class="actions"><button type="submit">Enviar mensagem PCD</button><button type="button" class="secondary" id="resumeMediaBtn">Voltar aos slides</button></div><div id="pcdSendStatus" class="status" role="status" aria-live="polite"></div></form>
+    </section>
+    <div class="admin-note">As mídias privadas são armazenadas no Supabase. O navegador que exibe a segunda tela precisa estar autenticado no mesmo projeto para gerar links temporários dos arquivos privados.</div>
   </div>`;
   $('openDisplayBtn').onclick=openDisplayWindow;
-  const resume=$('resumeMediaBtn');if(resume)resume.onclick=()=>{sendDisplay({type:'resume-media'});say('pcdSendStatus','Exibição normal retomada.')};
-  if(isAdmin){
-    setupMediaAdmin();
-    $('pcdForm').onsubmit=async e=>{
-      e.preventDefault();
-      const message=$('pcdMessage').value.trim();if(!message)return;
-      const row={condominio_id:profile.condominio_id,usuario_id:profile.id,usuario_nome:profile.nome||profile.email,mensagem:message,categoria:'PCD'};
-      try{
-        const {error}=await sb.from('avisos_pcd').insert(row);if(error)throw error;
-        sendDisplay({type:'show-pcd',message});
-        $('pcdMessage').value='';
-        say('pcdSendStatus','Mensagem enviada para a segunda tela e registrada no histórico.');
-      }catch(err){say('pcdSendStatus','A mensagem não foi registrada no Supabase: '+friendlyError(err),true)}
-    };
-  }
+  const resume=$('resumeMediaBtn');if(resume)resume.onclick=()=>{sendDisplay({type:'resume-media'});say('pcdSendStatus','Exibição normal retomada.');};
+  if(isAdmin) setupMediaAdmin();
+  const pcdForm=$('pcdForm');
+  if(pcdForm)pcdForm.onsubmit=async e=>{
+    e.preventDefault();
+    const message=$('pcdMessage').value.trim();if(!message)return;
+    if(!profile || !profile.id || !profile.papel){say('pcdSendStatus','Não foi possível identificar o perfil conectado. Saia e entre novamente.',true);return;}
+    const row={condominio_id:profile.condominio_id||null,usuario_id:profile.id,usuario_nome:profile.nome||profile.email,mensagem:message,categoria:'PCD'};
+    try{
+      const {error}=await sb.from('avisos_pcd').insert(row);
+      if(error)throw error;
+      sendDisplay({type:'show-pcd',message});
+      $('pcdMessage').value='';
+      say('pcdSendStatus','Mensagem enviada para a segunda tela e registrada no histórico.');
+    }catch(err){
+      // A mensagem ainda é enviada para a tela local mesmo se a política do banco não permitir gravar o histórico.
+      sendDisplay({type:'show-pcd',message});
+      say('pcdSendStatus','A mensagem foi enviada para a segunda tela, mas não foi registrada no histórico: '+friendlyError(err),true);
+    }
+  };
 }
 function renderCondoDetails(){const c=condos.find(x=>x.id===profile.condominio_id)||{};$('content').innerHTML=`<div class="card"><div class="row"><div><h2>Dados do condomínio / residencial</h2><p class="muted">Dados de contato e orientações do residencial.</p></div><span class="pill">${esc(c.nome||'Condomínio')}</span></div><form id="detailsForm"><div class="formrow"><div><label>Nome</label><input id="dNome" required value="${esc(c.nome||'')}"></div><div><label>CNPJ</label><input id="dCnpj" value="${esc(c.cnpj||'')}"></div><div><label>Telefone / WhatsApp</label><input id="dTelefone" value="${esc(c.telefone||'')}"></div><div><label>E-mail</label><input id="dEmail" type="email" value="${esc(c.email||'')}"></div><div><label>CEP</label><input id="dCep" value="${esc(c.cep||'')}"></div><div><label>Endereço</label><input id="dEndereco" value="${esc(c.endereco||'')}"></div><div><label>Cidade</label><input id="dCidade" value="${esc(c.cidade||'Sinop')}"></div><div><label>Estado</label><input id="dEstado" maxlength="2" value="${esc(c.estado||'MT')}"></div><div style="grid-column:1/-1"><label>Regulamento / instruções para visitantes</label><textarea id="dRegras" rows="3" style="width:100%;padding:12px;border:1px solid #ccd7e5;border-radius:10px;font:inherit">${esc(c.regras_visitante||'')}</textarea></div></div><div class="actions"><button>Salvar dados</button></div></form><div id="detailsStatus" class="status"></div></div>
 <div class="card" style="margin-top:16px"><div class="row"><div><h2>Documentos do condomínio</h2><p class="muted">Anexe atas de assembleia, regimento interno, convenção e outros arquivos oficiais. Os documentos ficam vinculados a este condomínio.</p></div><span class="pill">Arquivos privados</span></div><form id="condoDocsForm"><div class="file-drop"><label for="condoDocsInput">Selecionar documentos</label><input id="condoDocsInput" type="file" multiple accept=".pdf,.doc,.docx,.odt,.rtf,.txt,.jpg,.jpeg,.png,.webp,.heic"><label for="condoDocsCategory">Categoria do documento</label><select id="condoDocsCategory"><option>Atas de assembleia</option><option>Regimento interno</option><option>Convenção do condomínio</option><option>Comunicados e outros</option></select><div class="actions"><button type="submit" id="uploadDocsBtn">Enviar documentos</button></div><div id="docsStatus" class="status" role="status"></div></div></form><div class="row" style="margin-top:18px"><h3>Arquivos anexados</h3><button class="secondary" type="button" id="refreshDocsBtn">Atualizar lista</button></div><div id="condoDocsList" class="tablewrap"><div class="empty">Carregando documentos…</div></div></div>`;

@@ -191,8 +191,68 @@ function renderFinance(){
   const months=[];const now=new Date();for(let i=0;i<12;i++){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push(d.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}));}
   $('content').innerHTML=`<div class="row"><div><h2 class="sectiontitle">Resumo financeiro</h2><p class="muted">Resumo dos últimos 12 meses</p></div><span class="pill gold">Estrutura inicial</span></div><div class="finance-grid"><section class="card"><h3>Histórico financeiro</h3><p class="muted">Os meses ficam organizados abaixo. Valores e status reais dependem da integração com uma base financeira.</p>${months.map(m=>`<div class="finance-month"><strong>${esc(m.charAt(0).toLocaleUpperCase('pt-BR')+m.slice(1))}</strong><span class="pill gold">Sem dados financeiros</span></div>`).join('')}</section><section class="card"><h3>Formas de pagamento</h3><p>Configure aqui as informações oficiais para pagamento quando os dados financeiros forem integrados.</p><div class="finance-placeholder"><strong>Dados de pagamento não configurados</strong><p>Não há conta bancária, chave PIX ou histórico de quitação conectados a esta tela. Nenhum pagamento será marcado como recebido automaticamente.</p></div><div class="actions"><button type="button" class="secondary" onclick="alert('A área financeira está preparada visualmente. Para cadastrar cobranças e pagamentos reais, precisamos definir e conectar a tabela financeira do Supabase.')">Como ativar o financeiro</button></div></section></div>`;
 }
-function renderSupport(){
-  $('content').innerHTML=`<div class="card"><h2 class="sectiontitle">Suporte</h2><p class="muted">Central de ajuda do Acess Port.</p><div class="finance-placeholder"><strong>Atendimento</strong><p>Esta área está pronta para receber os canais oficiais de suporte, horários de atendimento e abertura de chamados.</p><p>Os contatos ainda não foram configurados nesta versão, para evitar exibir telefone ou e-mail incorreto.</p></div><h3>Antes de solicitar suporte</h3><ul><li>Informe o nome do condomínio, quando aplicável.</li><li>Descreva a tela e a ação que estava realizando.</li><li>Inclua a mensagem de erro, se houver.</li></ul></div>`;
+async function renderSupport(){
+  if(!profile || profile.papel!=='admin_geral'){
+    $('content').innerHTML=`<div class="card"><h2 class="sectiontitle">Suporte</h2><p class="muted">Esta área está disponível somente para o Administrador Geral nesta etapa.</p></div>`;
+    return;
+  }
+  $('content').innerHTML=`<div class="row"><div><h2 class="sectiontitle">Central de ajuda</h2><p class="muted">Gerencie os conteúdos que futuramente serão exibidos aos administradores dos condomínios.</p></div><span class="pill">Administrador Geral</span></div>
+  <div class="grid" style="grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);align-items:start">
+    <section class="card"><h3 id="supportFormTitle">Adicionar conteúdo</h3>
+      <form id="supportForm">
+        <input type="hidden" id="supportId">
+        <div class="formrow">
+          <div><label for="supportTitle">Título *</label><input id="supportTitle" maxlength="160" required placeholder="Ex.: Como cadastrar um morador"></div>
+          <div><label for="supportCategory">Categoria *</label><select id="supportCategory" required><option value="faq">Pergunta frequente</option><option value="tutorial">Passo a passo</option><option value="video">Vídeo</option><option value="aviso">Aviso</option><option value="contato">Contato / atendimento</option></select></div>
+          <div style="grid-column:1/-1"><label for="supportContent">Conteúdo / orientação *</label><textarea id="supportContent" rows="5" maxlength="12000" required placeholder="Escreva a orientação que o cliente deverá consultar."></textarea></div>
+          <div style="grid-column:1/-1"><label for="supportUrl">Link opcional (vídeo, manual ou página)</label><input id="supportUrl" type="url" maxlength="1000" placeholder="https://..."></div>
+          <div><label for="supportOrder">Ordem de exibição</label><input id="supportOrder" type="number" value="0" min="0" step="1"></div>
+          <div><label for="supportActive">Publicação</label><select id="supportActive"><option value="true">Ativo — poderá ser exibido ao cliente</option><option value="false">Inativo — somente rascunho administrativo</option></select></div>
+        </div>
+        <div class="actions"><button type="submit" id="supportSaveBtn">Salvar conteúdo</button><button type="button" class="secondary" id="supportCancelBtn">Limpar formulário</button></div>
+        <div id="supportFormStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+    <section class="card"><h3>Como organizar a Central de Ajuda</h3><ul><li>Cadastre instruções, perguntas frequentes, vídeos, avisos e contatos oficiais.</li><li>Use <strong>Inativo</strong> para preparar um conteúdo sem publicá-lo.</li><li>Revise os links antes de ativar.</li><li>Nesta etapa, somente o Administrador Geral pode gerenciar os conteúdos.</li></ul><div class="finance-placeholder"><strong>Publicação controlada</strong><p>O administrador do condomínio não recebe acesso aos botões de adicionar, editar ou apagar. A visualização para clientes será conectada na próxima etapa.</p></div></section>
+  </div>
+  <section class="card" style="margin-top:16px"><div class="row"><div><h3>Conteúdos cadastrados</h3><p class="muted">Consulte, edite, ative/desative ou exclua cada item.</p></div><button type="button" class="secondary" id="supportRefreshBtn">Atualizar lista</button></div><div id="supportListStatus" class="status" role="status" aria-live="polite">Carregando conteúdos…</div><div id="supportList" class="tablewrap"></div></section>`;
+  const form=$('supportForm');
+  const resetForm=()=>{form.reset();$('supportId').value='';$('supportOrder').value='0';$('supportActive').value='true';$('supportFormTitle').textContent='Adicionar conteúdo';$('supportSaveBtn').textContent='Salvar conteúdo';say('supportFormStatus','');};
+  const loadItems=async()=>{
+    say('supportListStatus','Carregando conteúdos…');
+    try{
+      const {data,error}=await sb.from('central_ajuda').select('id,titulo,categoria,conteudo,url,ordem,ativo,created_at,atualizado_em').order('ordem',{ascending:true}).order('created_at',{ascending:false});
+      if(error)throw error;
+      const rows=data||[];
+      const categoryLabel={faq:'Pergunta frequente',tutorial:'Passo a passo',video:'Vídeo',aviso:'Aviso',contato:'Contato'};
+      $('supportList').innerHTML=rows.map(x=>`<div class="card" style="margin:10px 0;padding:14px"><div class="row" style="align-items:flex-start"><div style="flex:1;min-width:180px"><strong>${esc(x.titulo)}</strong><div class="muted small">${esc(categoryLabel[x.categoria]||x.categoria)} • Ordem ${Number(x.ordem)||0} • ${x.ativo?'Ativo':'Inativo'}</div><p style="white-space:pre-wrap;margin:8px 0">${esc(x.conteudo)}</p>${x.url?`<p><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">Abrir link associado</a></p>`:''}</div><div class="actions"><button type="button" class="secondary" data-support-edit="${esc(x.id)}">Editar</button><button type="button" class="secondary" data-support-toggle="${esc(x.id)}" data-active="${x.ativo?'true':'false'}">${x.ativo?'Desativar':'Ativar'}</button><button type="button" class="danger" data-support-delete="${esc(x.id)}">Apagar</button></div></div></div>`).join('')||'<div class="empty">Nenhum conteúdo cadastrado ainda.</div>';
+      $('supportList').querySelectorAll('[data-support-edit]').forEach(b=>b.onclick=()=>{const x=rows.find(i=>String(i.id)===b.dataset.supportEdit);if(!x)return;$('supportId').value=x.id;$('supportTitle').value=x.titulo||'';$('supportCategory').value=x.categoria||'faq';$('supportContent').value=x.conteudo||'';$('supportUrl').value=x.url||'';$('supportOrder').value=Number(x.ordem)||0;$('supportActive').value=String(!!x.ativo);$('supportFormTitle').textContent='Editar conteúdo';$('supportSaveBtn').textContent='Salvar alterações';$('supportForm').scrollIntoView({behavior:'smooth',block:'start'});});
+      $('supportList').querySelectorAll('[data-support-toggle]').forEach(b=>b.onclick=async()=>{const active=b.dataset.active!=='true';try{const {error}=await sb.from('central_ajuda').update({ativo:active,atualizado_em:new Date().toISOString()}).eq('id',b.dataset.supportToggle);if(error)throw error;await loadItems();}catch(err){say('supportListStatus','Não foi possível alterar a publicação: '+friendlyError(err),true);}});
+      $('supportList').querySelectorAll('[data-support-delete]').forEach(b=>b.onclick=async()=>{if(!confirm('Tem certeza de que deseja apagar este conteúdo? Esta ação não pode ser desfeita.'))return;try{const {error}=await sb.from('central_ajuda').delete().eq('id',b.dataset.supportDelete);if(error)throw error;await loadItems();say('supportListStatus','Conteúdo apagado.');}catch(err){say('supportListStatus','Não foi possível apagar o conteúdo: '+friendlyError(err),true);}});
+      say('supportListStatus',`${rows.length} conteúdo(s) encontrado(s).`);
+    }catch(err){$('supportList').innerHTML='';say('supportListStatus','Não foi possível carregar a Central de Ajuda. Confira se a tabela central_ajuda foi criada no Supabase e se as permissões estão configuradas. Detalhes: '+friendlyError(err),true);}
+  };
+  $('supportCancelBtn').onclick=resetForm;
+  $('supportRefreshBtn').onclick=loadItems;
+  form.onsubmit=async e=>{
+    e.preventDefault();
+    const title=$('supportTitle').value.trim(),content=$('supportContent').value.trim(),url=$('supportUrl').value.trim();
+    if(!title||!content){say('supportFormStatus','Preencha o título e o conteúdo.',true);return;}
+    if(url){try{const parsed=new URL(url);if(!['https:','http:'].includes(parsed.protocol))throw new Error();}catch(_){say('supportFormStatus','Informe um link HTTP ou HTTPS válido.',true);return;}}
+    const row={titulo:title,categoria:$('supportCategory').value,conteudo:content,url:url||null,ordem:Math.max(0,Number.parseInt($('supportOrder').value||'0',10)||0),ativo:$('supportActive').value==='true',atualizado_em:new Date().toISOString()};
+    const id=$('supportId').value;
+    const btn=$('supportSaveBtn');btn.disabled=true;
+    try{
+      let result;
+      if(id)result=await sb.from('central_ajuda').update(row).eq('id',id).select('id').maybeSingle();
+      else result=await sb.from('central_ajuda').insert({...row,criado_por:session?.user?.id||null}).select('id').maybeSingle();
+      if(result.error)throw result.error;
+      if(!result.data)throw new Error('Nenhum registro foi confirmado pelo banco. Confira as permissões de acesso.');
+      resetForm();say('supportFormStatus',id?'Alterações salvas com sucesso.':'Conteúdo cadastrado com sucesso.');await loadItems();
+    }catch(err){say('supportFormStatus','Não foi possível salvar: '+friendlyError(err),true);}
+    finally{btn.disabled=false;}
+  };
+  await loadItems();
 }
 function renderAccount(){
   $('content').innerHTML=`<div class="card"><h2 class="sectiontitle">Minha conta</h2><p class="muted">Dados da conta autenticada.</p><div class="formrow"><div><label>Nome</label><input value="${esc(profile.nome||'Não informado')}" readonly></div><div><label>E-mail</label><input value="${esc(profile.email||session?.user?.email||'Não informado')}" readonly></div><div><label>Perfil</label><input value="${esc(roleLabel[profile.papel]||profile.papel)}" readonly></div></div><div class="actions"><button type="button" id="accountChangePassword">Alterar senha</button><button type="button" class="secondary" id="accountActivities">Ver atividades</button></div><div id="accountStatus" class="status" role="status"></div><form id="accountPasswordForm" class="hidden"><h3>Alterar senha</h3><label for="accountNewPassword">Nova senha</label><input id="accountNewPassword" type="password" minlength="8" autocomplete="new-password" required><label for="accountConfirmPassword">Confirmar nova senha</label><input id="accountConfirmPassword" type="password" minlength="8" autocomplete="new-password" required><div class="actions"><button type="submit">Salvar nova senha</button><button type="button" class="secondary" id="cancelAccountPassword">Cancelar</button></div></form></div>`;

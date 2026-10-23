@@ -300,22 +300,9 @@ async function renderDashboard(){
         <section class="card"><h3 style="margin-top:0">Acessos recentes</h3><div class="tablewrap"><table class="dashboard-table"><thead><tr><th>Data / hora</th><th>Porteiro</th><th>Visitante</th><th>Destino</th></tr></thead><tbody>${lastAccesses.map(x=>`<tr><td>${escText(new Date(x.created_at).toLocaleString('pt-BR'))}</td><td>${escText(x.usuario_nome||'—')}</td><td>${escText(x.prestador_nome||'—')}${x.empresa?`<div class="small muted">${escText(x.empresa)}</div>`:''}</td><td>${escText(x.destino||`Rua ${x.rua||'—'}, Qd. ${x.quadra||'—'}, Lt. ${x.lote||'—'}`)}</td></tr>`).join('')||'<tr><td colspan="4">Nenhum acesso registrado.</td></tr>'}</tbody></table></div><div class="actions"><button type="button" id="dashboardAccessReports">Abrir relatórios de acessos</button></div></section>
         <section class="card"><h3 style="margin-top:0">Rotas manuais sem QR fixo</h3><p class="muted small">Contagem dos registros lançados pelo formulário da portaria e enviados à segunda tela.</p><div class="stat">${manualRoutes.length}</div><div class="notice">Neste mês: ${monthManual} rota(s) manual(is).</div><div class="tablewrap"><table class="dashboard-table"><thead><tr><th>Data</th><th>Registrado por</th><th>Destino</th></tr></thead><tbody>${manualRoutes.slice(0,6).map(x=>`<tr><td>${escText(new Date(x.created_at).toLocaleDateString('pt-BR'))}</td><td>${escText(x.usuario_nome||'—')}</td><td>${escText(x.destino||'—')}</td></tr>`).join('')||'<tr><td colspan="3">Nenhuma rota manual registrada.</td></tr>'}</tbody></table></div></section>
       </div>
-      <section class="card" style="margin-top:16px"><h3 style="margin-top:0">Acesso rápido</h3><div class="dashboard-shortcuts">
-        <button class="dashboard-shortcut" type="button" id="dashboardOpenOperation"><span><strong>Portaria</strong><small>Registrar acesso e gerar rota manual</small></span><span>→</span></button>
-        <button class="dashboard-shortcut" type="button" id="dashboardOpenUsers"><span><strong>Porteiros</strong><small>Gerenciar os usuários do condomínio</small></span><span>→</span></button>
-        <button class="dashboard-shortcut" type="button" id="dashboardOpenMaps"><span><strong>Mapas / imóveis</strong><small>Consultar ruas, quadras e lotes</small></span><span>→</span></button>
-        <button class="dashboard-shortcut" type="button" id="dashboardOpenSecondScreen"><span><strong>Configuração</strong><small>Configurar a exibição da portaria</small></span><span>→</span></button>
-        <button class="dashboard-shortcut" type="button" id="dashboardOpenReports"><span><strong>Relatórios</strong><small>Consultar e exportar registros</small></span><span>→</span></button>
-        <button class="dashboard-shortcut" type="button" id="dashboardOpenCondo"><span><strong>Seu condomínio</strong><small>Consultar e atualizar os dados</small></span><span>→</span></button>
-      </div></section>`;
+`;
     $('dashboardPcdReports').onclick=()=>{dashboardBackContext=true;renderPcdReports();setTimeout(addDashboardBackButton,0)};
     $('dashboardAccessReports').onclick=()=>openDashboardSection('relatorios');
-    $('dashboardOpenOperation').onclick=()=>openDashboardSection('operacao');
-    $('dashboardOpenUsers').onclick=()=>openDashboardSection('usuarios');
-    $('dashboardOpenMaps').onclick=()=>openDashboardSection('imoveis');
-    $('dashboardOpenSecondScreen').onclick=()=>openDashboardSection('segunda-tela');
-    $('dashboardOpenReports').onclick=()=>openDashboardSection('relatorios');
-    $('dashboardOpenCondo').onclick=()=>openDashboardSection('condominio-dados');
     status('Indicadores do condomínio atualizados.');
   }catch(err){
     $('dashboardMain').innerHTML=`<div class="card"><h3>Não foi possível carregar os indicadores</h3><p class="muted">Verifique as permissões de leitura das tabelas de acessos e avisos PCD no Supabase.</p><div class="status error">${escText(friendlyError(err))}</div><div class="actions"><button type="button" id="dashboardTryReports">Abrir relatórios</button><button type="button" class="secondary" id="dashboardTryOperation">Abrir portaria</button></div></div>`;

@@ -62,6 +62,19 @@ body.screen-display{margin:0!important;background:#000!important;overflow:hidden
 .maps-scroll td,.maps-scroll th{padding:14px;vertical-align:middle}
 @media(max-width:760px){.sidebar{position:relative;height:auto;min-height:0}.maps-scroll{max-height:360px}}
 
+
+/* Organização compacta da área de downloads dos relatórios */
+.row:has(.report-download-groups){display:block;}
+.row:has(.report-download-groups)>h2{margin:0 0 14px;font-size:22px;}
+.report-download-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%;margin:0 0 18px;align-items:stretch;}
+.report-download-group{display:flex;flex-direction:column;gap:8px;border:1px solid var(--line);border-radius:12px;padding:14px;background:#fbfcfe;min-width:0;}
+.report-download-group h3{font-size:14px;line-height:1.35;margin:0;padding-bottom:8px;border-bottom:1px solid var(--line);}
+.report-download-group .actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0;}
+.report-download-group button{width:auto;min-height:34px;padding:8px 11px;border-radius:8px;font-size:12.5px;line-height:1.25;white-space:normal;flex:0 1 auto;}
+.report-download-group button:hover{filter:brightness(.98);}
+.report-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end;}
+@media(max-width:760px){.report-download-groups{grid-template-columns:1fr;gap:10px}.report-download-group{padding:12px}.report-download-group .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.report-download-group button{width:100%;min-height:36px;padding:8px;font-size:12px}.report-filters{grid-template-columns:1fr}}
+
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localizaçao segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Seja bem-vindo Administrador.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ÁREA DO CONDOMÍNIO</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhotoPreview" alt="Foto do perfil" hidden><span id="profilePhotoPlaceholder">👤</span></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><div id="sidebarProfileName" class="sidebar-profile-name">Administrador</div><div class="sidebar-profile-hint">Clique na foto para alterar</div></section><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><button class="secondary" id="logoutBtn">Sair</button></header><div class="content" id="content"></div></main></div>

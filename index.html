@@ -55,12 +55,17 @@ body { overflow: hidden; }
 #app .content {
   flex: 1 1 auto;
   min-height: 0;
-  overflow-y: auto;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  overflow-y: scroll;
   overflow-x: hidden;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  /* Mantém a barra vertical na borda esquerda da área central */
-  direction: rtl;
+  direction: ltr !important;
+  scrollbar-gutter: stable;
+  /* A rolagem pertence à área central, que ocupa até a borda direita da janela */
+  position: relative;
 }
 /* Restaura a direção normal do conteúdo para não inverter textos, tabelas ou formulários */
 #app .content > * {
@@ -118,14 +123,17 @@ body { overflow: hidden; }
   #app .content {
     flex: 1 1 auto;
     min-height: 0;
+    min-width: 0;
     height: 0;
     width: 100%;
-    overflow-y: auto;
+    margin: 0;
+    overflow-y: scroll;
     overflow-x: hidden;
     padding: clamp(10px, 3vw, 16px);
     overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
-    direction: rtl;
+    direction: ltr !important;
+    scrollbar-gutter: stable;
   }
   #app .content > * { direction: ltr; }
   #app .grid, #app .formrow, #app .finance-grid, #app .report-filters {

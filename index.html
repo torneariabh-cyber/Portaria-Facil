@@ -59,6 +59,12 @@ body { overflow: hidden; }
   overflow-x: hidden;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  /* Mantém a barra vertical na borda esquerda da área central */
+  direction: rtl;
+}
+/* Restaura a direção normal do conteúdo para não inverter textos, tabelas ou formulários */
+#app .content > * {
+  direction: ltr;
 }
 /* Layout responsivo: menu fixo e rolagem apenas no conteúdo, em desktop, tablet e celular */
 @media (max-width: 800px) {
@@ -119,7 +125,9 @@ body { overflow: hidden; }
     padding: clamp(10px, 3vw, 16px);
     overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
+    direction: rtl;
   }
+  #app .content > * { direction: ltr; }
   #app .grid, #app .formrow, #app .finance-grid, #app .report-filters {
     grid-template-columns: minmax(0, 1fr);
   }

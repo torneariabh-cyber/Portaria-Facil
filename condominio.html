@@ -362,7 +362,7 @@ function editCondoDetails(id){if(profile.papel!=='admin_geral')return;const c=co
 function renderSecondScreen(){
   const isAdmin=profile && ['admin_geral','admin_condominio'].includes(profile.papel);
   $('content').innerHTML=`<div class="card">
-    <div class="row"><div><h2>Segunda tela da portaria</h2><p class="muted">Abra a tela de exibição em outra janela deste mesmo navegador. As mensagens e os conteúdos são enviados para a tela de exibição.</p></div><button type="button" id="openDisplayBtn">Abrir segunda tela</button></div>
+    <div class="row"><div><h2>Segunda tela da portaria</h2><p class="muted">Clique no botão para abrir a segunda tela. Para ativar o modo de tela cheia no computador, basta pressionar a tecla F11 no teclado da maioria dos navegadores (como Chrome, Edge e Firefox). Para sair, pressione F11 novamente..</p></div><button type="button" id="openDisplayBtn">FULL SCREEN</button></div>
     ${isAdmin?`<div class="media-admin">
       <section class="media-panel"><div class="media-panel-head"><div><h3>Logo, imagens e vídeos</h3><p class="helper">Fotos e vídeos ficam no armazenamento em nuvem. Cada arquivo pode ter até 100 MB; arquivos maiores serão recusados antes do envio.</p></div></div>
         <div class="media-toolbar"><div><label for="mediaUpload">Adicionar arquivos de imagem/vídeo (máximo 100 MB cada)</label><input id="mediaUpload" type="file" accept="image/*,video/*" multiple><div class="small muted">O upload começa ao selecionar. Depois, clique em “Salvar” na linha do arquivo para exibi-lo.</div></div><div><button type="button" id="clearMedia" class="danger">Apagar todas as mídias</button></div></div>

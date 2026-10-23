@@ -22,6 +22,76 @@ textarea {
 }
 #supportContent { height: 220px; min-height: 220px; max-height: 220px; }
 #cRegras, #ecRegras, #slideText, #pcdMessage { height: 170px; min-height: 170px; max-height: 170px; }
+/* Menu lateral fixo e rolagem independente somente no conteúdo central */
+html, body { height: 100%; }
+body { overflow: hidden; }
+#app.layout {
+  display: block;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+#app .sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 250px;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 10;
+}
+#app .main {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#app .top { flex: 0 0 auto; }
+#app .content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+@media(max-width:800px) {
+  body { overflow: hidden; }
+  #app.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100vh;
+    height: 100dvh;
+  }
+  #app .sidebar {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: 42vh;
+    overflow: hidden;
+    padding: 12px;
+  }
+  #app .side-profile { display: none; }
+  #app .subbrand, #app .sidefoot { display: none; }
+  #app .nav { display: flex; overflow-x: auto; overflow-y: hidden; }
+  #app .nav button { flex: 0 0 auto; white-space: nowrap; }
+  #app .main {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+  #app .top { padding: 12px 14px; }
+  #app .content { padding: 14px; }
+}
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Gestão segura de condomínios e portaria</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">O acesso depende de uma conta criada no Supabase e de um perfil autorizado.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ADMINISTRAÇÃO GERAL</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhotoPreview" alt="Foto do perfil" hidden><span id="profilePhotoPlaceholder">👤</span></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><div id="sidebarProfileName" class="sidebar-profile-name">Administrador</div><div class="sidebar-profile-hint">Clique na foto para alterar</div></section><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>

@@ -195,7 +195,72 @@ body { overflow: hidden; }
 #app .nav-submenu[hidden] { display:none; }
 #app .nav-submenu button { font-size:14px; padding:9px 10px 9px 12px; }
 @media(max-width:800px) { #app .condo-row-actions button { min-width:112px; } #app .nav-group { display:flex; align-items:center; } #app .nav-submenu { display:flex; padding-left:0; } #app .nav-submenu[hidden] { display:none; } }
-</style></head><body>
+
+/* Refinamento visual da Administração Geral — preserva HTML, eventos e lógica existentes */
+:root{--navy:#10243a;--blue:#2168d5;--gold:#f3c548;--bg:#f2f5fa;--ink:#17283e;--muted:#667b95;--line:#dce5f0;--white:#fff;--red:#b42318;--green:#14804a}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.layout{grid-template-columns:258px minmax(0,1fr);min-height:100vh;align-items:start;gap:0}
+.sidebar{position:sticky;top:0;height:100vh;max-height:100vh;overflow-y:auto;overscroll-behavior:contain;padding:22px 14px 16px;scrollbar-width:thin;scrollbar-color:#49617d var(--navy);box-shadow:4px 0 18px #10243a0a;z-index:30}
+.brand{font-size:23px;letter-spacing:.1px;margin:0 8px 4px}.subbrand{margin:0 8px 22px;letter-spacing:.04em}
+.side-profile{margin:16px 0 18px;padding:12px 8px 18px}.profile-photo-button{width:84px;height:84px;border-radius:20px;transition:transform .18s,box-shadow .18s}.profile-photo-button:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0002}
+.nav{gap:5px}.nav button{min-height:42px;padding:10px 11px;border-radius:10px;font-size:13.5px;transition:background .15s,color .15s,transform .15s}.nav button:hover{transform:translateX(1px)}.nav button.active{background:#29435f;box-shadow:inset 3px 0 0 var(--gold)}
+.nav-group{display:grid;gap:5px}.nav-group-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:transparent;color:#dbe6f4;text-align:left;border-radius:10px;padding:10px 11px;min-height:42px}.nav-group-toggle:before{content:attr(data-icon);display:inline-grid;place-items:center;width:22px;min-width:22px;font-size:17px;line-height:1;color:var(--gold)}.nav-group-toggle.active,.nav-group-toggle:hover{background:#263e59;color:#fff}.nav-chevron{margin-left:auto}.nav-submenu{display:grid;gap:5px;padding-left:12px}.nav-submenu[hidden]{display:none}.nav-submenu button{font-size:13px;padding:9px 10px 9px 12px;min-height:38px}
+.sidefoot{margin-top:24px;padding:10px 8px}
+.main{min-width:0;min-height:100vh}.top{position:sticky;top:0;z-index:25;min-height:82px;padding:17px clamp(18px,2.4vw,34px);box-shadow:0 2px 10px #10243a05;backdrop-filter:saturate(150%) blur(8px)}.top h1{font-size:23px;line-height:1.25;letter-spacing:-.02em}.who{margin-top:4px;font-size:12px}.account-trigger{min-height:42px;padding:10px 13px;border-radius:11px;background:#fff;font-size:13px}.account-dropdown{border-radius:14px;box-shadow:0 18px 42px #10243a20;padding:7px}.account-dropdown button{min-height:40px}
+.content{width:100%;max-width:none;margin:0;padding:clamp(18px,2.2vw,30px);min-width:0}.card{border-radius:16px;padding:clamp(16px,1.8vw,22px);box-shadow:0 5px 20px #10243a07;transition:box-shadow .18s,border-color .18s}.card:hover{border-color:#d3deec;box-shadow:0 8px 24px #10243a0b}.sectiontitle{font-size:20px;letter-spacing:-.015em;margin-bottom:14px}
+.grid{gap:16px;align-items:stretch}.stat{font-size:clamp(25px,2.1vw,32px);letter-spacing:-.025em}.formrow{gap:14px}.actions{gap:8px;align-items:center}.actions button,.row button{min-height:40px;border-radius:10px;font-size:13px;padding:10px 13px}button{border-radius:10px;transition:background .15s,box-shadow .15s,transform .15s}button:hover{filter:brightness(.98)}button:active{transform:translateY(1px)}button.secondary{background:#eaf0f8;color:var(--navy)}button.secondary:hover{background:#dfe8f4}input,select{min-height:42px;border-radius:10px;border-color:#cbd8e8}input:focus,select:focus{outline:3px solid #2168d51c;border-color:#7da8e9}label{font-size:13px;margin:12px 0 6px}
+.tablewrap{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:auto;margin-top:14px}table{min-width:100%;font-size:13px}th,td{padding:12px 13px;vertical-align:middle}th{position:sticky;top:0;z-index:1;background:#f5f8fc;letter-spacing:.025em;font-weight:750}tbody tr:hover{background:#f8fbff}td{white-space:normal} .pill{white-space:nowrap}
+.finance-grid{gap:16px;align-items:start}.finance-month{border-radius:12px;padding:13px 14px;transition:border-color .15s,background .15s}.finance-month:hover{border-color:#c6d7ee;background:#fbfdff}.finance-placeholder{border-radius:14px}.dashboard-kpis{gap:14px}.dashboard-kpi{border-radius:15px;box-shadow:0 4px 16px #10243a06}.notice{border:1px solid #f2dfaa;border-radius:12px}.status{font-size:13px}
+.loginwrap{background:radial-gradient(circle at 80% 10%,#214c72 0,#10243a 48%,#09192a 100%)}.login{border:1px solid #ffffff35;border-radius:22px;box-shadow:0 28px 80px #0004}.login input{min-height:44px}.login button{min-height:44px}
+:focus-visible{outline:3px solid #f3c548;outline-offset:2px}
+@media(max-width:1100px){.layout{grid-template-columns:230px minmax(0,1fr)}.content{padding:20px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.finance-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}.sidebar{position:sticky;top:0;height:auto;max-height:none;overflow:visible;padding:10px 12px;z-index:40;border-right:0;border-bottom:1px solid #203c5b}.brand{font-size:20px}.subbrand{display:none}.side-profile{display:none}.nav{display:flex;align-items:center;gap:5px;overflow-x:auto;padding:4px 0 2px;scrollbar-width:thin}.nav button{width:auto;flex:0 0 auto;white-space:nowrap;min-height:38px;padding:8px 10px}.nav-group{display:flex;position:relative;flex:0 0 auto}.nav-submenu{display:none;position:absolute;top:calc(100% + 5px);left:0;min-width:180px;padding:7px;background:#10243a;border:1px solid #29435f;border-radius:12px;box-shadow:0 12px 24px #0003;z-index:50}.nav-group.open .nav-submenu{display:grid}.nav-submenu button{width:100%;white-space:normal}.sidefoot{display:none}.top{position:relative;min-height:68px;padding:13px 16px;align-items:center}.top h1{font-size:19px}.content{padding:14px}.grid{grid-template-columns:1fr;gap:11px}.formrow,.report-filters{grid-template-columns:1fr}.dashboard-columns{grid-template-columns:1fr!important}.finance-grid{grid-template-columns:1fr}.card{border-radius:13px;padding:16px}.top-actions{gap:6px}.account-trigger{font-size:12px;padding:8px 10px}.tablewrap{max-width:100%;-webkit-overflow-scrolling:touch}}
+@media(max-width:420px){.brand{font-size:18px}.sidebar{padding:8px}.nav button{padding:8px 9px;font-size:12px}.top{align-items:flex-start;gap:8px}.top h1{font-size:17px}.who{overflow-wrap:anywhere}.actions button{flex:1 1 auto}.content{padding:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+</style><style id="acessport-visual-consistency-fix">
+/* Padronização visual com a Área do Condomínio — sem alterar funcionalidades */
+#app, #app * { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+#app button, #app input, #app select, #app textarea { font-size: 14px; line-height: 1.4; }
+#app button { min-height: 40px; padding: 10px 14px; border-radius: 10px; font-weight: 650; letter-spacing: 0; }
+#app .sidebar { position: fixed; inset: 0 auto 0 0; width: 250px; height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; padding: 22px 14px; scrollbar-width: thin; scrollbar-color: #40536b transparent; }
+#app .main { margin-left: 250px; width: calc(100% - 250px); min-width: 0; }
+#app .nav { display: grid; gap: 6px; }
+#app .nav button { width: 100%; min-height: 42px; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: transparent; color: #dbe6f4; text-align: left; font-size: 14px; font-weight: 650; line-height: 1.35; white-space: normal; }
+#app .nav button:before { display: inline-grid; place-items: center; flex: 0 0 22px; width: 22px; min-width: 22px; font-size: 16px; line-height: 1; font-family: system-ui, Arial, sans-serif; }
+#app .nav button.active, #app .nav button:hover { background: #263e59; color: #fff; }
+#app .top { min-height: 68px; padding: 14px 22px; gap: 14px; }
+#app .top h1 { font-size: 21px; line-height: 1.3; font-weight: 750; letter-spacing: -0.02em; }
+#app .who { font-size: 12px; line-height: 1.4; }
+#app .content { max-width: none; width: 100%; padding: 22px; }
+#app .card { border-radius: 15px; padding: 19px; }
+#app .grid, #app .dashboard-kpis { gap: 14px; }
+#app .stat, #app .dashboard-kpi .kpi-value { font-variant-numeric: tabular-nums; }
+#app label { font-size: 13px; font-weight: 650; margin: 10px 0 6px; }
+#app input, #app select, #app textarea { border-radius: 9px; }
+#app .actions { gap: 8px; align-items: center; }
+#app .actions button { min-height: 40px; }
+#app .tablewrap { border-radius: 10px; }
+#app th { font-size: 11px; font-weight: 750; letter-spacing: .02em; }
+#app td { font-size: 13px; }
+#app .account-trigger { min-height: 40px; font-size: 13px; font-weight: 650; }
+@media (max-width: 800px) {
+  #app .sidebar { position: sticky; inset: auto; width: 100%; height: auto; max-height: none; padding: 10px 12px; overflow: visible; }
+  #app .main { margin-left: 0; width: 100%; }
+  #app .nav { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 3px; }
+  #app .nav button { width: auto; min-width: max-content; min-height: 38px; padding: 9px 11px; font-size: 13px; }
+  #app .content { padding: 14px; }
+  #app .top { padding: 14px 16px; }
+  #app .card { padding: 16px; }
+}
+@media (max-width: 420px) {
+  #app .nav button { font-size: 12px; padding: 8px 9px; }
+  #app .top { align-items: flex-start; }
+  #app .content { padding: 10px; }
+  #app button { padding: 9px 11px; }
+}
+</style>
+</head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Gestão segura de condomínios e portaria</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Bem-vindo CEO, Que bom te ver aqui!.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ADMINISTRAÇÃO GERAL</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhotoPreview" alt="Foto do perfil" hidden><span id="profilePhotoPlaceholder">👤</span></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><div id="sidebarProfileName" class="sidebar-profile-name">Administrador</div><div class="sidebar-profile-hint">Clique na foto para alterar</div></section><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>
 <div id="publicDisplay" aria-live="polite"><div id="displayMedia" class="media-frame"><div style="font-size:clamp(24px,4vw,54px);font-weight:800">ACESS PORT</div></div><div id="displayPcd" hidden></div><div id="displayQr" class="qr-scene" hidden><h1 id="displayCondoName">ACESS PORT</h1><p id="displayAddress"></p><img id="displayQrImage" alt="QR Code de localização"><div id="displayTimer" class="timer">02:00</div><div class="display-brand">Acess Port • Localização rápida e inteligente</div></div></div>

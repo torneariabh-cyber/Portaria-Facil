@@ -1,0 +1,32 @@
+[
+  {
+    "file": "index.html",
+    "bytes": 3126351,
+    "portal_fn": 0,
+    "portal_url_refs": 0
+  },
+  {
+    "file": "administracao.html",
+    "bytes": 176915,
+    "portal_fn": 1,
+    "portal_url_refs": 3
+  },
+  {
+    "file": "condominio.html",
+    "bytes": 316606,
+    "portal_fn": 1,
+    "portal_url_refs": 3
+  },
+  {
+    "file": "portaria.html",
+    "bytes": 100118,
+    "portal_fn": 1,
+    "portal_url_refs": 3
+  },
+  {
+    "file": "prestador.html",
+    "bytes": 316747,
+    "portal_fn": 1,
+    "portal_url_refs": 0
+  }
+]

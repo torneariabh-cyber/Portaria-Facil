@@ -406,9 +406,88 @@ body.screen-display{margin:0!important;background:#000!important;overflow:hidden
   #app .top .account-toggle{min-height:38px;padding:8px 10px;font-size:11px}
 }
 
+
+/* =========================================================
+   ACESS PORT — PADRÃO VISUAL COMPARTILHADO COM CONDOMÍNIO
+   Mantém o HTML funcional e os IDs da Portaria; padroniza apenas a apresentação.
+   ========================================================= */
+:root{--navy:#10243a;--blue:#2168d5;--gold:#f2c447;--bg:#f3f6fb;--ink:#14283f;--muted:#667991;--line:#dfe7f1;--white:#fff;--green:#14804a;--red:#b42318}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{background:#f3f6fb;color:#14283f;font-size:14px;line-height:1.5}
+button,input,select,textarea{font:inherit}
+button{min-height:40px;border-radius:10px;padding:9px 14px;transition:background .16s ease,box-shadow .16s ease,transform .16s ease}
+button:hover{filter:brightness(.98);box-shadow:0 3px 10px #10243a12}
+button:active{transform:translateY(1px)}
+input,select,textarea{min-height:42px;border-radius:10px;border:1px solid #cbd7e6;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{border-color:#6798e7;box-shadow:0 0 0 3px #2168d51a}
+label{font-size:13px;color:#263b54;margin:14px 0 6px}
+#app.layout{grid-template-columns:268px minmax(0,1fr);align-items:stretch;min-height:100vh}
+#app .sidebar{box-sizing:border-box;width:268px;height:100vh;min-height:100vh;max-height:100vh;position:sticky;top:0;align-self:stretch;overflow-y:auto;overscroll-behavior:contain;padding:25px 17px 20px;background:linear-gradient(180deg,#11243b 0%,#142b45 100%);border-right:1px solid rgba(255,255,255,.06);border-bottom:0;box-shadow:5px 0 24px rgba(13,31,51,.07);scrollbar-width:thin;scrollbar-color:#49617b #11243b;z-index:30}
+#app .brand{margin:0 9px 4px;font-size:25px;line-height:1.15;font-weight:850;letter-spacing:.045em}
+#app .brand span{color:#e7bd4a}
+#app .subbrand{margin:0 9px 19px;color:#9fb2c8;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
+#app .side-profile{display:flex;flex-direction:column;align-items:center;gap:7px;margin:0 0 19px;padding:16px 10px 19px;border:1px solid rgba(255,255,255,.10);border-radius:15px;background:rgba(255,255,255,.055);text-align:center}
+#app .profile-photo-button{width:72px;height:72px;flex:0 0 72px;margin:0 auto;border-radius:20px;border:3px solid rgba(231,189,74,.8);box-shadow:0 5px 18px rgba(0,0,0,.2)}
+#app .profile-photo-button img{width:100%;height:100%;object-fit:cover}
+#app #profileName{display:block;max-width:190px;margin:0;color:#fff;font-size:13px;font-weight:750;line-height:1.35;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app .side-profile small{display:block;margin-top:5px;color:#9fb2c8;font-size:10px;font-weight:400;text-align:center}
+#app .nav{display:grid;gap:6px}
+#app .nav button,#app .support-sidebar-btn{position:relative;display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:10px 12px;border:1px solid transparent;border-radius:10px;color:#d7e2ef;font-size:13px;font-weight:600;letter-spacing:.005em;text-align:left;transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease}
+#app .nav button:hover,#app .support-sidebar-btn:hover{background:rgba(255,255,255,.085);border-color:rgba(255,255,255,.07);color:#fff;transform:translateX(2px)}
+#app .nav button.active,#app .support-sidebar-btn.active{color:#fff;background:linear-gradient(90deg,rgba(231,189,74,.19),rgba(255,255,255,.075));border-color:rgba(231,189,74,.28);box-shadow:inset 3px 0 0 #e7bd4a}
+#app .nav-icon{width:20px;flex:0 0 20px;text-align:center;color:#e7bd4a;font-size:16px}
+#app .sidefoot{margin-top:26px;padding:13px 9px 4px;border-top:1px solid rgba(255,255,255,.10);color:#8fa5bd;font-size:10px;letter-spacing:.035em}
+#app .main{min-width:0;min-height:100vh}
+#app .top{position:sticky;top:0;z-index:20;min-height:76px;padding:15px clamp(18px,2.5vw,34px);background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid #e2e9f2;box-shadow:0 2px 8px #10243a05}
+#app .top h1{font-size:21px;line-height:1.25;font-weight:800;letter-spacing:-.02em;color:#10243a}
+#app .who{margin-top:4px;font-size:12px;line-height:1.4}
+#app .content{width:100%;max-width:1540px;margin:0 auto;padding:clamp(18px,2.2vw,30px);min-width:0}
+#app .card{padding:clamp(16px,1.7vw,22px);border:1px solid #e0e7f0;border-radius:16px;background:#fff;box-shadow:0 4px 16px #14283f08}
+#app .grid{gap:14px}
+#app .tablewrap{border:1px solid #e1e8f1;border-radius:12px;background:#fff;max-width:100%;overscroll-behavior-x:contain}
+#app table{font-size:13px}
+#app th,#app td{padding:12px 14px;border-bottom:1px solid #e8edf4;vertical-align:middle}
+#app th{font-size:11px;letter-spacing:.045em;background:#f6f8fc;color:#60728a}
+#app tbody tr:hover{background:#f9fbfe}
+#app .actions{gap:8px;align-items:center}
+#app .actions button{min-height:38px;padding:8px 12px;font-size:13px}
+#app .empty{padding:30px 18px;border:1px dashed #d4deea;border-radius:12px;background:#fafcff}
+#app .notice{border:1px solid #f0dfaa;border-radius:11px;line-height:1.5}
+#app .status{font-size:13px;overflow-wrap:anywhere}
+#app .account-wrap{position:relative;z-index:25;margin-left:auto}
+#app .account-toggle{background:#fff!important;color:#2168d5!important;border:1px solid #dce5f0!important;min-height:42px;padding:10px 12px}
+#app .account-wrap .account-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:100;width:210px;min-width:190px;background:#fff;border:1px solid #e0e7f0;border-radius:12px;padding:6px;box-shadow:0 12px 32px #10243a1a;overflow:hidden}
+#app .account-wrap .account-menu button{display:flex;align-items:center;gap:9px;width:100%;background:transparent;color:var(--ink);text-align:left;padding:10px;border-radius:8px;font-weight:600}
+#app .account-wrap .account-menu button:hover{background:#f3f6fb}
+#app .account-wrap .account-menu.hidden{display:none!important}
+@media(max-width:900px){
+ #app.layout{grid-template-columns:minmax(0,1fr)}
+ #app .sidebar{position:relative;top:auto;width:100%;height:auto;min-height:0;max-height:none;padding:13px 14px 12px;border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}
+ #app .brand{font-size:21px;margin:2px 7px 3px}
+ #app .subbrand{margin:0 7px 10px;font-size:9px}
+ #app .side-profile{flex-direction:row;justify-content:flex-start;align-items:center;gap:12px;margin:0 0 10px;padding:9px 10px}
+ #app .profile-photo-button{width:45px;height:45px;flex:0 0 45px;border-radius:13px;margin:0}
+ #app #profileName,#app .side-profile small{text-align:left}
+ #app .nav{display:flex;overflow-x:auto;overflow-y:hidden;gap:6px;padding:2px 0 5px}
+ #app .nav>button{flex:0 0 auto;width:auto;min-width:max-content;min-height:38px;padding:8px 10px;font-size:11px}
+ #app .support-sidebar-btn{width:auto;min-width:max-content;min-height:38px;margin-top:6px}
+ #app .sidefoot{display:none}
+ #app .content{padding:16px}
+}
+@media(max-width:700px){
+ #app .content{padding:12px}
+ #app .top{flex-wrap:wrap;gap:10px}
+ #app .top h1{font-size:19px}
+ #app .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #app .formrow{grid-template-columns:minmax(0,1fr)}
+ #app .tablewrap{max-width:100%;overflow:auto}
+ #app .account-wrap{margin-left:auto}
+}
+@media(max-width:420px){#app .grid{grid-template-columns:minmax(0,1fr)}}
+
 </style></head><body>
-<div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</div><p>Localização segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Seja bem-vindo Porteiro.</p></div></div>
-<div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">PLATAFORMA DE LOCALIZAÇÃO</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhoto" alt="Foto do perfil" /><span id="profilePhotoFallback">👤</span></button><strong id="profileName">Portaria</strong><small>Clique na foto para alterar</small><input type="file" id="profilePhotoInput" accept="image/*" hidden></section><nav class="nav" id="nav"></nav><button type="button" id="supportPortariaBtn" class="support-sidebar-btn"><span class="nav-icon" aria-hidden="true">?</span><span>Suporte</span></button><div id="supportPortariaPanel" class="support-card hidden"><h3>Suporte da Portaria</h3><p>Se houver dificuldade em realizar o acesso manual, seleção de endereço ou envio do QR, entre em contato com o administrador do condomínio. Não compartilhe sua senha.</p></div><div class="sidefoot">Bem Vindo ao Modulo Portaria</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="account-wrap"><button class="secondary account-toggle" type="button" id="accountToggle">♟ Minha conta <span>▾</span></button><div class="account-menu hidden" id="accountMenu"><button type="button" data-account-action="password">🔒 Alterar senha</button><button type="button" data-account-action="activities">↶ Atividades</button><button type="button" data-account-action="logout">⇥ Logout</button></div></div><button class="secondary hidden" id="logoutBtn">Sair</button></header><div class="content" id="content"></div></main></div>
+<div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localização segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Seja bem-vindo Porteiro.</p></div></div>
+<div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">PLATAFORMA DE LOCALIZAÇÃO</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhoto" alt="Foto do perfil" /><span id="profilePhotoFallback">👤</span></button><strong id="profileName">Portaria</strong><small>Clique na foto para alterar</small><input type="file" id="profilePhotoInput" accept="image/*" hidden></section><nav class="nav" id="nav"></nav><button type="button" id="supportPortariaBtn" class="support-sidebar-btn"><span class="nav-icon" aria-hidden="true">?</span><span>Suporte</span></button><div id="supportPortariaPanel" class="support-card hidden"><h3>Suporte da Portaria</h3><p>Se houver dificuldade em realizar o acesso manual, seleção de endereço ou envio do QR, entre em contato com o administrador do condomínio. Não compartilhe sua senha.</p></div><div class="sidefoot">Bem Vindo ao Modulo Portaria</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="account-wrap top-actions"><button class="secondary account-toggle account-trigger" type="button" id="accountToggle">♟ Minha conta <span>▾</span></button><div class="account-menu account-dropdown hidden" id="accountMenu"><button type="button" data-account-action="password">🔒 Alterar senha</button><button type="button" data-account-action="activities">↶ Atividades</button><button type="button" data-account-action="logout">⇥ Logout</button></div></div><button class="secondary hidden" id="logoutBtn">Sair</button></header><div class="content" id="content"></div></main></div>
 <div id="publicDisplay" aria-live="polite"><div id="displayMedia" class="media-frame"><div style="font-size:clamp(24px,4vw,54px);font-weight:800">ACESS PORT</div></div><div id="displayPcd" hidden></div><div id="displayQr" class="qr-scene" hidden><h1 id="displayCondoName">ACESS PORT</h1><p id="displayAddress"></p><img id="displayQrImage" alt="QR Code de localização"><div id="displayTimer" class="timer">02:00</div><div class="display-brand">Acess Port • Localização rápida e inteligente</div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 'use strict';

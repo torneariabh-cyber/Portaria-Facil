@@ -772,6 +772,107 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{fon
 #app .content input, #app .content select, #app .content textarea { min-height:40px; font-size:14px; }
 #app .content .card { box-sizing:border-box; }
 @media(max-width:760px){ #app .sidebar .nav button,#app .sidebar .nav-group-toggle,#app .sidebar .nav-submenu button{min-height:40px;font-size:14px;} #app .content{padding:16px;} }
+</style><style>
+
+/* ==========================================================
+   PADRAO FINAL — IDENTIDADE VISUAL DA AREA CONDOMINIO
+   Somente CSS: preserva IDs, HTML funcional, eventos e scripts.
+   ========================================================== */
+:root{
+  --navy:#11243b;--blue:#2168d5;--gold:#e7bd4a;--bg:#f3f6fb;
+  --ink:#17283e;--muted:#6c7b90;--line:#e0e7f0;--white:#fff;
+}
+html,body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;color:var(--ink)}
+#app.layout{background:var(--bg)!important;min-height:100vh}
+#app .sidebar{
+  background:var(--navy)!important;color:#fff!important;
+  padding:22px 14px 16px!important;box-shadow:4px 0 18px #10243a0a!important;
+  border-right:1px solid #203c5b!important;
+}
+#app .brand{font-size:23px!important;font-weight:850!important;letter-spacing:.1px!important;color:#fff!important;margin:0 8px 4px!important}
+#app .brand span{color:var(--gold)!important}
+#app .subbrand{color:#aebed1!important;font-size:10px!important;letter-spacing:.12em!important;margin:0 8px 20px!important}
+#app .side-profile{
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:7px!important;margin:18px 0 20px!important;padding:15px 10px 17px!important;
+  min-height:142px!important;background:#1b3552!important;border:1px solid #ffffff20!important;
+  border-radius:15px!important;text-align:center!important;
+}
+#app .profile-photo-button{width:68px!important;height:68px!important;min-width:68px!important;border-radius:17px!important;border:2px solid var(--gold)!important;background:#fff!important;padding:0!important;overflow:hidden!important}
+#app .profile-photo-button img{width:100%!important;height:100%!important;object-fit:cover!important}
+#app .sidebar-profile-name,#app .side-profile strong{display:block!important;color:#fff!important;font-size:13px!important;font-weight:750!important;text-align:center!important;max-width:205px!important}
+#app .sidebar-profile-hint,#app .side-profile small{color:#b9c8da!important;font-size:10px!important;text-align:center!important}
+#app .nav{display:grid!important;grid-auto-flow:row!important;grid-template-columns:minmax(0,1fr)!important;gap:5px!important;width:100%!important;overflow:visible!important}
+#app .nav button,#app .nav .nav-group-toggle{
+  display:flex!important;align-items:center!important;gap:10px!important;width:100%!important;min-width:0!important;
+  min-height:42px!important;margin:0!important;padding:10px 11px!important;border:1px solid transparent!important;
+  border-radius:10px!important;background:transparent!important;color:#dbe6f4!important;
+  font:650 13px/1.35 Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important;text-align:left!important;
+  box-shadow:none!important;white-space:normal!important;
+}
+#app .nav button:before,#app .nav .nav-group-toggle:before{display:inline-grid!important;place-items:center!important;flex:0 0 22px!important;width:22px!important;min-width:22px!important;color:var(--gold)!important;font-size:16px!important}
+#app .nav button:hover,#app .nav .nav-group-toggle:hover{background:#203a57!important;color:#fff!important;border-color:#ffffff12!important}
+#app .nav button.active,#app .nav .nav-group-toggle.active{background:#29415d!important;color:#fff!important;border-color:#526b83!important;box-shadow:inset 3px 0 0 var(--gold)!important}
+#app .nav-group{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:5px!important;width:100%!important}
+#app .nav-group-toggle{justify-content:flex-start!important}
+#app .nav-chevron{margin-left:auto!important}
+#app .nav-submenu{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:4px!important;padding:3px 0 3px 13px!important;margin:0!important}
+#app .nav-submenu button{min-height:38px!important;padding:8px 10px 8px 12px!important;border-left:1px solid #ffffff30!important;border-radius:0 8px 8px 0!important;color:#b9c8da!important;font-size:12px!important}
+#app .nav-submenu button.active{color:#fff!important;border-left:2px solid var(--gold)!important;background:#ffffff12!important;box-shadow:none!important}
+#app .nav-submenu[hidden]{display:none!important}
+#app .sidefoot{color:#aebed1!important;border-top:1px solid #ffffff20!important;margin-top:25px!important;padding:12px 8px!important;font-size:11px!important}
+#app .top{
+  min-height:76px!important;padding:16px 24px!important;background:#fff!important;
+  border-bottom:1px solid var(--line)!important;box-shadow:0 2px 8px #11243b08!important;
+}
+#app .top h1{font-size:22px!important;line-height:1.3!important;font-weight:750!important;color:var(--ink)!important;margin:0 0 3px!important}
+#app .who{font-size:12px!important;color:var(--muted)!important}
+#app .account-trigger{display:flex!important;align-items:center!important;gap:8px!important;background:#fff!important;color:var(--blue)!important;border:1px solid var(--line)!important;padding:10px 12px!important;border-radius:10px!important;font-weight:700!important}
+#app .account-dropdown{z-index:80!important;border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:0 12px 32px #11243b20!important;padding:6px!important}
+#app .account-dropdown button{width:100%!important;min-height:40px!important;background:transparent!important;color:var(--ink)!important;text-align:left!important;border-radius:8px!important}
+#app .content{box-sizing:border-box!important;background:var(--bg)!important;padding:26px!important;max-width:none!important}
+#app .card,#app .panel,#app .media-panel,#app .dashboard-kpi{
+  border:1px solid var(--line)!important;border-radius:16px!important;background:#fff!important;
+  box-shadow:0 2px 8px #11243b06!important;
+}
+#app .card{padding:20px!important}
+#app .sectiontitle{font-size:20px!important;line-height:1.35!important;font-weight:750!important;color:var(--ink)!important}
+#app input:not([type=checkbox]):not([type=radio]),#app select,#app textarea{
+  border:1px solid #cbd8e8!important;border-radius:10px!important;background:#fff!important;color:var(--ink)!important;
+}
+#app input:focus,#app select:focus,#app textarea:focus{outline:2px solid #75a7f2!important;outline-offset:2px!important}
+#app .tablewrap{border:1px solid var(--line)!important;border-radius:12px!important;background:#fff!important;overflow:auto!important}
+#app table{border-collapse:collapse!important;width:100%!important}
+#app th{background:#f7f9fc!important;color:#60738c!important;font-size:12px!important;font-weight:750!important}
+#app th,#app td{padding:12px 14px!important;border-bottom:1px solid var(--line)!important;vertical-align:middle!important}
+#app button{border-radius:10px!important;font-weight:700!important}
+@media(min-width:801px){
+  #app.layout{display:block!important;height:100vh!important;height:100dvh!important;min-height:0!important;overflow:hidden!important}
+  #app .sidebar{position:fixed!important;inset:0 auto 0 0!important;width:248px!important;height:100vh!important;height:100dvh!important;max-height:100vh!important;overflow-x:hidden!important;overflow-y:auto!important;z-index:40!important}
+  #app .main{margin-left:248px!important;width:calc(100% - 248px)!important;height:100vh!important;height:100dvh!important;min-height:0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+  #app .top{flex:0 0 auto!important;position:relative!important}
+  #app .content{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important}
+}
+@media(max-width:800px){
+  #app.layout{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr)!important;height:100vh!important;height:100dvh!important;min-height:0!important;overflow:hidden!important}
+  #app .sidebar{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;max-height:none!important;overflow:visible!important;padding:10px 12px!important;z-index:40!important}
+  #app .side-profile{display:none!important}
+  #app .subbrand,#app .sidefoot{display:none!important}
+  #app .nav{display:flex!important;flex-direction:row!important;gap:5px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:4px 0!important}
+  #app .nav>button,#app .nav>.nav-group{flex:0 0 auto!important;width:auto!important;min-width:max-content!important}
+  #app .nav>button,#app .nav .nav-group-toggle{min-height:38px!important;width:auto!important;padding:8px 10px!important;font-size:12px!important}
+  #app .nav-group{display:flex!important;position:relative!important}
+  #app .nav-submenu{display:none!important;position:absolute!important;top:calc(100% + 5px)!important;left:0!important;min-width:180px!important;padding:7px!important;background:var(--navy)!important;border:1px solid #29415d!important;border-radius:12px!important;box-shadow:0 12px 24px #0003!important;z-index:50!important}
+  #app .nav-group.open .nav-submenu{display:grid!important}
+  #app .main{margin:0!important;width:100%!important;height:100%!important;min-height:0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+  #app .top{position:relative!important;min-height:68px!important;padding:12px 16px!important;gap:8px!important}
+  #app .top h1{font-size:18px!important}
+  #app .content{flex:1 1 auto!important;min-height:0!important;height:0!important;overflow-y:auto!important;overflow-x:hidden!important;padding:14px!important}
+  #app .grid,#app .formrow,#app .finance-grid,#app .report-filters{grid-template-columns:minmax(0,1fr)!important}
+  #app .tablewrap{max-width:100%!important;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:420px){#app .top{align-items:flex-start!important}#app .top h1{font-size:17px!important}#app .content{padding:10px!important}}
+
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localização segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Bem-vindo CEO, Que bom te ver aqui!.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ADMINISTRAÇÃO GERAL</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhotoPreview" alt="Foto do perfil" hidden><span id="profilePhotoPlaceholder">👤</span></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><div id="sidebarProfileName" class="sidebar-profile-name">Administrador</div><div class="sidebar-profile-hint">Clique na foto para alterar</div></section><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>

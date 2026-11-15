@@ -504,6 +504,194 @@ tbody tr:last-child td{border-bottom:0}
   #app #dashboardMain .dashboard-table{min-width:560px}
 }
 
+
+
+/* =========================================================
+   ACESS PORT — ORGANIZAÇÃO RESPONSIVA DE TODAS AS ABAS
+   Ajustes de layout; não altera conteúdo, IDs ou JavaScript.
+   ========================================================= */
+#app .content,
+#app #content{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:16px;
+  width:100%;
+  max-width:none;
+  min-width:0;
+  padding:clamp(16px,2.2vw,30px);
+}
+#app #content > *{min-width:0;max-width:100%}
+#app #content > .card,
+#app #content > section.card{width:100%;margin:0!important}
+#app #content > .row{
+  width:100%;
+  min-width:0;
+  flex-wrap:wrap;
+  align-items:center;
+  row-gap:10px;
+}
+#app #content > .row > :first-child{min-width:0}
+#app #content h2,
+#app #content h3{overflow-wrap:anywhere}
+#app #content .formrow{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  align-items:start;
+}
+#app #content .formrow > *,
+#app #content form > *,
+#app #content .finance-grid > *,
+#app #content .dashboard-columns > *{min-width:0}
+#app #content form{width:100%;max-width:100%}
+#app #content input:not([type=checkbox]):not([type=radio]),
+#app #content select,
+#app #content textarea{width:100%;max-width:100%;min-width:0}
+#app #content textarea{resize:vertical;max-width:100%}
+#app #content .actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+}
+#app #content .actions button{max-width:100%;white-space:normal}
+#app #content .row button{flex:0 0 auto}
+#app #content .tablewrap{
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  overflow:auto;
+  overscroll-behavior-x:contain;
+}
+#app #content .tablewrap table{
+  width:100%;
+  min-width:680px;
+  border-collapse:collapse;
+}
+#app #content .tablewrap th,
+#app #content .tablewrap td{vertical-align:middle}
+#app #content .notice,
+#app #content .status{max-width:100%;overflow-wrap:anywhere}
+#app #content .report-filters,
+#app #content .finance-grid,
+#app #content .dashboard-columns{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  width:100%;
+  align-items:start;
+}
+#app #content .report-download-groups{
+  width:100%;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+#app #content .report-download-group{min-width:0}
+#app #content .media-panel,
+#app #content .media-toolbar,
+#app #content .document-row{min-width:0}
+#app #content .media-toolbar{grid-template-columns:minmax(0,1fr) auto}
+#app #content .dashboard-toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+#app #content .dashboard-toolbar > *{min-width:0}
+#app #dashboardMain{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:16px;
+  width:100%;
+  min-width:0;
+}
+#app #dashboardMain > .grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  width:100%;
+  margin:0!important;
+}
+#app #dashboardMain > .grid > .card{min-width:0;margin:0!important}
+#app #dashboardMain > .dashboard-kpis{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  width:100%;
+  margin:0;
+}
+#app #dashboardMain .dashboard-kpi{
+  min-width:0;
+  min-height:118px;
+  height:100%;
+  padding:16px;
+}
+#app #dashboardMain .dashboard-kpi .kpi-value{
+  font-size:clamp(21px,1.8vw,29px);
+  overflow-wrap:anywhere;
+}
+#app #dashboardMain > .dashboard-columns{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  width:100%;
+  margin:0;
+  align-items:stretch;
+}
+#app #dashboardMain > .dashboard-columns > .card{
+  min-width:0;
+  width:100%;
+  margin:0!important;
+}
+#app #dashboardMain .dashboard-chart{min-width:0;max-width:100%}
+#app #dashboardMain .dashboard-table{width:100%;min-width:680px}
+#app #dashboardMain > .actions{width:100%;margin:0}
+#app #dashboardMain > .card{width:100%;margin:0!important}
+#app #dashboardMain .tablewrap{max-width:100%}
+#app #dashboardStatus{width:100%;margin:0}
+@media(max-width:1180px){
+  #app #dashboardMain > .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #app #dashboardMain > .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #app #content .finance-grid,
+  #app #content .dashboard-columns{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  #app .content,#app #content{padding:16px}
+  #app #content .report-download-groups{grid-template-columns:1fr}
+  #app #content .media-toolbar{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  #app .content,#app #content{gap:12px;padding:12px}
+  #app #content .formrow,
+  #app #content .finance-grid,
+  #app #content .report-filters,
+  #app #content .dashboard-columns{grid-template-columns:minmax(0,1fr)}
+  #app #content > .row{align-items:flex-start}
+  #app #content > .row > button{width:100%}
+  #app #content .actions button{flex:1 1 auto}
+  #app #dashboardMain{gap:12px}
+  #app #dashboardMain > .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  #app #dashboardMain > .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  #app #dashboardMain > .dashboard-columns{grid-template-columns:minmax(0,1fr);gap:12px}
+  #app #dashboardMain > .dashboard-columns > .card{padding:14px}
+  #app #dashboardMain .dashboard-kpi{min-height:104px;padding:12px}
+  #app #dashboardMain .dashboard-kpi .kpi-value{font-size:22px}
+  #app #dashboardMain .dashboard-chart{gap:5px;padding-left:0;padding-right:0}
+  #app #dashboardMain .dashboard-table{min-width:620px}
+  #app #content .tablewrap table{min-width:640px}
+}
+@media(max-width:420px){
+  #app #dashboardMain > .grid{grid-template-columns:minmax(0,1fr)}
+  #app #dashboardMain > .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #app #content .card{padding:14px}
+  #app #content .actions button{width:100%}
+}
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localizaçao segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Seja bem-vindo Administrador.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ÁREA DO CONDOMÍNIO</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhotoPreview" alt="Foto do perfil" hidden><span id="profilePhotoPlaceholder">👤</span></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><div id="sidebarProfileName" class="sidebar-profile-name">Administrador</div><div class="sidebar-profile-hint">Clique na foto para alterar</div></section><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>

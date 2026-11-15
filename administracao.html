@@ -245,6 +245,326 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{fon
 .account-dropdown{border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px #11243b20;padding:6px}
 .account-dropdown button{display:flex;align-items:center;gap:9px;width:100%;min-height:40px;background:transparent;color:var(--ink);text-align:left;padding:10px;border-radius:8px;font-weight:600}
 @media(max-width:760px){.top,.topbar,header.app-header{padding:12px 16px}.card,.panel,.section-card,.dashboard-card{padding:15px}.nav button{min-height:42px}.report-download-groups{grid-template-columns:1fr}}
+
+
+/* ================================================================
+   ACESS PORT — REFINAMENTO VISUAL ADMINISTRATIVO
+   Camada exclusivamente visual. Não altera IDs, eventos ou scripts.
+   ================================================================ */
+#app.layout{
+  --ap-sidebar:#11243b;
+  --ap-sidebar-soft:#1b3552;
+  --ap-accent:#e7bd4a;
+  --ap-blue:#2168d5;
+  --ap-canvas:#f3f6fb;
+  --ap-border:#e3eaf2;
+  --ap-shadow:0 8px 24px rgba(17,36,59,.055);
+  grid-template-columns:268px minmax(0,1fr);
+  min-height:100vh;
+  background:var(--ap-canvas);
+}
+#app .sidebar{
+  width:268px;
+  padding:25px 17px 20px;
+  background:linear-gradient(180deg,#11243b 0%,#142b45 100%);
+  border-right:1px solid rgba(255,255,255,.06);
+  box-shadow:5px 0 24px rgba(13,31,51,.07);
+  scrollbar-width:thin;
+  scrollbar-color:#49617b #11243b;
+}
+#app .brand{
+  margin:0 9px 4px;
+  font-size:25px;
+  line-height:1.15;
+  font-weight:850;
+  letter-spacing:.045em;
+}
+#app .brand span{color:var(--ap-accent)}
+#app .subbrand{
+  margin:0 9px 19px;
+  color:#9fb2c8;
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.16em;
+}
+#app .side-profile{
+  margin:0 0 19px;
+  padding:16px 10px 19px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:15px;
+  background:rgba(255,255,255,.055);
+}
+#app .profile-photo-button{
+  width:72px;height:72px;border-radius:20px;
+  border:3px solid rgba(231,189,74,.8);
+  box-shadow:0 5px 18px rgba(0,0,0,.2);
+}
+#app .sidebar-profile-name{font-size:13px;font-weight:750;letter-spacing:.01em}
+#app .sidebar-profile-hint{color:#9fb2c8;font-size:10px}
+#app .nav{display:grid;gap:6px}
+#app .nav button,
+#app .nav .nav-group-toggle{
+  position:relative;
+  min-height:44px;
+  padding:10px 12px;
+  border:1px solid transparent;
+  border-radius:10px;
+  color:#d7e2ef;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.005em;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+#app .nav button:before,
+#app .nav .nav-group-toggle:before{
+  color:#e7bd4a;
+  font-size:16px;
+  opacity:.95;
+}
+#app .nav button:hover,
+#app .nav .nav-group-toggle:hover{
+  background:rgba(255,255,255,.085);
+  border-color:rgba(255,255,255,.07);
+  color:#fff;
+  transform:translateX(2px);
+}
+#app .nav button.active,
+#app .nav .nav-group-toggle.active{
+  color:#fff;
+  background:linear-gradient(90deg,rgba(231,189,74,.19),rgba(255,255,255,.075));
+  border-color:rgba(231,189,74,.28);
+  box-shadow:inset 3px 0 0 var(--ap-accent);
+}
+#app .nav .nav-submenu{gap:5px;margin:3px 0 6px;padding:4px 0 4px 14px}
+#app .nav .nav-submenu button{
+  min-height:38px;
+  padding:8px 10px 8px 13px!important;
+  border-left:1px solid rgba(255,255,255,.19)!important;
+  border-radius:0 8px 8px 0;
+  color:#b9c9da;
+  font-size:12px;
+}
+#app .nav .nav-submenu button.active{
+  color:#fff;
+  border-left:2px solid var(--ap-accent)!important;
+  background:rgba(255,255,255,.075);
+  box-shadow:none;
+}
+#app .sidefoot{
+  margin-top:26px;
+  padding:13px 9px 4px;
+  border-top:1px solid rgba(255,255,255,.10);
+  color:#8fa5bd;
+  font-size:10px;
+  letter-spacing:.035em;
+}
+#app .main{min-width:0;background:var(--ap-canvas)}
+#app .top{
+  position:sticky;top:0;z-index:15;
+  min-height:82px;
+  padding:17px clamp(18px,3vw,38px);
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--ap-border);
+  box-shadow:0 3px 14px rgba(17,36,59,.035);
+  backdrop-filter:blur(12px);
+}
+#app .top h1{
+  margin:0;
+  color:#142a43;
+  font-size:21px;
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+#app .who{margin-top:4px;color:#7c8ba0;font-size:11px;font-weight:500}
+#app .top-actions{gap:12px}
+#app .account-trigger{
+  min-height:42px;
+  padding:9px 14px;
+  border:1px solid #e1e8f0;
+  border-radius:11px;
+  background:#fff;
+  color:#1a3552;
+  font-size:12px;
+  font-weight:750;
+  box-shadow:0 2px 7px rgba(17,36,59,.035);
+}
+#app .account-trigger:hover{border-color:#c6d5e6;background:#f8fafd}
+#app .account-dropdown{
+  top:calc(100% + 9px);
+  min-width:190px;
+  padding:7px;
+  border:1px solid var(--ap-border);
+  border-radius:13px;
+  background:#fff;
+  box-shadow:0 14px 38px rgba(17,36,59,.15);
+}
+#app .account-dropdown button{
+  width:100%;min-height:39px;padding:9px 11px;
+  border-radius:8px;background:transparent;color:#30445c;
+  text-align:left;font-size:12px;font-weight:600;
+}
+#app .account-dropdown button:hover{background:#f1f5fa;color:#142a43}
+#app .content{
+  width:100%;max-width:1580px;
+  padding:clamp(18px,2.5vw,34px);
+}
+#app .sectiontitle{color:#172d46;font-size:19px;font-weight:800;letter-spacing:-.02em}
+#app .card,
+#app .dashboard-kpi,
+#app .media-panel{
+  border:1px solid var(--ap-border);
+  border-radius:15px;
+  background:#fff;
+  box-shadow:var(--ap-shadow);
+}
+#app .card{padding:20px}
+#app .dashboard-kpi{padding:19px}
+#app .dashboard-kpi .kpi-label{color:#74849a;font-size:10px;letter-spacing:.08em}
+#app .dashboard-kpi .kpi-value{color:#172d46;font-size:30px}
+#app .dashboard-kpi .kpi-foot{color:#8795a8;font-size:11px}
+#app .tablewrap{
+  border:1px solid var(--ap-border);
+  border-radius:13px;
+  background:#fff;
+  box-shadow:0 3px 12px rgba(17,36,59,.035);
+}
+#app .tablewrap th{background:#f6f8fb;color:#718198;font-size:10px;letter-spacing:.07em}
+#app .tablewrap td{color:#30445c;font-size:12px}
+#app input:not([type=checkbox]):not([type=radio]),
+#app select,
+#app textarea{
+  border:1px solid #d7e1ec;
+  border-radius:9px;
+  background:#fff;
+  color:#243950;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+#app input:focus,
+#app select:focus,
+#app textarea:focus{
+  outline:none;border-color:#75a4e7;
+  box-shadow:0 0 0 3px rgba(33,104,213,.10);
+}
+#app button{transition:filter .15s ease,transform .15s ease,box-shadow .15s ease}
+#app button:not(.nav button):not(.nav-group-toggle):hover{filter:brightness(.98)}
+#app button:focus-visible,
+#app a:focus-visible{outline:3px solid rgba(33,104,213,.28);outline-offset:2px}
+#app .dashboard-shortcut{
+  min-height:76px;border-color:var(--ap-border);border-radius:12px;
+  box-shadow:0 3px 10px rgba(17,36,59,.035);
+}
+#app .dashboard-shortcut:hover{border-color:#c7d8eb;background:#f9fbfe;transform:translateY(-1px)}
+#app .dashboard-mini-item{border-color:var(--ap-border);border-radius:12px}
+#app .notice{border:1px solid #f0dfaa;border-radius:11px}
+#app .pill{font-weight:750}
+@media(max-width:900px){
+  #app.layout{grid-template-columns:1fr}
+  #app .sidebar{
+    position:relative;top:auto;width:100%;height:auto;min-height:0;max-height:none;
+    padding:13px 14px 12px;border-right:0;border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  #app .brand{font-size:21px;margin:2px 7px 3px}
+  #app .subbrand{margin:0 7px 10px;font-size:9px}
+  #app .side-profile{flex-direction:row;justify-content:flex-start;align-items:center;gap:12px;margin:0 0 10px;padding:9px 10px}
+  #app .profile-photo-button{width:45px;height:45px;border-radius:13px;flex:0 0 45px}
+  #app .sidebar-profile-name{text-align:left}
+  #app .sidebar-profile-hint{display:block;text-align:left}
+  #app .nav{display:flex;overflow-x:auto;overflow-y:hidden;gap:6px;padding:2px 0 5px;scrollbar-width:thin}
+  #app .nav>button,#app .nav>.nav-group{flex:0 0 auto;width:auto;min-width:max-content}
+  #app .nav>button,#app .nav .nav-group-toggle{min-height:38px;padding:8px 10px;font-size:11px}
+  #app .nav .nav-group{display:flex;align-items:center;gap:4px}
+  #app .nav .nav-submenu{display:flex;gap:4px;padding:0;margin:0}
+  #app .nav .nav-submenu button{min-height:36px;padding:7px 9px!important;font-size:10px}
+  #app .sidefoot{display:none}
+  #app .top{position:relative;min-height:68px;padding:14px 17px}
+  #app .top h1{font-size:18px}
+  #app .content{padding:16px}
+}
+#app .nav .nav-submenu[hidden]{display:none!important}
+@media(max-width:520px){
+  #app .top{align-items:center;gap:8px}
+  #app .top-actions{gap:6px}
+  #app .account-trigger{min-height:38px;padding:8px 10px;font-size:11px}
+  #app .content{padding:12px}
+  #app .card{padding:15px}
+}
+
+
+/* Dashboard da Administração — mesma distribuição aprovada, com seletores alinhados ao HTML atual */
+#app #dashboardMain{
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:12px;
+  width:100%;
+  align-items:stretch;
+}
+#app #dashboardMain > .grid{
+  grid-column:1/-1;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:0!important;
+}
+#app #dashboardMain > .dashboard-kpis{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin:0;
+}
+#app #dashboardMain > .dashboard-columns{display:contents}
+#app #dashboardMain > .dashboard-columns > section.card{
+  min-width:0;
+  margin:0!important;
+  padding:16px 18px;
+  border:1px solid #e8edf3;
+  border-radius:12px;
+  box-shadow:none;
+  background:#fff;
+}
+#app #dashboardMain > .dashboard-columns:nth-of-type(3) > section:first-child{grid-column:span 5}
+#app #dashboardMain > .dashboard-columns:nth-of-type(3) > section:last-child{grid-column:span 7}
+#app #dashboardMain > .dashboard-columns:nth-of-type(4) > section:first-child{grid-column:span 7}
+#app #dashboardMain > .dashboard-columns:nth-of-type(4) > section:last-child{grid-column:span 5}
+#app #dashboardMain .dashboard-kpi{
+  min-height:108px;
+  padding:15px 17px;
+  border:1px solid #e8edf3;
+  border-radius:12px;
+  box-shadow:none;
+  background:#fff;
+}
+#app #dashboardMain .dashboard-kpi:after{display:none}
+#app #dashboardMain .dashboard-kpi .kpi-value{margin:5px 0 2px;font-size:clamp(25px,2.1vw,31px)}
+#app #dashboardMain h3{font-size:15px;margin:0 0 7px!important}
+#app #dashboardMain .muted.small{font-size:12px;margin:0 0 10px}
+#app #dashboardMain .dashboard-chart{height:190px;margin-top:8px;padding-top:12px}
+#app #dashboardMain .dashboard-bar-track{height:140px}
+#app #dashboardMain .dashboard-table{font-size:12px}
+#app #dashboardMain .dashboard-table th,
+#app #dashboardMain .dashboard-table td{padding:9px 10px}
+#app #dashboardMain .actions{margin-top:10px}
+#app .dashboard-toolbar{margin-bottom:8px}
+#app #dashboardStatus{margin:0 0 10px;padding:8px 12px}
+@media(max-width:1050px){
+  #app #dashboardMain > .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #app #dashboardMain > .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #app #dashboardMain > .dashboard-columns:nth-of-type(3) > section:first-child,
+  #app #dashboardMain > .dashboard-columns:nth-of-type(3) > section:last-child,
+  #app #dashboardMain > .dashboard-columns:nth-of-type(4) > section:first-child,
+  #app #dashboardMain > .dashboard-columns:nth-of-type(4) > section:last-child{grid-column:span 6}
+}
+@media(max-width:700px){
+  #app #dashboardMain{grid-template-columns:minmax(0,1fr);gap:10px}
+  #app #dashboardMain > .grid{grid-template-columns:minmax(0,1fr)}
+  #app #dashboardMain > .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #app #dashboardMain > .dashboard-columns:nth-of-type(3) > section:first-child,
+  #app #dashboardMain > .dashboard-columns:nth-of-type(3) > section:last-child,
+  #app #dashboardMain > .dashboard-columns:nth-of-type(4) > section:first-child,
+  #app #dashboardMain > .dashboard-columns:nth-of-type(4) > section:last-child{grid-column:1}
+  #app #dashboardMain > .dashboard-columns > section.card{padding:13px}
+  #app #dashboardMain .dashboard-table{min-width:560px}
+}
 </style><style id="acessport-visual-consistency-fix">
 /* Padronização visual com a Área do Condomínio — sem alterar funcionalidades */
 #app, #app * { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }

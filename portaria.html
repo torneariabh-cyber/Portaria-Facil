@@ -204,6 +204,8 @@ body.screen-display{margin:0!important;background:#000!important;overflow:hidden
 
 
 /* ACESS PORT — PADRÃO VISUAL DA BARRA LATERAL (igual Administração Geral) */
+/* A coluna do layout deve ter a mesma largura da barra lateral para evitar sobreposição. */
+#app.layout{grid-template-columns:268px minmax(0,1fr)}
 #app .sidebar{
   width:268px;padding:25px 17px 20px;
   background:linear-gradient(180deg,#11243b 0%,#142b45 100%);
@@ -246,6 +248,7 @@ body.screen-display{margin:0!important;background:#000!important;overflow:hidden
 #app .nav .nav-submenu button.active{color:#fff;border-left:2px solid #e7bd4a!important;background:rgba(255,255,255,.075);box-shadow:none}
 #app .sidefoot{margin-top:26px;padding:13px 9px 4px;border-top:1px solid rgba(255,255,255,.10);color:#8fa5bd;font-size:10px;letter-spacing:.035em}
 @media(max-width:900px){
+  #app.layout{grid-template-columns:minmax(0,1fr)}
   #app .sidebar{position:relative;top:auto;width:100%;height:auto;min-height:0;max-height:none;padding:13px 14px 12px;border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}
   #app .brand{font-size:21px;margin:2px 7px 3px}
   #app .subbrand{margin:0 7px 10px;font-size:9px}

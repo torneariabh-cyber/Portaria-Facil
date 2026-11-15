@@ -43,12 +43,11 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
 @media(max-width:1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:800px){.app{grid-template-columns:1fr}.sidebar{height:auto;max-height:none;position:relative;padding:13px 14px 12px}.subbrand,.module-card,.sidefoot{display:none}.nav{display:flex;overflow-x:auto;gap:6px;padding:4px 0}.nav button{width:auto;min-width:max-content;min-height:38px;padding:8px 10px;font-size:11px}.top{height:auto;min-height:72px;padding:14px 16px}.top h1{font-size:19px}.content{padding:15px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
 @media(max-width:480px){.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:13px}.metric{font-size:23px}.search{max-width:none;width:100%}.page-head{display:block}.page-head .btn-primary{margin-top:10px;width:100%}}
-.access-login-screen{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#10243a,#183f69)}.access-login-card{width:min(440px,100%);padding:30px;background:#fff;border-radius:22px;box-shadow:0 25px 80px #0003}.access-login-card .brand{color:var(--navy);margin:0 0 12px}.access-login-card h1{font-size:23px;margin:0 0 8px}.access-login-card p{color:var(--muted);margin:0 0 20px}.access-login-card label{margin-top:12px}.access-login-card button{width:100%;margin-top:18px;background:var(--blue);color:#fff}.access-login-card #accessLoginStatus{min-height:22px;margin:12px 0;color:#b42318;font-size:12px}.access-login-card>a{display:block;text-align:center;color:var(--blue);font-size:12px;margin-top:12px}.account{cursor:pointer}@media(max-width:480px){.access-login-card{padding:24px}}
+
 </style>
 </head>
 <body>
-<div id="accessLogin" class="access-login-screen"><form id="accessLoginForm" class="access-login-card"><div class="brand">ACESS <span>PORT</span></div><h1>Acesso Condominial</h1><p>Entre com o mesmo e-mail e senha utilizados no módulo Condomínio.</p><label for="accessEmail">E-mail</label><input id="accessEmail" type="email" autocomplete="username" required><label for="accessPassword">Senha</label><input id="accessPassword" type="password" autocomplete="current-password" required><button id="accessLoginButton" type="submit">Entrar</button><div id="accessLoginStatus" role="status" aria-live="polite"></div><a href="index.html#login">Voltar ao Acess Port</a></form></div>
-<div class="app" id="condoAccessApp" style="display:none">
+<div class="app" id="condoAccessApp" style="display:grid">
 <aside class="sidebar">
   <div class="brand">ACESS <span>PORT</span></div>
   <div class="subbrand">Acesso Condominial</div>
@@ -68,7 +67,7 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
   <div class="sidefoot">Acess Port · Estrutura inicial</div>
 </aside>
 <main class="main">
-  <header class="top"><div><h1 id="topTitle">Dashboard</h1><div class="subtitle">Acess Port · Acesso Condominial</div></div><button class="account">♟ Minha conta　⌄</button></header>
+  <header class="top"><div><h1 id="topTitle">Dashboard</h1><div class="subtitle">Acess Port · Acesso Condominial</div></div><div class="account" aria-label="Módulo aberto">Acesso Condominial</div></header>
   <div class="content">
     <section class="view active" id="view-dashboard">
       <div class="page-head"><div><h2>Visão geral</h2><div class="muted">Indicadores do controle de acesso do condomínio</div></div></div>
@@ -161,26 +160,7 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
   </div>
 </main>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// Usa o mesmo projeto, a mesma sessão e a mesma chave de armazenamento do módulo Condomínio.
-const ACCESS_SUPABASE_URL='https://uyakrrwqzvwlqhqjnscc.supabase.co';
-const ACCESS_SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFkbWluLWNvbmRvbWluaW8tdjEiLCJyZWYiOiJ1eWFrcnJ3cXp2d2xxaHFqbnNjYyIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzkyMjA0MTU2LCJleHAiOjIxMDc3ODAxNTZ9.sL_yIcxaiYYEHRdLcKpeIRpf8lbjYxMiL0g0xKrCajc';
-const accessSb=window.supabase.createClient(ACCESS_SUPABASE_URL,ACCESS_SUPABASE_ANON_KEY,{auth:{storageKey:'acessport-auth-admin-condominio-v1',autoRefreshToken:true,persistSession:true,detectSessionInUrl:true,flowType:'implicit'}});
-const accessLoginStatus=document.getElementById('accessLoginStatus');
-function accessStatus(message){accessLoginStatus.textContent=message||''}
-async function validateCondoSession(session){
-  if(!session?.user){document.getElementById('accessLogin').style.display='grid';document.getElementById('condoAccessApp').style.display='none';return false}
-  const {data,error}=await accessSb.from('perfis_acesso').select('id,nome,email,papel,condominio_id,ativo').eq('id',session.user.id).maybeSingle();
-  if(error||!data||!data.ativo||data.papel!=='admin_condominio'){document.getElementById('accessLogin').style.display='grid';document.getElementById('condoAccessApp').style.display='none';accessStatus(error?'Não foi possível validar o perfil. Tente novamente.':'Esta área é exclusiva do perfil Administrador do condomínio.');return false}
-  document.getElementById('accessLogin').style.display='none';document.getElementById('condoAccessApp').style.display='grid';
-  document.querySelector('.account').textContent=(data.nome||data.email)+'  ·  Sair';
-  return true;
-}
-document.getElementById('accessLoginForm').addEventListener('submit',async e=>{e.preventDefault();const button=document.getElementById('accessLoginButton');button.disabled=true;accessStatus('Validando acesso…');try{const {data,error}=await accessSb.auth.signInWithPassword({email:document.getElementById('accessEmail').value.trim(),password:document.getElementById('accessPassword').value});if(error)throw error;const ok=await validateCondoSession(data.session);if(!ok)await accessSb.auth.signOut()}catch(err){accessStatus(/Invalid login credentials/i.test(err.message)?'E-mail ou senha incorretos.':err.message||'Falha ao entrar.')}finally{button.disabled=false}});
-accessSb.auth.getSession().then(({data})=>validateCondoSession(data.session));
-accessSb.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'||!session){document.getElementById('accessLogin').style.display='grid';document.getElementById('condoAccessApp').style.display='none'}else if(event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){setTimeout(()=>validateCondoSession(session),0)}});
-document.querySelector('.account').addEventListener('click',async()=>{await accessSb.auth.signOut();document.getElementById('accessLogin').style.display='grid';document.getElementById('condoAccessApp').style.display='none';accessStatus('Sessão encerrada.');});
 const titles={dashboard:"Dashboard",moradores:"Moradores",unidades:"Unidades",visitantes:"Visitantes",prestadores:"Prestadores","acessos":"Controle de acessos",equipamentos:"Equipamentos",qrcode:"QR Code",documentos:"Documentos",configuracoes:"Configurações"};
 document.querySelectorAll("#navigation button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("#navigation button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById("view-"+btn.dataset.view).classList.add("active");document.getElementById("topTitle").textContent=titles[btn.dataset.view]}));
 function showForm(name){document.getElementById("form-"+name).hidden=false;document.getElementById("form-"+name).scrollIntoView({behavior:"smooth",block:"start"})}

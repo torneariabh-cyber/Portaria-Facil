@@ -5,61 +5,130 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Acess Port | Acesso Condominial</title>
 <style>
-:root{--navy:#11243b;--navy2:#142b45;--blue:#2168d5;--gold:#e7bd4a;--bg:#f3f6fb;--ink:#17283e;--muted:#718096;--line:#e0e7f0;--white:#fff;--green:#14804a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,system-ui,Arial,sans-serif;color:var(--ink)}
-button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:700}
+:root{
+  /* Shell do seucondominio (tokens visuais limpos, sem dados) */
+  --sc-shell-fundo:#244560;
+  --sc-shell-texto:#FFFFFF;
+  --sc-shell-topo-altura:54px;
+  --sc-shell-acento:#244560;
+  --sc-shell-acento-texto:#ffffff;
+  --sc-shell-ligacao-fundo:#2e7d32;
+  --sc-shell-ligacao-fundo-hover:#1b5e20;
+  --sc-shell-folha-raio:8px;
+  /* Paleta Acess Port (mantida para os cards/métricas) */
+  --navy:#11243b;
+  --navy2:#142b45;
+  --blue:#2168d5;
+  --gold:#e7bd4a;
+  --bg:#f3f6fb;
+  --ink:#17283e;
+  --muted:#718096;
+  --line:#e0e7f0;
+  --white:#fff;
+  --green:#14804a;
+  --surface:#ffffff;
+  --surface-2:#f8fafc;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font:14px/1.45 Inter,system-ui,Arial,sans-serif;color:var(--ink)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:8px;padding:10px 14px;font-weight:700}
 .app{min-height:100vh;display:grid;grid-template-columns:268px minmax(0,1fr)}
-.sidebar{height:100vh;position:sticky;top:0;overflow:auto;padding:25px 17px 20px;color:#fff;background:linear-gradient(180deg,var(--navy),var(--navy2));box-shadow:5px 0 24px #0d1f3312}
-.brand{margin:0 9px 4px;font-size:25px;line-height:1.15;font-weight:850;letter-spacing:.045em}.brand span{color:var(--gold)}
-.subbrand{margin:0 9px 22px;color:#9fb2c8;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
-.module-card{padding:15px 12px;margin:0 0 17px;border:1px solid #ffffff1a;border-radius:15px;background:#ffffff0d}
-.module-card strong{display:block;font-size:13px}.module-card small{color:#9fb2c8;font-size:11px}
-.nav{display:grid;gap:6px}.nav button{display:flex;align-items:center;gap:10px;width:100%;min-height:43px;padding:10px 12px;text-align:left;color:#d7e2ef;background:transparent;border:1px solid transparent;border-radius:10px;font-size:13px;font-weight:600}
-.nav button:hover{background:#ffffff16;color:#fff}.nav button.active{color:#fff;background:linear-gradient(90deg,#e7bd4a30,#ffffff13);border-color:#e7bd4a47;box-shadow:inset 3px 0 #e7bd4a}
+
+/* ---------- SIDEBAR (shell seucondominio, adaptada) ---------- */
+.sidebar{height:100vh;position:sticky;top:0;overflow:auto;padding:18px 14px 20px;color:var(--sc-shell-texto);background:var(--sc-shell-fundo);box-shadow:5px 0 24px #0d1f3312}
+.brand{margin:0 9px 4px;font-size:22px;line-height:1.15;font-weight:850;letter-spacing:.045em}
+.brand span{color:var(--gold)}
+.subbrand{margin:0 9px 20px;color:#bcd0e6;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
+.module-card{padding:14px 12px;margin:0 0 16px;border:1px solid #ffffff1f;border-radius:10px;background:#ffffff10}
+.module-card strong{display:block;font-size:13px}
+.module-card small{color:#bcd0e6;font-size:11px}
+.nav{display:grid;gap:4px}
+.nav button{display:flex;align-items:center;gap:10px;width:100%;min-height:42px;padding:9px 12px;text-align:left;color:#d7e2ef;background:transparent;border:1px solid transparent;border-radius:8px;font-size:13px;font-weight:600}
+.nav button:hover{background:#ffffff16;color:#fff}
+.nav button.active{color:#fff;background:#ffffff22;border-color:#ffffff33;box-shadow:inset 3px 0 var(--gold)}
 .nav-icon{width:20px;flex:0 0 20px;text-align:center;color:var(--gold);font-size:16px}
-.sidefoot{margin-top:26px;padding:13px 9px 4px;border-top:1px solid #ffffff1a;color:#8fa5bd;font-size:10px}
-.main{min-width:0}.top{height:82px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;background:#fff;border-bottom:1px solid var(--line)}
-.top h1{margin:0;font-size:22px;line-height:1.2;font-weight:800}.top .subtitle{margin-top:4px;color:#8493a8;font-size:11px}
-.account{padding:10px 14px;border:1px solid #d8e3f1;border-radius:11px;background:#fff;color:#2168d5;font-weight:700;font-size:12px;box-shadow:0 2px 7px #11243b08}
-.content{width:100%;max-width:1500px;margin:auto;padding:26px;display:grid;gap:18px}
-.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.page-head h2{margin:0 0 4px;font-size:20px}.muted{color:var(--muted)}
+.sidefoot{margin-top:22px;padding:12px 9px 4px;border-top:1px solid #ffffff1f;color:#a9c0d8;font-size:10px}
+
+/* ---------- TOPO (shell seucondominio) ---------- */
+.main{min-width:0}
+.top{height:var(--sc-shell-topo-altura);min-height:var(--sc-shell-topo-altura);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px;background:var(--sc-shell-fundo);color:var(--sc-shell-texto);border-bottom:1px solid #1b3550}
+.top h1{margin:0;font-size:17px;line-height:1.2;font-weight:800}
+.top .subtitle{margin-top:3px;color:#c6d5e5;font-size:11px}
+.account{padding:8px 12px;border:1px solid #ffffff33;border-radius:8px;background:#ffffff12;color:#fff;font-weight:700;font-size:12px}
+.content{width:100%;max-width:1500px;margin:auto;padding:24px;display:grid;gap:18px}
+.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.page-head h2{margin:0 0 4px;font-size:20px}
+.muted{color:var(--muted)}
 .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:0 4px 14px #12243b08}
-.metric-label{font-size:12px;color:var(--muted)}.metric{font-size:27px;font-weight:850;margin:7px 0 0;color:var(--navy)}
-.section-title{margin:0 0 14px;font-size:16px}.empty{padding:30px 16px;text-align:center;color:var(--muted);border:1px dashed #cbd6e4;border-radius:12px;background:#fbfdff}
+.card{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;box-shadow:0 4px 14px #12243b08}
+.metric-label{font-size:12px;color:var(--muted)}
+.metric{font-size:27px;font-weight:850;margin:7px 0 0;color:var(--navy)}
+.section-title{margin:0 0 14px;font-size:16px}
+.empty{padding:30px 16px;text-align:center;color:var(--muted);border:1px dashed #cbd6e4;border-radius:10px;background:#fbfdff}
 .empty strong{display:block;color:var(--ink);margin-bottom:5px}
 .toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.btn-primary{background:var(--blue);color:#fff}.btn-secondary{background:#eaf0f8;color:var(--navy)}.btn-outline{background:#fff;color:var(--blue);border:1px solid #d8e3f1}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-secondary{background:#eaf0f8;color:var(--navy)}
+.btn-outline{background:#fff;color:var(--blue);border:1px solid #d8e3f1}
 .search{max-width:340px;min-width:220px}
-input,select,textarea{width:100%;padding:11px 12px;border:1px solid #ccd7e5;border-radius:9px;background:#fff;color:var(--ink);outline:none}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #ccd7e5;border-radius:8px;background:#fff;color:var(--ink);outline:none}
 input:focus,select:focus,textarea:focus{border-color:#7aa5e8;box-shadow:0 0 0 3px #2168d514}
 label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{min-width:0}.field.full{grid-column:1/-1}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{min-width:0}.field.full{grid-column:1/-1}
 .form-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}
-.table-wrap{width:100%;overflow:auto}table{width:100%;border-collapse:collapse;min-width:680px}th,td{padding:12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}th{background:#f8fafc;color:var(--muted);font-size:11px;text-transform:uppercase}
+.table-wrap{width:100%;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:680px}
+th,td{padding:12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:var(--surface-2);color:var(--muted);font-size:11px;text-transform:uppercase}
 .view{display:none}.view.active{display:grid;gap:18px}
-.notice{padding:12px 14px;border-radius:10px;background:#fff5d9;color:#715500;font-size:12px}
+.notice{padding:12px 14px;border-radius:8px;background:#fff5d9;color:#715500;font-size:12px}
 .status{font-size:12px;color:var(--muted);min-height:18px}
-@media(max-width:1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:800px){.app{grid-template-columns:1fr}.sidebar{height:auto;max-height:none;position:relative;padding:13px 14px 12px}.subbrand,.module-card,.sidefoot{display:none}.nav{display:flex;overflow-x:auto;gap:6px;padding:4px 0}.nav button{width:auto;min-width:max-content;min-height:38px;padding:8px 10px;font-size:11px}.top{height:auto;min-height:72px;padding:14px 16px}.top h1{font-size:19px}.content{padding:15px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
-@media(max-width:480px){.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:13px}.metric{font-size:23px}.search{max-width:none;width:100%}.page-head{display:block}.page-head .btn-primary{margin-top:10px;width:100%}}
 
-
+/* ---------- Ferramentas de moradores ---------- */
 .resident-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.more-wrap{position:relative}.more-button{width:40px;height:40px;padding:0;font-size:23px;line-height:1}
-.more-menu{position:absolute;right:0;top:calc(100% + 7px);z-index:40;width:280px;padding:7px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 35px #11243b24}
+.more-wrap{position:relative}
+.more-button{width:40px;height:40px;padding:0;font-size:23px;line-height:1}
+.more-menu{position:absolute;right:0;top:calc(100% + 7px);z-index:40;width:280px;padding:7px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 35px #11243b24}
 .more-menu button{display:block;width:100%;padding:10px;text-align:left;background:transparent;color:var(--ink);font-size:13px;font-weight:600}
 .more-menu button:hover{background:#f1f5fa}
-.bulk-card{border-color:#b9cce5}.bulk-results{display:grid;gap:14px;margin-top:16px}
-.extracted-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fbfdff}
-.extracted-card h4{margin:0 0 10px}.extracted-card .form-grid{margin-top:12px}
-.extracted-card .form-actions{margin-top:12px}.file-note{font-size:11px;color:var(--muted);margin-top:6px}
-.resident-table{min-width:900px}.unit-table{min-width:560px}.unit-code{font-weight:800;letter-spacing:.4px}.resident-tools .search{width:min(340px,45vw)}
+.bulk-card{border-color:#b9cce5}
+.bulk-results{display:grid;gap:14px;margin-top:16px}
+.extracted-card{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fbfdff}
+.extracted-card h4{margin:0 0 10px}
+.extracted-card .form-grid{margin-top:12px}
+.extracted-card .form-actions{margin-top:12px}
+.file-note{font-size:11px;color:var(--muted);margin-top:6px}
+.resident-table{min-width:900px}
+.unit-table{min-width:560px}
+.unit-code{font-weight:800;letter-spacing:.4px}
+.resident-tools .search{width:min(340px,45vw)}
 
+@media(max-width:1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){
+  .app{grid-template-columns:1fr}
+  .sidebar{height:auto;max-height:none;position:relative;padding:12px 14px 10px}
+  .subbrand,.module-card,.sidefoot{display:none}
+  .nav{display:flex;overflow-x:auto;gap:6px;padding:4px 0}
+  .nav button{width:auto;min-width:max-content;min-height:38px;padding:8px 10px;font-size:11px}
+  .top{height:auto;min-height:60px;padding:12px 16px}
+  .top h1{font-size:16px}
+  .content{padding:15px}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+}
+@media(max-width:480px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .card{padding:13px}.metric{font-size:23px}
+  .search{max-width:none;width:100%}
+  .page-head{display:block}
+  .page-head .btn-primary{margin-top:10px;width:100%}
+}
 </style>
 </head>
 <body>
-<div class="app" id="condoAccessApp" style="display:grid">
+<div class="app" id="condoAccessApp">
 <aside class="sidebar">
   <div class="brand">ACESS <span>PORT</span></div>
   <div class="subbrand">Acesso Condominial</div>
@@ -76,22 +145,32 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
     <button data-view="documentos"><span class="nav-icon">▤</span>Documentos</button>
     <button data-view="configuracoes"><span class="nav-icon">⚙</span>Configurações</button>
   </nav>
-  <div class="sidefoot">Acess Port · Estrutura inicial</div>
+  <div class="sidefoot">Acess Port · Acesso Condominial</div>
 </aside>
 <main class="main">
-  <header class="top"><div><h1 id="topTitle">Dashboard</h1><div class="subtitle">Acess Port · Acesso Condominial</div></div><div class="account" aria-label="Módulo aberto">Acesso Condominial</div></header>
+  <header class="top">
+    <div>
+      <h1 id="topTitle">Dashboard</h1>
+      <div class="subtitle">Acess Port · Acesso Condominial</div>
+    </div>
+    <div class="account" aria-label="Módulo aberto">Acesso Condominial</div>
+  </header>
   <div class="content">
+
+    <!-- DASHBOARD -->
     <section class="view active" id="view-dashboard">
       <div class="page-head"><div><h2>Visão geral</h2><div class="muted">Indicadores do controle de acesso do condomínio</div></div></div>
       <div class="cards">
-        <div class="card"><div class="metric-label">Moradores cadastrados</div><div class="metric">0</div></div>
-        <div class="card"><div class="metric-label">Unidades cadastradas</div><div class="metric">0</div></div>
+        <div class="card"><div class="metric-label">Moradores cadastrados</div><div class="metric" id="metricMoradores">0</div></div>
+        <div class="card"><div class="metric-label">Unidades cadastradas</div><div class="metric" id="metricUnidades">0</div></div>
         <div class="card"><div class="metric-label">Visitantes ativos</div><div class="metric">0</div></div>
         <div class="card"><div class="metric-label">Registros de acesso hoje</div><div class="metric">0</div></div>
       </div>
       <div class="card"><h3 class="section-title">Atividades recentes</h3><div class="empty"><strong>Nenhuma atividade registrada</strong>Os registros aparecerão aqui quando o controle de acesso for configurado.</div></div>
       <div class="notice">Estrutura inicial vazia. Nenhum cadastro, foto, documento ou histórico pessoal foi importado.</div>
     </section>
+
+    <!-- MORADORES -->
     <section class="view" id="view-moradores">
       <div class="page-head"><div><h2>Moradores</h2><div class="muted">Cadastro e gerenciamento dos moradores</div></div><button class="btn-primary" onclick="showForm('moradores')">＋ Novo morador</button></div>
       <div class="card" id="form-moradores" hidden><h3 class="section-title">Cadastro de morador</h3>
@@ -139,6 +218,8 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
         <div id="bulkResults" class="bulk-results"></div>
       </div>
     </section>
+
+    <!-- UNIDADES -->
     <section class="view" id="view-unidades">
       <div class="page-head"><div><h2>Unidades</h2><div class="muted">Cadastro de quadras, lotes, casas e apartamentos</div></div><button class="btn-primary" onclick="showForm('unidades')">＋ Nova unidade</button></div>
       <div class="card" id="form-unidades" hidden><h3 class="section-title">Cadastro de unidade</h3><form data-form="unidades"><div class="form-grid">
@@ -148,6 +229,8 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
       </div><div class="form-actions"><button type="button" class="btn-secondary" onclick="hideForm('unidades')">Cancelar</button><button class="btn-primary" type="submit">Salvar unidade</button></div></form></div>
       <div class="card"><div class="toolbar"><h3 class="section-title">Unidades cadastradas</h3><span class="muted" id="unitCount">0 unidades</span></div><div id="unitList"><div class="empty"><strong>Nenhuma unidade cadastrada</strong>As quadras e lotes serão criados automaticamente quando forem identificados nos contratos.</div></div></div>
     </section>
+
+    <!-- VISITANTES -->
     <section class="view" id="view-visitantes">
       <div class="page-head"><div><h2>Visitantes</h2><div class="muted">Autorização e identificação de visitantes</div></div><button class="btn-primary" onclick="showForm('visitantes')">＋ Novo visitante</button></div>
       <div class="card" id="form-visitantes" hidden><h3 class="section-title">Cadastro de visitante</h3><form data-form="visitantes"><div class="form-grid">
@@ -158,6 +241,8 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
       </div><div class="form-actions"><button type="button" class="btn-secondary" onclick="hideForm('visitantes')">Cancelar</button><button class="btn-primary" type="submit">Salvar visitante</button></div></form></div>
       <div class="card"><h3 class="section-title">Visitantes cadastrados</h3><div class="empty"><strong>Nenhum visitante cadastrado</strong>Os visitantes autorizados serão listados aqui.</div></div>
     </section>
+
+    <!-- PRESTADORES -->
     <section class="view" id="view-prestadores">
       <div class="page-head"><div><h2>Prestadores</h2><div class="muted">Cadastro de prestadores de serviços e entregadores</div></div><button class="btn-primary" onclick="showForm('prestadores')">＋ Novo prestador</button></div>
       <div class="card" id="form-prestadores" hidden><h3 class="section-title">Cadastro de prestador</h3><form data-form="prestadores"><div class="form-grid">
@@ -167,6 +252,8 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
       </div><div class="form-actions"><button type="button" class="btn-secondary" onclick="hideForm('prestadores')">Cancelar</button><button class="btn-primary" type="submit">Salvar prestador</button></div></form></div>
       <div class="card"><h3 class="section-title">Prestadores cadastrados</h3><div class="empty"><strong>Nenhum prestador cadastrado</strong>Os prestadores serão exibidos nesta lista.</div></div>
     </section>
+
+    <!-- ACESSOS -->
     <section class="view" id="view-acessos">
       <div class="page-head"><div><h2>Controle de acessos</h2><div class="muted">Consulta de entradas, saídas e autorizações</div></div></div>
       <div class="card"><div class="toolbar"><h3 class="section-title">Filtros de acesso</h3><button class="btn-outline">Exportar relatório</button></div><div class="form-grid">
@@ -175,6 +262,8 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
       </div></div>
       <div class="card"><h3 class="section-title">Histórico de acessos</h3><div class="empty"><strong>Nenhum acesso registrado</strong>Os eventos de entrada e saída serão exibidos aqui.</div></div>
     </section>
+
+    <!-- EQUIPAMENTOS -->
     <section class="view" id="view-equipamentos">
       <div class="page-head"><div><h2>Equipamentos</h2><div class="muted">Cadastro e identificação dos dispositivos de controle de acesso</div></div><button class="btn-primary" onclick="showForm('equipamentos')">＋ Novo equipamento</button></div>
       <div class="card" id="form-equipamentos" hidden><h3 class="section-title">Cadastro de equipamento</h3><form data-form="equipamentos"><div class="form-grid">
@@ -184,6 +273,8 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
       </div><div class="form-actions"><button type="button" class="btn-secondary" onclick="hideForm('equipamentos')">Cancelar</button><button class="btn-primary" type="submit">Salvar equipamento</button></div></form></div>
       <div class="card"><h3 class="section-title">Equipamentos cadastrados</h3><div class="empty"><strong>Nenhum equipamento cadastrado</strong>Cadastre os dispositivos para iniciar a configuração.</div></div>
     </section>
+
+    <!-- QR CODE -->
     <section class="view" id="view-qrcode">
       <div class="page-head"><div><h2>QR Code</h2><div class="muted">Configuração de convites e credenciais temporárias</div></div></div>
       <div class="card"><h3 class="section-title">Configurações de QR Code</h3><div class="form-grid">
@@ -191,10 +282,14 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
         <div class="field"><label>Tipos de credencial</label><select><option>Visitante e prestador</option><option>Somente visitante</option><option>Somente prestador</option></select></div>
       </div><div class="empty" style="margin-top:16px"><strong>Nenhuma credencial gerada</strong>O gerador será conectado após a definição das regras de acesso.</div></div>
     </section>
+
+    <!-- DOCUMENTOS -->
     <section class="view" id="view-documentos">
       <div class="page-head"><div><h2>Documentos</h2><div class="muted">Arquivos e documentos relacionados ao controle de acesso</div></div><button class="btn-primary">＋ Adicionar documento</button></div>
       <div class="card"><div class="empty"><strong>Nenhum documento cadastrado</strong>A área está pronta para receber categorias e arquivos.</div></div>
     </section>
+
+    <!-- CONFIGURAÇÕES -->
     <section class="view" id="view-configuracoes">
       <div class="page-head"><div><h2>Configurações</h2><div class="muted">Parâmetros gerais do módulo Acesso Condominial</div></div></div>
       <div class="card"><h3 class="section-title">Identificação do condomínio</h3><div class="form-grid">
@@ -206,62 +301,112 @@ label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
         <div class="field"><label>Registrar entrada e saída</label><select><option>Sim</option><option>Não</option></select></div><div class="field"><label>Notificações</label><select><option>Definir posteriormente</option><option>E-mail</option><option>Aplicativo</option></select></div>
       </div><div class="form-actions"><button class="btn-primary" type="button">Salvar configurações</button></div></div>
     </section>
+
   </div>
 </main>
 </div>
+
 <script>
 const titles={dashboard:"Dashboard",moradores:"Moradores",unidades:"Unidades",visitantes:"Visitantes",prestadores:"Prestadores",acessos:"Controle de acessos",equipamentos:"Equipamentos",qrcode:"QR Code",documentos:"Documentos",configuracoes:"Configurações"};
-document.querySelectorAll("#navigation button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("#navigation button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById("view-"+btn.dataset.view).classList.add("active");document.getElementById("topTitle").textContent=titles[btn.dataset.view];if(btn.dataset.view==="unidades")renderUnits()}));
+document.querySelectorAll("#navigation button").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll("#navigation button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById("view-"+btn.dataset.view).classList.add("active");
+  document.getElementById("topTitle").textContent=titles[btn.dataset.view];
+  if(btn.dataset.view==="unidades")renderUnits();
+  if(btn.dataset.view==="dashboard")renderDashboard();
+}));
+
 function showForm(name){const el=document.getElementById("form-"+name);if(!el)return;el.hidden=false;el.scrollIntoView({behavior:"smooth",block:"start"});}
 function hideForm(name){const el=document.getElementById("form-"+name);if(el)el.hidden=true;}
-document.querySelectorAll('form[data-form]:not([data-form="moradores"])').forEach(form=>form.addEventListener("submit",e=>{e.preventDefault();const msg=document.createElement("div");msg.className="status";msg.textContent="Estrutura visual pronta. A gravação será conectada na próxima etapa.";form.appendChild(msg)}));
 
+document.querySelectorAll('form[data-form]:not([data-form="moradores"])').forEach(form=>form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const msg=document.createElement("div");
+  msg.className="status";
+  msg.textContent="Estrutura visual pronta. A gravação será conectada na próxima etapa.";
+  form.appendChild(msg);
+}));
+
+/* ---------- Store: moradores ---------- */
 const residentStoreKey="acessport_acesso_condominial_moradores_v1";
 function getResidents(){try{return JSON.parse(localStorage.getItem(residentStoreKey)||"[]")}catch(e){return []}}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+/* ---------- Store: unidades ---------- */
 const unitStoreKey="acessport_acesso_condominial_unidades_v1";
 function getUnits(){try{return JSON.parse(localStorage.getItem(unitStoreKey)||"[]")}catch(e){return []}}
 function normalizeUnitPart(value){const raw=String(value??"").trim();if(!raw)return "";const n=Number(raw);if(!Number.isInteger(n)||n<1||n>100)return raw.toUpperCase();return String(n).padStart(2,"0");}
 function unitSortValue(v){const n=Number(v);return Number.isFinite(n)?n:999999;}
 function compareUnits(a,b){return unitSortValue(a.quadra)-unitSortValue(b.quadra)||unitSortValue(a.lote)-unitSortValue(b.lote)||String(a.quadra).localeCompare(String(b.quadra),"pt-BR")||String(a.lote).localeCompare(String(b.lote),"pt-BR");}
+
 function ensureUnitFromResident(data){
- const quadra=normalizeUnitPart(data.quadra),lote=normalizeUnitPart(data.lote);
- if(!quadra||!lote)return {created:false,reason:"missing"};
- const all=getUnits(),key=quadra+"-"+lote;
- const found=all.find(u=>u.codigo===key);
- if(found){if(data.rua&&!found.rua){found.rua=data.rua;localStorage.setItem(unitStoreKey,JSON.stringify(all));}return {created:false,unit:found};}
- const unit={id:key,codigo:key,quadra,lote,rua:data.rua||"",tipo:"Casa",situacao:"Ativa",responsavel:data.nome||"",criado_em:new Date().toISOString()};
- all.push(unit);all.sort(compareUnits);localStorage.setItem(unitStoreKey,JSON.stringify(all));renderUnits();return {created:true,unit};
+  const quadra=normalizeUnitPart(data.quadra),lote=normalizeUnitPart(data.lote);
+  if(!quadra||!lote)return {created:false,reason:"missing"};
+  const all=getUnits(),key=quadra+"-"+lote;
+  const found=all.find(u=>u.codigo===key);
+  if(found){if(data.rua&&!found.rua){found.rua=data.rua;localStorage.setItem(unitStoreKey,JSON.stringify(all));}return {created:false,unit:found};}
+  const unit={id:key,codigo:key,quadra,lote,rua:data.rua||"",tipo:"Casa",situacao:"Ativa",responsavel:data.nome||"",criado_em:new Date().toISOString()};
+  all.push(unit);all.sort(compareUnits);localStorage.setItem(unitStoreKey,JSON.stringify(all));renderUnits();return {created:true,unit};
 }
+
 function renderUnits(){
- const all=getUnits().sort(compareUnits),root=document.getElementById("unitList"),count=document.getElementById("unitCount");
- if(count)count.textContent=all.length+" unidade(s)";
- if(!root)return;
- if(!all.length){root.innerHTML='<div class="empty"><strong>Nenhuma unidade cadastrada</strong>As quadras e lotes serão criados automaticamente quando forem identificados nos contratos.</div>';return;}
- root.innerHTML='<div class="table-wrap"><table class="unit-table"><thead><tr><th>Ordem</th><th>Quadra</th><th>Lote</th><th>Rua</th><th>Responsável</th><th>Situação</th></tr></thead><tbody>'+
- all.map(u=>'<tr><td class="unit-code">'+esc(u.codigo)+'</td><td>'+esc(u.quadra)+'</td><td>'+esc(u.lote)+'</td><td>'+esc(u.rua)+'</td><td>'+esc(u.responsavel)+'</td><td>'+esc(u.situacao)+'</td></tr>').join("")+'</tbody></table></div>';
+  const all=getUnits().sort(compareUnits),root=document.getElementById("unitList"),count=document.getElementById("unitCount");
+  if(count)count.textContent=all.length+" unidade(s)";
+  if(!root)return;
+  if(!all.length){root.innerHTML='<div class="empty"><strong>Nenhuma unidade cadastrada</strong>As quadras e lotes serão criados automaticamente quando forem identificados nos contratos.</div>';return;}
+  root.innerHTML='<div class="table-wrap"><table class="unit-table"><thead><tr><th>Ordem</th><th>Quadra</th><th>Lote</th><th>Rua</th><th>Responsável</th><th>Situação</th></tr></thead><tbody>'+
+    all.map(u=>'<tr><td class="unit-code">'+esc(u.codigo)+'</td><td>'+esc(u.quadra)+'</td><td>'+esc(u.lote)+'</td><td>'+esc(u.rua)+'</td><td>'+esc(u.responsavel)+'</td><td>'+esc(u.situacao)+'</td></tr>').join("")+'</tbody></table></div>';
 }
-function saveResidentRecord(data){const all=getResidents();const normalized={...data,quadra:normalizeUnitPart(data.quadra),lote:normalizeUnitPart(data.lote),id:Date.now()+"-"+Math.random().toString(16).slice(2),criado_em:new Date().toISOString()};all.push(normalized);localStorage.setItem(residentStoreKey,JSON.stringify(all));ensureUnitFromResident(normalized);renderResidents();}
+
+function renderDashboard(){
+  document.getElementById("metricMoradores").textContent=getResidents().length;
+  document.getElementById("metricUnidades").textContent=getUnits().length;
+}
+
+function saveResidentRecord(data){
+  const all=getResidents();
+  const normalized={...data,quadra:normalizeUnitPart(data.quadra),lote:normalizeUnitPart(data.lote),id:Date.now()+"-"+Math.random().toString(16).slice(2),criado_em:new Date().toISOString()};
+  all.push(normalized);
+  localStorage.setItem(residentStoreKey,JSON.stringify(all));
+  ensureUnitFromResident(normalized);
+  renderResidents();
+  renderDashboard();
+}
+
 function renderResidents(filter=""){
- const q=filter.toLocaleLowerCase("pt-BR");
- const all=getResidents().filter(x=>[x.nome,x.cpf,x.quadra,x.lote,x.rua].some(v=>String(v||"").toLocaleLowerCase("pt-BR").includes(q)));
- const root=document.getElementById("residentList");
- if(!all.length){root.innerHTML='<div class="empty"><strong>Nenhum morador cadastrado</strong>Os novos cadastros serão exibidos nesta lista.</div>';return;}
- root.innerHTML='<div class="table-wrap"><table class="resident-table"><thead><tr><th>Morador</th><th>CPF</th><th>RG</th><th>Quadra</th><th>Lote</th><th>Rua</th><th>Cônjuge</th><th>Contrato</th><th></th></tr></thead><tbody>'+
- all.map(x=>'<tr><td>'+esc(x.nome)+'</td><td>'+esc(x.cpf)+'</td><td>'+esc(x.rg)+'</td><td>'+esc(x.quadra)+'</td><td>'+esc(x.lote)+'</td><td>'+esc(x.rua)+'</td><td>'+esc(x.conjuge_nome)+'</td><td>'+esc(x.documento_origem)+'</td><td><button class="btn-secondary" data-delete-id="'+esc(x.id)+'">Excluir</button></td></tr>').join("")+'</tbody></table></div>';
+  const q=filter.toLocaleLowerCase("pt-BR");
+  const all=getResidents().filter(x=>[x.nome,x.cpf,x.quadra,x.lote,x.rua].some(v=>String(v||"").toLocaleLowerCase("pt-BR").includes(q)));
+  const root=document.getElementById("residentList");
+  if(!all.length){root.innerHTML='<div class="empty"><strong>Nenhum morador cadastrado</strong>Os novos cadastros serão exibidos nesta lista.</div>';return;}
+  root.innerHTML='<div class="table-wrap"><table class="resident-table"><thead><tr><th>Morador</th><th>CPF</th><th>RG</th><th>Quadra</th><th>Lote</th><th>Rua</th><th>Cônjuge</th><th>Contrato</th><th></th></tr></thead><tbody>'+
+    all.map(x=>'<tr><td>'+esc(x.nome)+'</td><td>'+esc(x.cpf)+'</td><td>'+esc(x.rg)+'</td><td>'+esc(x.quadra)+'</td><td>'+esc(x.lote)+'</td><td>'+esc(x.rua)+'</td><td>'+esc(x.conjuge_nome)+'</td><td>'+esc(x.documento_origem)+'</td><td><button class="btn-secondary" data-delete-id="'+esc(x.id)+'">Excluir</button></td></tr>').join("")+'</tbody></table></div>';
 }
-function deleteResident(id){if(confirm("Excluir este cadastro salvo neste navegador?")){localStorage.setItem(residentStoreKey,JSON.stringify(getResidents().filter(x=>x.id!==id)));renderResidents(document.getElementById("residentSearch").value);}}
+
+function deleteResident(id){
+  if(confirm("Excluir este cadastro salvo neste navegador?")){
+    localStorage.setItem(residentStoreKey,JSON.stringify(getResidents().filter(x=>x.id!==id)));
+    renderResidents(document.getElementById("residentSearch").value);
+    renderDashboard();
+  }
+}
+
 document.getElementById("residentList").addEventListener("click",e=>{const b=e.target.closest("[data-delete-id]");if(b)deleteResident(b.dataset.deleteId);});
 document.getElementById("residentSearch").addEventListener("input",e=>renderResidents(e.target.value));
-document.getElementById("residentForm").addEventListener("submit",e=>{
- e.preventDefault();const fd=new FormData(e.currentTarget),data={};
- for(const [k,v] of fd.entries())data[k]=String(v).trim();
- if(!data.nome){alert("Informe o nome completo.");return;}
- saveResidentRecord(data);e.currentTarget.reset();hideForm("moradores");alert("Cadastro salvo neste navegador. A sincronização com banco de dados será feita em uma próxima etapa.");
-});
-renderResidents();
-renderUnits();
 
+document.getElementById("residentForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const fd=new FormData(e.currentTarget),data={};
+  for(const [k,v] of fd.entries())data[k]=String(v).trim();
+  if(!data.nome){alert("Informe o nome completo.");return;}
+  saveResidentRecord(data);
+  e.currentTarget.reset();
+  hideForm("moradores");
+  alert("Cadastro salvo neste navegador. A sincronização com banco de dados será feita em uma próxima etapa.");
+});
+
+/* ---------- Menu ⋮ ---------- */
 const residentMore=document.getElementById("residentMore");
 residentMore.addEventListener("click",()=>{const m=document.getElementById("residentMoreMenu");m.hidden=!m.hidden;residentMore.setAttribute("aria-expanded",String(!m.hidden));});
 function closeResidentMenu(){document.getElementById("residentMoreMenu").hidden=true;residentMore.setAttribute("aria-expanded","false");}
@@ -269,45 +414,110 @@ document.addEventListener("click",e=>{if(!e.target.closest(".more-wrap"))closeRe
 function openBulkModal(){closeResidentMenu();const m=document.getElementById("bulkModal");m.hidden=false;m.scrollIntoView({behavior:"smooth",block:"start"});}
 function closeBulkModal(){document.getElementById("bulkModal").hidden=true;}
 
+/* ---------- Leitura de contratos ---------- */
 async function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement("script");s.src=src;s.onload=resolve;s.onerror=()=>reject(new Error("Não foi possível carregar a biblioteca de leitura. Verifique a conexão com a internet e tente novamente."));document.head.appendChild(s);});}
+
 async function readContractFile(file){
- const ext=file.name.split(".").pop().toLowerCase();
- if(ext==="docx"){if(!window.mammoth)await loadScript("https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js");const r=await window.mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()});return r.value;}
- if(ext==="pdf"){if(!window.pdfjsLib)await loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js");window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";const pdf=await window.pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let text="";for(let i=1;i<=pdf.numPages;i++){const page=await pdf.getPage(i);const c=await page.getTextContent();text+=" "+c.items.map(x=>x.str).join(" ");}if(text.trim().length<30)throw new Error("Este PDF parece digitalizado ou está sem texto selecionável. Nesta etapa, use DOCX, PDF pesquisável ou imagem JPG/PNG.");return text;}
- if(["png","jpg","jpeg","webp"].includes(ext)){if(!window.Tesseract)await loadScript("https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.1/tesseract.min.js");const r=await window.Tesseract.recognize(file,"por");return r.data.text;}
- throw new Error("Formato não suportado. Envie PDF, DOCX ou imagem.");
+  const ext=file.name.split(".").pop().toLowerCase();
+  if(ext==="docx"){
+    if(!window.mammoth)await loadScript("https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js");
+    const r=await window.mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()});
+    return r.value;
+  }
+  if(ext==="pdf"){
+    if(!window.pdfjsLib)await loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js");
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    const pdf=await window.pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
+    let text="";
+    for(let i=1;i<=pdf.numPages;i++){
+      const page=await pdf.getPage(i);
+      const c=await page.getTextContent();
+      text+=" "+c.items.map(x=>x.str).join(" ");
+    }
+    if(text.trim().length<30)throw new Error("Este PDF parece digitalizado ou está sem texto selecionável. Nesta etapa, use DOCX, PDF pesquisável ou imagem JPG/PNG.");
+    return text;
+  }
+  if(["png","jpg","jpeg","webp"].includes(ext)){
+    if(!window.Tesseract)await loadScript("https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.1/tesseract.min.js");
+    const r=await window.Tesseract.recognize(file,"por");
+    return r.data.text;
+  }
+  throw new Error("Formato não suportado. Envie PDF, DOCX ou imagem.");
 }
+
 function findField(text,patterns){for(const p of patterns){const m=text.match(p);if(m&&m[1])return m[1].trim().replace(/\s{2,}/g," ").replace(/[;,.\s]+$/,"").slice(0,120);}return "";}
+
 function extractContractFields(text){
- const clean=text.replace(/\r/g," ").replace(/[ \t]+/g," ").replace(/\n+/g," \n ");
- const cpf=findField(clean,[/(?:CPF|C\.P\.F\.?)\s*[:\-]?\s*([0-9.\-]{11,14})/i,/\b(\d{3}\.\d{3}\.\d{3}-\d{2})\b/]);
- const rg=findField(clean,[/(?:RG|IDENTIDADE)\s*[:\-]?\s*([0-9.\-]{5,18})/i]);
- const nome=findField(clean,[/(?:PROMITENTE\s+COMPRADOR(?:A)?|COMPRADOR(?:A)?|ADQUIRENTE)\s*[:\-]?\s*([A-ZÀ-Ú][A-ZÀ-Ú ]{5,90})/i,/(?:NOME COMPLETO|NOME)\s*[:\-]?\s*([A-ZÀ-Ú][A-ZÀ-Ú ]{5,90})/i]);
- const quadra=findField(clean,[/(?:QUADRA|QD\.?)\s*[:\-]?\s*([A-Z0-9\-]+)/i]);
- const lote=findField(clean,[/(?:LOTE|LT\.?)\s*[:\-]?\s*([A-Z0-9\-]+)/i]);
- const rua=findField(clean,[/(?:RUA|ALAMEDA|AVENIDA|LOGRADOURO)\s*[:\-]?\s*([A-ZÀ-Ú0-9 .\-]{3,70})/i]);
- const numero=findField(clean,[/(?:NÚMERO|NUMERO|Nº|N°)\s*[:\-]?\s*(\d{1,6})/i]);
- const conjuge_nome=findField(clean,[/(?:CÔNJUGE|CONJUGE|ESPOS[AO])\s*[:\-]?\s*([A-ZÀ-Ú][A-ZÀ-Ú ]{5,90})/i]);
- const conjuge_cpf=findField(clean,[/(?:CPF DO CÔNJUGE|CPF CONJUGE)\s*[:\-]?\s*([0-9.\-]{11,14})/i]);
- const conjuge_rg=findField(clean,[/(?:RG DO CÔNJUGE|RG CONJUGE)\s*[:\-]?\s*([0-9.\-]{5,18})/i]);
- return {nome,cpf,rg,quadra,lote,rua,numero,conjuge_nome,conjuge_cpf,conjuge_rg};
+  const clean=text.replace(/\r/g," ").replace(/[ \t]+/g," ").replace(/\n+/g," \n ");
+  const cpf=findField(clean,[/(?:CPF|C\.P\.F\.?)\s*[:\-]?\s*([0-9.\-]{11,14})/i,/\b(\d{3}\.\d{3}\.\d{3}-\d{2})\b/]);
+  const rg=findField(clean,[/(?:RG|IDENTIDADE)\s*[:\-]?\s*([0-9.\-]{5,18})/i]);
+  const nome=findField(clean,[/(?:PROMITENTE\s+COMPRADOR(?:A)?|COMPRADOR(?:A)?|ADQUIRENTE)\s*[:\-]?\s*([A-ZÀ-Ú][A-ZÀ-Ú ]{5,90})/i,/(?:NOME COMPLETO|NOME)\s*[:\-]?\s*([A-ZÀ-Ú][A-ZÀ-Ú ]{5,90})/i]);
+  const quadra=findField(clean,[/(?:QUADRA|QD\.?)\s*[:\-]?\s*([A-Z0-9\-]+)/i]);
+  const lote=findField(clean,[/(?:LOTE|LT\.?)\s*[:\-]?\s*([A-Z0-9\-]+)/i]);
+  const rua=findField(clean,[/(?:RUA|ALAMEDA|AVENIDA|LOGRADOURO)\s*[:\-]?\s*([A-ZÀ-Ú0-9 .\-]{3,70})/i]);
+  const numero=findField(clean,[/(?:NÚMERO|NUMERO|Nº|N°)\s*[:\-]?\s*(\d{1,6})/i]);
+  const conjuge_nome=findField(clean,[/(?:CÔNJUGE|CONJUGE|ESPOS[AO])\s*[:\-]?\s*([A-ZÀ-Ú][A-ZÀ-Ú ]{5,90})/i]);
+  const conjuge_cpf=findField(clean,[/(?:CPF DO CÔNJUGE|CPF CONJUGE)\s*[:\-]?\s*([0-9.\-]{11,14})/i]);
+  const conjuge_rg=findField(clean,[/(?:RG DO CÔNJUGE|RG CONJUGE)\s*[:\-]?\s*([0-9.\-]{5,18})/i]);
+  return {nome,cpf,rg,quadra,lote,rua,numero,conjuge_nome,conjuge_cpf,conjuge_rg};
 }
+
 function contractCard(file,fields,error=""){
- const wrap=document.createElement("div");wrap.className="extracted-card";
- const keys=[["nome","Nome completo"],["cpf","CPF"],["rg","RG"],["quadra","Quadra"],["lote","Lote"],["rua","Rua"],["numero","Número"],["conjuge_nome","Nome do cônjuge"],["conjuge_cpf","CPF do cônjuge"],["conjuge_rg","RG do cônjuge"]];
- wrap.innerHTML='<h4>'+esc(file.name)+'</h4>'+(error?'<div class="notice">'+esc(error)+'</div>':'<div class="muted">Confira os dados identificados. Campos não encontrados ficarão em branco.</div>')+'<div class="form-grid">'+keys.map(([k,l])=>'<div class="field"><label>'+l+'</label><input data-field="'+k+'" value="'+esc(fields[k]||"")+'"></div>').join("")+'</div><div class="form-actions"><button type="button" class="btn-secondary discard">Descartar</button><button type="button" class="btn-primary confirm" '+(error?'disabled':'')+'>Confirmar cadastro</button></div>';
- wrap.querySelector(".discard").onclick=()=>wrap.remove();
- wrap.querySelector(".confirm").onclick=()=>{const d={};wrap.querySelectorAll("[data-field]").forEach(i=>d[i.dataset.field]=i.value.trim());d.documento_origem=file.name;if(!d.nome){alert("Preencha o nome antes de confirmar.");return;}saveResidentRecord(d);wrap.remove();document.getElementById("bulkStatus").textContent="Cadastro confirmado neste navegador. Revise o próximo documento.";};
- return wrap;
+  const wrap=document.createElement("div");wrap.className="extracted-card";
+  const keys=[["nome","Nome completo"],["cpf","CPF"],["rg","RG"],["quadra","Quadra"],["lote","Lote"],["rua","Rua"],["numero","Número"],["conjuge_nome","Nome do cônjuge"],["conjuge_cpf","CPF do cônjuge"],["conjuge_rg","RG do cônjuge"]];
+  wrap.innerHTML='<h4>'+esc(file.name)+'</h4>'+
+    (error?'<div class="notice">'+esc(error)+'</div>':'<div class="muted">Confira os dados identificados. Campos não encontrados ficarão em branco.</div>')+
+    '<div class="form-grid">'+keys.map(([k,l])=>'<div class="field"><label>'+l+'</label><input data-field="'+k+'" value="'+esc(fields[k]||"")+'"></div>').join("")+'</div>'+
+    '<div class="form-actions"><button type="button" class="btn-secondary discard">Descartar</button><button type="button" class="btn-primary confirm" '+(error?'disabled':'')+'>Confirmar cadastro</button></div>';
+  wrap.querySelector(".discard").onclick=()=>wrap.remove();
+  wrap.querySelector(".confirm").onclick=()=>{
+    const d={};
+    wrap.querySelectorAll("[data-field]").forEach(i=>d[i.dataset.field]=i.value.trim());
+    d.documento_origem=file.name;
+    if(!d.nome){alert("Preencha o nome antes de confirmar.");return;}
+    saveResidentRecord(d);
+    wrap.remove();
+    document.getElementById("bulkStatus").textContent="Cadastro confirmado neste navegador. Revise o próximo documento.";
+  };
+  return wrap;
 }
+
 document.getElementById("processContracts").addEventListener("click",async()=>{
- const files=[...(document.getElementById("contractFiles").files||[])],status=document.getElementById("bulkStatus"),results=document.getElementById("bulkResults");results.innerHTML="";
- if(!files.length){status.textContent="Selecione pelo menos um contrato.";return;}
- const button=document.getElementById("processContracts");button.disabled=true;
- try{for(let i=0;i<files.length;i++){status.textContent="Analisando "+(i+1)+" de "+files.length+": "+files[i].name;try{const text=await readContractFile(files[i]);results.appendChild(contractCard(files[i],extractContractFields(text)));}catch(err){results.appendChild(contractCard(files[i],{},err.message));}}status.textContent="Análise concluída. Revise os campos e confirme somente os dados corretos.";}
- finally{button.disabled=false;}
+  const files=[...(document.getElementById("contractFiles").files||[])];
+  const status=document.getElementById("bulkStatus"),results=document.getElementById("bulkResults");
+  results.innerHTML="";
+  if(!files.length){status.textContent="Selecione pelo menos um contrato.";return;}
+  const button=document.getElementById("processContracts");
+  button.disabled=true;
+  try{
+    for(let i=0;i<files.length;i++){
+      status.textContent="Analisando "+(i+1)+" de "+files.length+": "+files[i].name;
+      try{
+        const text=await readContractFile(files[i]);
+        results.appendChild(contractCard(files[i],extractContractFields(text)));
+      }catch(err){
+        results.appendChild(contractCard(files[i],{},err.message));
+      }
+    }
+    status.textContent="Análise concluída. Revise os campos e confirme somente os dados corretos.";
+  } finally {
+    button.disabled=false;
+  }
 });
-function downloadResidentTemplate(){const csv="nome,cpf,rg,telefone,email,quadra,lote,rua,numero,vinculo,conjuge_nome,conjuge_cpf,conjuge_rg,conjuge_telefone\n";const a=document.createElement("a");const url=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.href=url;a.download="modelo_cadastro_moradores.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);closeResidentMenu();}
+
+function downloadResidentTemplate(){
+  const csv="nome,cpf,rg,telefone,email,quadra,lote,rua,numero,vinculo,conjuge_nome,conjuge_cpf,conjuge_rg,conjuge_telefone\n";
+  const a=document.createElement("a");
+  const url=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));
+  a.href=url;a.download="modelo_cadastro_moradores.csv";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  closeResidentMenu();
+}
+
+/* ---------- Init ---------- */
+renderResidents();
+renderUnits();
+renderDashboard();
 </script>
 </body>
 </html>

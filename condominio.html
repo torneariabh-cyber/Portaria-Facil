@@ -693,188 +693,151 @@ tbody tr:last-child td{border-bottom:0}
   #app #content .actions button{width:100%}
 }
 
-/* =========================================================
-   PADRÃO VISUAL ACESSO CONDOMINIAL
-   Aplicado ao projeto Condomínio sem alterar sua estrutura
-   ou suas funcionalidades.
-   ========================================================= */
+/* ===== IDENTIDADE VISUAL FIEL AO PROJETO ACESSO CONDOMINIAL (REFERÊNCIA) ===== */
 :root{
   --sc-shell-fundo:#3b5a3f;
   --sc-shell-fundo-2:#2f4a33;
-  --sc-shell-texto:#ffffff;
+  --sc-shell-texto:#fff;
+  --sc-shell-topo-altura:54px;
   --sc-shell-acento:#3b5a3f;
-  --sc-shell-acento-texto:#ffffff;
+  --sc-shell-acento-texto:#fff;
   --sc-shell-destaque:#8fbf7a;
   --sc-shell-ligacao-fundo:#2e7d32;
   --sc-shell-ligacao-fundo-hover:#1b5e20;
+  --sc-shell-folha-raio:8px;
   --navy:#11243b;
+  --navy2:#142b45;
   --blue:#2168d5;
   --gold:#e7bd4a;
   --bg:#f3f6fb;
   --ink:#17283e;
   --muted:#718096;
   --line:#e0e7f0;
-  --white:#ffffff;
+  --white:#fff;
   --green:#14804a;
-  --red:#b42318;
+  --surface:#fff;
+  --surface-2:#f8fafc;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Arial,sans-serif}
-#app.layout{grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font:14px/1.45 Inter,system-ui,Arial,sans-serif;color:var(--ink)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:8px;padding:10px 14px;font-weight:700}
+#app.layout{min-height:100vh;display:grid;grid-template-columns:268px minmax(0,1fr)}
 #app .sidebar{
-  background:var(--sc-shell-fundo)!important;
-  color:var(--sc-shell-texto);
-  padding:18px 14px 20px;
+  height:100vh;min-height:100vh;position:sticky;top:0;align-self:start;
+  overflow:auto;padding:18px 14px 20px;color:var(--sc-shell-texto);
+  background:var(--sc-shell-fundo)!important;box-shadow:5px 0 24px #0d1f3312;
   border-right:1px solid var(--sc-shell-fundo-2);
-  box-shadow:5px 0 24px #0d1f3312;
 }
-#app .brand{font-size:22px;line-height:1.15;font-weight:850;letter-spacing:.045em}
+#app .brand{margin:0 9px 4px;font-size:22px;line-height:1.15;font-weight:850;letter-spacing:.045em}
 #app .brand span{color:var(--gold)}
-#app .subbrand{color:#c8dcc0;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
-#app .side-profile{border-bottom:1px solid #ffffff1f}
-#app .sidebar-profile-name{color:#ffffff}
-#app .sidebar-profile-hint{color:#c8dcc0}
+#app .subbrand{margin:0 9px 20px;color:#c8dcc0;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
+#app .side-profile{margin:12px 4px 16px;padding:12px 8px 16px;border-bottom:1px solid #ffffff1f}
 #app .profile-photo-button{border-radius:10px}
-#app .nav{gap:4px}
-#app .nav button,
-#app .nav .nav-group-toggle{
-  color:#dfe9da;
-  background:transparent;
-  border:1px solid transparent;
-  border-radius:8px;
-  min-height:42px;
-  padding:9px 12px;
-  font-size:13px;
-  font-weight:600;
+#app .sidebar-profile-name{color:#fff}
+#app .sidebar-profile-hint{color:#c8dcc0}
+#app .nav{display:grid;gap:4px}
+#app .nav button,#app .nav .nav-group-toggle{
+  display:flex;align-items:center;gap:10px;width:100%;min-height:42px;
+  padding:9px 12px;text-align:left;color:#dfe9da;background:transparent;
+  border:1px solid transparent;border-radius:8px;font-size:13px;font-weight:600;
 }
-#app .nav button:before,
-#app .nav .nav-group-toggle:before{color:var(--gold)}
-#app .nav button:hover,
-#app .nav .nav-group-toggle:hover{background:#ffffff16;color:#ffffff}
-#app .nav button.active,
-#app .nav .nav-group-toggle.active{
-  color:#ffffff;
-  background:#ffffff22;
-  border-color:#ffffff33;
+#app .nav button:before,#app .nav .nav-group-toggle:before{color:var(--gold)}
+#app .nav button:hover,#app .nav .nav-group-toggle:hover{background:#ffffff16;color:#fff}
+#app .nav button.active,#app .nav .nav-group-toggle.active{
+  color:#fff;background:#ffffff22;border-color:#ffffff33;
   box-shadow:inset 3px 0 var(--gold);
 }
-#app .nav-submenu button{border-left:2px solid #ffffff33!important}
-#app .sidefoot{color:#b9ccb1;border-top:1px solid #ffffff1f}
+#app .nav-submenu{display:grid;gap:4px;padding-left:12px}
+#app .nav-submenu button{min-height:36px;padding:8px 10px 8px 14px;border-left:2px solid #ffffff33!important}
+#app .sidefoot{margin-top:22px;padding:12px 9px 4px;border-top:1px solid #ffffff1f;color:#b9ccb1;font-size:10px}
 #app .main{min-width:0}
 #app .top{
-  min-height:54px;
-  padding:10px 24px;
-  background:var(--sc-shell-fundo)!important;
-  color:var(--sc-shell-texto);
-  border-bottom:1px solid var(--sc-shell-fundo-2);
-  box-shadow:none;
+  height:var(--sc-shell-topo-altura);min-height:var(--sc-shell-topo-altura);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:0 24px;background:var(--sc-shell-fundo)!important;color:var(--sc-shell-texto);
+  border-bottom:1px solid var(--sc-shell-fundo-2);box-shadow:none;
 }
-#app .top h1{margin:0;color:#ffffff;font-size:17px;line-height:1.2;font-weight:800}
-#app .top .who{color:#cfe0c7}
-#app .top-actions{color:#ffffff}
+#app .top h1{margin:0;font-size:17px;line-height:1.2;font-weight:800;color:#fff}
+#app .top .who{margin-top:3px;color:#cfe0c7;font-size:11px}
+#app .top-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
 #app .account-trigger{
-  color:#ffffff!important;
-  background:#ffffff12!important;
-  border:1px solid #ffffff33!important;
-  border-radius:8px;
+  padding:8px 12px;border:1px solid #ffffff33!important;border-radius:8px;
+  background:#ffffff12!important;color:#fff!important;font-weight:700;font-size:12px;
 }
 #app .account-trigger:hover{background:#ffffff20!important}
 #app .account-dropdown{border-radius:8px}
-#app .content{
-  width:100%;
-  max-width:1500px;
-  margin:0 auto;
-  padding:24px;
-}
+#app .content{width:100%;max-width:1500px;margin:auto;padding:24px;display:grid;gap:18px}
 #app .card{
-  background:#ffffff;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:18px;
-  box-shadow:0 4px 14px #12243b08;
+  min-width:0;background:var(--surface);border:1px solid var(--line);
+  border-radius:10px;padding:18px;box-shadow:0 4px 14px #12243b08;
 }
-#app .card+.card{margin-top:16px}
-#app .sectiontitle,
-#app h2.sectiontitle{color:var(--navy);font-size:16px;font-weight:800}
+#app .card+.card{margin-top:0}
+#app .sectiontitle,#app .section-title{margin:0 0 14px;font-size:16px;font-weight:800;color:var(--navy)}
 #app .dashboard-kpi{
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#ffffff;
-  box-shadow:0 4px 14px #12243b08;
+  min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;
+  padding:18px;box-shadow:0 4px 14px #12243b08;
 }
 #app .dashboard-kpi:after{background:#3b5a3f0d}
-#app .dashboard-kpi .kpi-label{color:var(--muted)}
-#app .dashboard-kpi .kpi-value{color:var(--navy)}
-#app .dashboard-bar-fill{background:linear-gradient(90deg,#3b5a3f,#8fbf7a)}
-#app button{
-  border-radius:8px;
-  font-weight:700;
-}
-#app button:not(.secondary):not(.danger):not(.account-trigger):not(.dashboard-shortcut):not(.map-edit-button){
-  /* mantém as cores específicas dos botões funcionais */
-}
-#app button.secondary,
-#app .btn-secondary,
-#app .dashboard-fullscreen,
-#app .map-edit-button{
-  background:#eaf0f8;
-  color:var(--navy);
-  border:1px solid #d8e3f1;
-}
+#app .dashboard-kpi .kpi-label{font-size:12px;color:var(--muted)}
+#app .dashboard-kpi .kpi-value{font-size:27px;font-weight:850;color:var(--navy)}
+#app .dashboard-kpi .kpi-foot{font-size:12px;color:var(--muted)}
+#app .dashboard-bar-fill{background:var(--sc-shell-destaque)}
+#app .muted,#app .who{color:var(--muted)}
+#app .btn-primary{background:var(--blue);color:#fff}
+#app .btn-secondary,#app button.secondary{background:#eaf0f8;color:var(--navy)}
+#app .btn-outline{background:#fff;color:var(--blue);border:1px solid #d8e3f1}
 #app input,#app select,#app textarea{
-  border-radius:8px;
-  border:1px solid #ccd7e5;
-  background:#ffffff;
-  color:var(--ink);
+  width:100%;padding:11px 12px;border:1px solid #ccd7e5;border-radius:8px;
+  background:#fff;color:var(--ink);outline:none;
 }
 #app input:focus,#app select:focus,#app textarea:focus{
-  border-color:#8fbf7a;
-  box-shadow:0 0 0 3px #3b5a3f18;
+  border-color:#7aa5e8;box-shadow:0 0 0 3px #2168d514;
 }
-#app label{color:#42536a}
-#app th{background:#f8fafc;color:var(--muted)}
-#app .tablewrap{border-radius:10px}
-#app .notice,#app .admin-note{
-  border-radius:8px;
-  background:#fff5d9;
-  color:#715500;
-}
-#app .empty{border-radius:10px}
-#app .pill{border-radius:999px}
-#app .media-panel,
-#app .report-download-group,
-#app .dashboard-mini-item{border-radius:10px}
-#app .dashboard-shortcut{border-radius:8px}
+#app label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#42536a}
+#app .formrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#app .actions{display:flex;gap:8px;flex-wrap:wrap}
+#app .actions button{min-height:40px}
+#app .tablewrap{width:100%;overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+#app table{width:100%;border-collapse:collapse;min-width:680px}
+#app th,#app td{padding:12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+#app th{background:var(--surface-2);color:var(--muted);font-size:11px;text-transform:uppercase}
+#app tbody tr:last-child td{border-bottom:0}
+#app .pill{display:inline-block;padding:4px 9px;border-radius:999px;background:#e8f7ef;color:var(--green);font-size:12px;font-weight:700}
+#app .pill.gold{background:#fff4d4;color:#7c5c00}
+#app .notice,#app .admin-note{padding:12px 14px;border-radius:8px;background:#fff5d9;color:#715500;font-size:12px}
+#app .status{font-size:12px;color:var(--muted);min-height:18px}
+#app .empty{padding:30px 16px;text-align:center;color:var(--muted);border:1px dashed #cbd6e4;border-radius:10px;background:#fbfdff}
+#app .empty strong{display:block;color:var(--ink);margin-bottom:5px}
+#app .media-panel,#app .report-download-group,#app .dashboard-mini-item,
+#app .maps-details,#app .extracted-card{border-radius:10px}
 #loginScreen.loginwrap{
-  background:linear-gradient(135deg,#2f4a33 0%,#3b5a3f 58%,#52764e 100%);
+  min-height:100vh;display:grid;place-items:center;padding:20px;
+  background:linear-gradient(135deg,#2f4a33,#3b5a3f);
 }
-#loginScreen .login{
-  border-radius:10px;
-  box-shadow:0 18px 55px #10201030;
-}
-#loginScreen .login .brand{color:var(--navy)}
+#loginScreen .login{background:#fff;width:min(440px,100%);border-radius:10px;padding:30px;box-shadow:0 25px 80px #0003}
+#loginScreen .login .brand{color:var(--navy);margin:0}
 #loginScreen .login .brand span{color:var(--gold)}
+#loginScreen .login p{color:var(--muted)}
 #loginScreen .login button{border-radius:8px}
+@media(max-width:1100px){#app .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:800px){
   #app.layout{grid-template-columns:1fr}
-  #app .sidebar{
-    position:sticky;
-    top:0;
-    height:auto;
-    min-height:0;
-    max-height:42vh;
-    padding:12px 14px 10px;
-    z-index:20;
-  }
+  #app .sidebar{height:auto;max-height:42vh;min-height:0;position:sticky;top:0;padding:12px 14px 10px;z-index:20}
   #app .subbrand,#app .sidefoot{display:none}
-  #app .top{min-height:60px;padding:12px 16px}
+  #app .nav{display:flex;overflow-x:auto;gap:6px;padding:4px 0}
+  #app .nav button,#app .nav .nav-group-toggle{width:auto;min-width:max-content;min-height:38px;padding:8px 10px;font-size:11px}
+  #app .top{height:auto;min-height:60px;padding:12px 16px}
   #app .top h1{font-size:16px}
   #app .content{padding:15px}
-  #app .card{padding:15px}
+  #app .formrow{grid-template-columns:1fr}
 }
 @media(max-width:480px){
-  #app .content{padding:12px}
+  #app .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
   #app .card{padding:13px}
+  #app .dashboard-kpi{padding:13px}
+  #app .dashboard-kpi .kpi-value{font-size:23px}
+  #app .content{padding:12px}
 }
 
 </style></head><body>

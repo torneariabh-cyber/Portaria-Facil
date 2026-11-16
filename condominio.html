@@ -692,6 +692,191 @@ tbody tr:last-child td{border-bottom:0}
   #app #content .card{padding:14px}
   #app #content .actions button{width:100%}
 }
+
+/* =========================================================
+   PADRÃO VISUAL ACESSO CONDOMINIAL
+   Aplicado ao projeto Condomínio sem alterar sua estrutura
+   ou suas funcionalidades.
+   ========================================================= */
+:root{
+  --sc-shell-fundo:#3b5a3f;
+  --sc-shell-fundo-2:#2f4a33;
+  --sc-shell-texto:#ffffff;
+  --sc-shell-acento:#3b5a3f;
+  --sc-shell-acento-texto:#ffffff;
+  --sc-shell-destaque:#8fbf7a;
+  --sc-shell-ligacao-fundo:#2e7d32;
+  --sc-shell-ligacao-fundo-hover:#1b5e20;
+  --navy:#11243b;
+  --blue:#2168d5;
+  --gold:#e7bd4a;
+  --bg:#f3f6fb;
+  --ink:#17283e;
+  --muted:#718096;
+  --line:#e0e7f0;
+  --white:#ffffff;
+  --green:#14804a;
+  --red:#b42318;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Arial,sans-serif}
+#app.layout{grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+#app .sidebar{
+  background:var(--sc-shell-fundo)!important;
+  color:var(--sc-shell-texto);
+  padding:18px 14px 20px;
+  border-right:1px solid var(--sc-shell-fundo-2);
+  box-shadow:5px 0 24px #0d1f3312;
+}
+#app .brand{font-size:22px;line-height:1.15;font-weight:850;letter-spacing:.045em}
+#app .brand span{color:var(--gold)}
+#app .subbrand{color:#c8dcc0;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
+#app .side-profile{border-bottom:1px solid #ffffff1f}
+#app .sidebar-profile-name{color:#ffffff}
+#app .sidebar-profile-hint{color:#c8dcc0}
+#app .profile-photo-button{border-radius:10px}
+#app .nav{gap:4px}
+#app .nav button,
+#app .nav .nav-group-toggle{
+  color:#dfe9da;
+  background:transparent;
+  border:1px solid transparent;
+  border-radius:8px;
+  min-height:42px;
+  padding:9px 12px;
+  font-size:13px;
+  font-weight:600;
+}
+#app .nav button:before,
+#app .nav .nav-group-toggle:before{color:var(--gold)}
+#app .nav button:hover,
+#app .nav .nav-group-toggle:hover{background:#ffffff16;color:#ffffff}
+#app .nav button.active,
+#app .nav .nav-group-toggle.active{
+  color:#ffffff;
+  background:#ffffff22;
+  border-color:#ffffff33;
+  box-shadow:inset 3px 0 var(--gold);
+}
+#app .nav-submenu button{border-left:2px solid #ffffff33!important}
+#app .sidefoot{color:#b9ccb1;border-top:1px solid #ffffff1f}
+#app .main{min-width:0}
+#app .top{
+  min-height:54px;
+  padding:10px 24px;
+  background:var(--sc-shell-fundo)!important;
+  color:var(--sc-shell-texto);
+  border-bottom:1px solid var(--sc-shell-fundo-2);
+  box-shadow:none;
+}
+#app .top h1{margin:0;color:#ffffff;font-size:17px;line-height:1.2;font-weight:800}
+#app .top .who{color:#cfe0c7}
+#app .top-actions{color:#ffffff}
+#app .account-trigger{
+  color:#ffffff!important;
+  background:#ffffff12!important;
+  border:1px solid #ffffff33!important;
+  border-radius:8px;
+}
+#app .account-trigger:hover{background:#ffffff20!important}
+#app .account-dropdown{border-radius:8px}
+#app .content{
+  width:100%;
+  max-width:1500px;
+  margin:0 auto;
+  padding:24px;
+}
+#app .card{
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:18px;
+  box-shadow:0 4px 14px #12243b08;
+}
+#app .card+.card{margin-top:16px}
+#app .sectiontitle,
+#app h2.sectiontitle{color:var(--navy);font-size:16px;font-weight:800}
+#app .dashboard-kpi{
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#ffffff;
+  box-shadow:0 4px 14px #12243b08;
+}
+#app .dashboard-kpi:after{background:#3b5a3f0d}
+#app .dashboard-kpi .kpi-label{color:var(--muted)}
+#app .dashboard-kpi .kpi-value{color:var(--navy)}
+#app .dashboard-bar-fill{background:linear-gradient(90deg,#3b5a3f,#8fbf7a)}
+#app button{
+  border-radius:8px;
+  font-weight:700;
+}
+#app button:not(.secondary):not(.danger):not(.account-trigger):not(.dashboard-shortcut):not(.map-edit-button){
+  /* mantém as cores específicas dos botões funcionais */
+}
+#app button.secondary,
+#app .btn-secondary,
+#app .dashboard-fullscreen,
+#app .map-edit-button{
+  background:#eaf0f8;
+  color:var(--navy);
+  border:1px solid #d8e3f1;
+}
+#app input,#app select,#app textarea{
+  border-radius:8px;
+  border:1px solid #ccd7e5;
+  background:#ffffff;
+  color:var(--ink);
+}
+#app input:focus,#app select:focus,#app textarea:focus{
+  border-color:#8fbf7a;
+  box-shadow:0 0 0 3px #3b5a3f18;
+}
+#app label{color:#42536a}
+#app th{background:#f8fafc;color:var(--muted)}
+#app .tablewrap{border-radius:10px}
+#app .notice,#app .admin-note{
+  border-radius:8px;
+  background:#fff5d9;
+  color:#715500;
+}
+#app .empty{border-radius:10px}
+#app .pill{border-radius:999px}
+#app .media-panel,
+#app .report-download-group,
+#app .dashboard-mini-item{border-radius:10px}
+#app .dashboard-shortcut{border-radius:8px}
+#loginScreen.loginwrap{
+  background:linear-gradient(135deg,#2f4a33 0%,#3b5a3f 58%,#52764e 100%);
+}
+#loginScreen .login{
+  border-radius:10px;
+  box-shadow:0 18px 55px #10201030;
+}
+#loginScreen .login .brand{color:var(--navy)}
+#loginScreen .login .brand span{color:var(--gold)}
+#loginScreen .login button{border-radius:8px}
+@media(max-width:800px){
+  #app.layout{grid-template-columns:1fr}
+  #app .sidebar{
+    position:sticky;
+    top:0;
+    height:auto;
+    min-height:0;
+    max-height:42vh;
+    padding:12px 14px 10px;
+    z-index:20;
+  }
+  #app .subbrand,#app .sidefoot{display:none}
+  #app .top{min-height:60px;padding:12px 16px}
+  #app .top h1{font-size:16px}
+  #app .content{padding:15px}
+  #app .card{padding:15px}
+}
+@media(max-width:480px){
+  #app .content{padding:12px}
+  #app .card{padding:13px}
+}
+
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localizaçao segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Seja bem-vindo Administrador.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ÁREA DO CONDOMÍNIO</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhotoPreview" alt="Foto do perfil" hidden><span id="profilePhotoPlaceholder">👤</span></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><div id="sidebarProfileName" class="sidebar-profile-name">Administrador</div><div class="sidebar-profile-hint">Clique na foto para alterar</div></section><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>

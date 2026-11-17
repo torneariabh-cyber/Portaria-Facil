@@ -436,6 +436,170 @@ tbody tr:last-child td{border-bottom:0}
   #app .card{padding:15px}
 }
 
+
+/* ================================================================
+   ACESS PORT — INTERFACE RESPONSIVA 2026
+   Camada visual adicional: preserva IDs, HTML funcional e JavaScript.
+   ================================================================ */
+:root{
+  --ap-green:#355b3b;
+  --ap-green-dark:#29482f;
+  --ap-green-soft:#edf4eb;
+  --ap-gold:#e7bd4a;
+  --ap-text:#263b2b;
+  --ap-muted:#687d6c;
+  --ap-line:#dce7dc;
+  --ap-surface:#fff;
+  --ap-bg:#f4f7f3;
+  --ap-radius:16px;
+  --ap-shadow:0 8px 24px rgba(35,67,41,.07);
+}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body{background:var(--ap-bg);color:var(--ap-text);font-size:15px;line-height:1.55;}
+button,input,select,textarea{font-family:inherit;}
+button{min-height:44px;padding:10px 16px;border-radius:11px;font-size:14px;font-weight:750;touch-action:manipulation;}
+input:not([type=checkbox]):not([type=radio]),select,textarea{min-height:46px;padding:11px 13px;font-size:16px;border:1px solid #cfddcf;border-radius:11px;}
+label{font-size:14px;font-weight:750;color:#35543a;margin:15px 0 7px;}
+:focus-visible{outline:3px solid rgba(231,189,74,.85);outline-offset:3px;}
+
+/* Área administrativa — desktop */
+#app.layout{grid-template-columns:270px minmax(0,1fr);background:var(--ap-bg);}
+#app .sidebar{width:auto;min-width:0;padding:24px 17px;background:linear-gradient(180deg,#355b3b 0%,#29482f 100%);}
+#app .brand{font-size:26px;letter-spacing:.04em;}
+#app .subbrand{font-size:11px;letter-spacing:.12em;line-height:1.5;}
+#app .nav{gap:7px;}
+#app .nav button,#app .nav .nav-group-toggle{min-height:47px;padding:11px 13px;font-size:14px;border-radius:11px;}
+#app .nav .nav-submenu button{min-height:42px;font-size:13px;}
+#app .main{min-width:0;}
+#app .top{min-height:82px;padding:16px clamp(18px,2.6vw,38px);}
+#app .top h1{font-size:clamp(20px,1.8vw,25px);}
+#app .who{font-size:13px;}
+#app .content{max-width:1680px;padding:clamp(18px,2.4vw,36px);}
+#app .card{padding:clamp(17px,1.8vw,24px);border-radius:var(--ap-radius);box-shadow:var(--ap-shadow);}
+#app .sectiontitle,#app .card h2{font-size:clamp(19px,1.6vw,23px);line-height:1.3;}
+#app .card h3{font-size:17px;line-height:1.35;}
+#app .grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+#app .dashboard-kpi{min-height:132px;padding:20px;border-radius:15px;}
+#app .dashboard-kpi .kpi-label{font-size:12px;}
+#app .dashboard-kpi .kpi-value{font-size:clamp(27px,2.3vw,34px);}
+#app .dashboard-kpi .kpi-foot{font-size:13px;}
+#app .actions{gap:9px;}
+#app .actions button{min-height:43px;padding:10px 14px;font-size:14px;}
+#app .account-trigger{min-height:44px;padding:10px 14px;font-size:13px;}
+#app .tablewrap{max-width:100%;overflow:auto;-webkit-overflow-scrolling:touch;border-radius:13px;}
+#app table{font-size:14px;}
+#app th,#app td{padding:13px 15px;}
+#app th{font-size:11px;}
+#app .pill{font-size:12px;padding:5px 10px;}
+#app .status,.muted{font-size:14px;}
+
+/* Portal público do prestador */
+.public-portal{width:min(620px,100%)!important;padding:clamp(22px,4vw,38px)!important;border:1px solid var(--ap-line);box-shadow:0 18px 55px rgba(20,48,25,.16);}
+.public-portal .brand{font-size:clamp(25px,4vw,32px);}
+.public-portal .portal-intro{font-size:16px;line-height:1.55;}
+.public-portal .step-label{font-size:16px;gap:11px;margin:20px 0 8px;}
+.public-portal .step-number{width:32px;height:32px;flex-basis:32px;font-size:15px;}
+.public-portal select{min-height:52px;font-size:16px;}
+.public-portal .terms-box{padding:15px;gap:12px;border-radius:13px;}
+.public-portal .terms-box input{width:22px;height:22px;flex-basis:22px;}
+.public-portal .terms-box label{font-size:14px;line-height:1.5;}
+.public-portal .primary-go{min-height:54px;font-size:17px;font-weight:800;}
+.public-portal .map-choice{min-height:70px;padding:14px;border-radius:13px;font-size:15px;}
+.public-portal .map-choice .map-icon{width:46px;height:46px;flex-basis:46px;}
+
+/* Login */
+.loginwrap{padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));}
+.login{width:min(460px,100%);padding:clamp(24px,5vw,38px);border-radius:22px;}
+.login .brand{font-size:29px;}
+.login p{font-size:15px;line-height:1.55;}
+.login button{min-height:48px;font-size:15px;}
+
+/* Tablets e notebooks menores */
+@media(max-width:1100px){
+  #app.layout{grid-template-columns:225px minmax(0,1fr);}
+  #app .sidebar{padding:19px 12px;}
+  #app .nav button,#app .nav .nav-group-toggle{font-size:13px;padding:10px;}
+  #app .content{padding:20px;}
+  #app .dashboard-columns{grid-template-columns:minmax(0,1fr)!important;}
+}
+@media(min-width:701px) and (max-width:900px){
+  #app .grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #app .formrow{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+/* Android e iOS — navegação e conteúdo adaptados ao toque */
+@media(max-width:700px){
+  html,body{min-width:320px;}
+  #app.layout{display:block;min-height:100vh;}
+  #app .sidebar{position:sticky;top:0;z-index:50;width:100%;height:auto;min-height:0;max-height:none;overflow:visible;padding:11px 13px 9px;border:0;border-bottom:1px solid rgba(255,255,255,.12);box-shadow:0 5px 18px rgba(25,55,30,.16);}
+  #app .brand{font-size:21px;margin:0 5px 2px;}
+  #app .subbrand{display:block;margin:0 5px 8px;font-size:9px;letter-spacing:.1em;}
+  #app .side-profile{display:none;}
+  #app .nav{display:flex;align-items:center;gap:7px;width:100%;overflow-x:auto;overflow-y:visible;padding:3px 1px 7px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+  #app .nav>button,#app .nav>.nav-group{flex:0 0 auto;width:auto;min-width:max-content;}
+  #app .nav>button,#app .nav .nav-group-toggle{min-height:42px;padding:9px 12px;font-size:13px;border-radius:10px;white-space:nowrap;}
+  #app .nav .nav-group{position:relative;display:block;}
+  #app .nav .nav-submenu{display:none;position:absolute;top:calc(100% + 7px);left:0;min-width:210px;max-width:min(280px,85vw);padding:8px;margin:0;background:#29482f;border:1px solid rgba(255,255,255,.16);border-radius:13px;box-shadow:0 14px 30px rgba(0,0,0,.25);z-index:100;}
+  #app .nav .nav-group.open .nav-submenu{display:grid;}
+  #app .nav .nav-submenu button{width:100%;min-height:43px;padding:10px 12px!important;font-size:13px;white-space:normal;text-align:left;}
+  #app .sidefoot{display:none;}
+  #app .top{position:relative;z-index:10;min-height:68px;padding:13px 15px;gap:10px;align-items:center;}
+  #app .top h1{font-size:19px;line-height:1.25;}
+  #app .who{font-size:12px;}
+  #app .top-actions{gap:6px;}
+  #app .account-trigger{min-height:40px;padding:8px 10px;font-size:12px;}
+  #app .account-dropdown{right:0;min-width:190px;}
+  #app .content{padding:14px 12px 28px;}
+  #app .card{padding:16px;border-radius:14px;}
+  #app .sectiontitle,#app .card h2{font-size:19px;}
+  #app .card h3{font-size:16px;}
+  #app .grid{grid-template-columns:1fr;gap:11px;}
+  #app .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+  #app .dashboard-kpi{min-height:112px;padding:13px;border-radius:13px;}
+  #app .dashboard-kpi .kpi-label{font-size:10px;line-height:1.35;}
+  #app .dashboard-kpi .kpi-value{font-size:25px;margin:7px 0 3px;}
+  #app .dashboard-kpi .kpi-foot{font-size:11px;}
+  #app .dashboard-columns{grid-template-columns:minmax(0,1fr)!important;gap:12px;}
+  #app .formrow,#app .report-filters{grid-template-columns:1fr;gap:8px;}
+  #app .actions{display:flex;flex-wrap:wrap;}
+  #app .actions button{flex:1 1 145px;min-height:44px;font-size:13px;}
+  #app .tablewrap{margin-left:0;margin-right:0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  #app table{min-width:650px;font-size:13px;}
+  #app th,#app td{padding:11px 12px;}
+  #app .report-download-groups{grid-template-columns:1fr;}
+  #app .report-download-group .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+  #app .report-download-group button{width:100%;min-height:42px;font-size:12px;}
+  #app .media-toolbar,#app .document-row{grid-template-columns:1fr;}
+  #app .media-panel{padding:14px;}
+  #app input:not([type=checkbox]):not([type=radio]),#app select,#app textarea{font-size:16px;min-height:47px;}
+  .public-portal{width:100%!important;max-width:560px!important;padding:22px 18px!important;border-radius:18px!important;}
+  .public-portal .primary-go{min-height:56px;}
+  .login{padding:26px 21px;}
+}
+
+/* Celulares estreitos */
+@media(max-width:390px){
+  #app .top{align-items:flex-start;}
+  #app .top h1{font-size:17px;}
+  #app .account-trigger{font-size:11px;padding:7px 8px;}
+  #app .content{padding:11px 9px 24px;}
+  #app .card{padding:13px;}
+  #app .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #app .dashboard-kpi{padding:11px;}
+  #app .dashboard-kpi .kpi-value{font-size:22px;}
+  #app .nav>button,#app .nav .nav-group-toggle{font-size:12px;padding:8px 10px;}
+  .public-portal{padding:19px 15px!important;}
+}
+
+/* Acessibilidade e conforto em telas sensíveis ao toque */
+@media(hover:none){
+  button:hover{filter:none;box-shadow:none;}
+  #app .nav button:hover{transform:none;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important;}
+}
+
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localizaçao segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Seja bem-vindo Administrador.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ÁREA DO PRESTADOR DE SERVIÇOS</div><section class="side-profile"><button type="button" id="profilePhotoButton" class="profile-photo-button" title="Alterar foto do perfil"><img id="profilePhotoPreview" alt="Foto do perfil" hidden><span id="profilePhotoPlaceholder">👤</span></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><div id="sidebarProfileName" class="sidebar-profile-name">Administrador</div><div class="sidebar-profile-hint">Clique na foto para alterar</div></section><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>

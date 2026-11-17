@@ -998,6 +998,123 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .account-dropdown,.account-menu{z-index:80}
 @media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}.sidebar{position:sticky;top:0;height:auto;max-height:none;min-height:0;overflow:visible;padding:10px 12px;z-index:40;border-right:0;border-bottom:1px solid #2f4a33}.brand{font-size:20px}.subbrand,.sidefoot,.side-profile{display:none}.nav{display:flex;overflow-x:auto;gap:5px;padding:4px 0 2px;scrollbar-width:thin}.nav button,.support-sidebar-btn{white-space:nowrap;width:auto;flex:0 0 auto;padding:9px 10px;min-height:38px}.top{padding:16px;align-items:flex-start}.content{padding:14px}.grid{grid-template-columns:1fr}.formrow{grid-template-columns:1fr}.top h1{font-size:18px}}
 
+
+
+/* =========================================================
+   MINHA CONTA — MESMO AJUSTE APROVADO NA ADMINISTRAÇÃO GERAL
+   Apenas aparência: estrutura e JavaScript do Condomínio preservados.
+   ========================================================= */
+#app .top .account-wrap{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  flex:0 0 auto!important;
+  margin-left:auto!important;
+  z-index:100!important;
+}
+#app .top .account-toggle,
+#app .top .account-trigger{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:36px!important;
+  height:36px!important;
+  padding:8px 12px!important;
+  border:1px solid #ffffff33!important;
+  border-radius:8px!important;
+  background:#ffffff12!important;
+  color:#fff!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  box-shadow:none!important;
+  white-space:nowrap!important;
+  transform:none!important;
+}
+#app .top .account-toggle:hover,
+#app .top .account-trigger:hover{
+  border-color:#ffffff55!important;
+  background:#ffffff20!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+#app .top .account-toggle:active,
+#app .top .account-trigger:active{transform:none!important}
+#app .top .account-toggle span,
+#app .top .account-trigger span{
+  color:#fff!important;
+  font-size:11px!important;
+  line-height:1!important;
+}
+#app .top .account-menu,
+#app .top .account-dropdown{
+  position:absolute!important;
+  top:calc(100% + 7px)!important;
+  right:0!important;
+  left:auto!important;
+  z-index:120!important;
+  min-width:190px!important;
+  width:210px!important;
+  padding:7px!important;
+  border:1px solid #dfe8da!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  color:#405b43!important;
+  box-shadow:0 14px 35px rgba(17,36,59,.18)!important;
+  overflow:hidden!important;
+}
+#app .top .account-menu[hidden],
+#app .top .account-dropdown[hidden],
+#app .top .account-menu.hidden,
+#app .top .account-dropdown.hidden{display:none!important}
+#app .top .account-menu button,
+#app .top .account-dropdown button{
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  width:100%!important;
+  min-height:38px!important;
+  height:auto!important;
+  padding:9px 10px!important;
+  border:0!important;
+  border-radius:8px!important;
+  background:transparent!important;
+  color:#405b43!important;
+  text-align:left!important;
+  font-size:12px!important;
+  font-weight:600!important;
+  box-shadow:none!important;
+  white-space:normal!important;
+}
+#app .top .account-menu button:hover,
+#app .top .account-dropdown button:hover{
+  background:#f1f5fa!important;
+  color:#3b5a3f!important;
+  box-shadow:none!important;
+}
+@media(max-width:800px){
+  #app .top .account-toggle,
+  #app .top .account-trigger{
+    min-height:36px!important;
+    height:36px!important;
+    padding:8px 10px!important;
+    font-size:12px!important;
+  }
+}
+@media(max-width:520px){
+  #app .top .account-toggle,
+  #app .top .account-trigger{
+    min-height:34px!important;
+    height:34px!important;
+    padding:7px 9px!important;
+    font-size:11px!important;
+  }
+}
+
 </style></head><body><h1>${esc(c.nome)}</h1><h2>Leia para informar o destino</h2><img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=${encodeURIComponent(u.toString())}"><p>${esc(u.toString())}</p><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close()});
 }
 async function renderPublicPortal(condoId){

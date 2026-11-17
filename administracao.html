@@ -817,10 +817,262 @@ tbody tr:last-child td{border-bottom:0}
 .module-card strong{display:block;font-size:13px}
 .module-card small{display:block;margin-top:2px;color:#c8dcc0;font-size:11px;line-height:1.4}
 @media(max-width:800px){.module-card{display:none}}
+
+/* ===== PADRÃO VISUAL FINAL — baseado no modelo Acesso Condominial ===== */
+#app.layout{
+  min-height:100vh;
+  grid-template-columns:268px minmax(0,1fr);
+}
+#app .sidebar{
+  box-sizing:border-box;
+  width:268px;
+  height:100vh;
+  min-height:100vh;
+  max-height:100vh;
+  position:sticky;
+  top:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding:18px 14px 16px;
+  background:#3b5a3f;
+  color:#fff;
+  box-shadow:5px 0 24px #0d1f3312;
+  z-index:50;
+}
+#app .sidebar-fixed-head{flex:0 0 auto;min-width:0}
+#app .sidebar .brand{
+  display:block;
+  margin:0 9px 4px;
+  color:#fff;
+  font-size:22px;
+  line-height:1.15;
+  font-weight:850;
+  letter-spacing:.045em;
+}
+#app .sidebar .brand span{color:#e7bd4a}
+#app .sidebar .subbrand{
+  display:block;
+  margin:0 9px 20px;
+  color:#c8dcc0;
+  font-size:10px;
+  line-height:1.3;
+  font-weight:750;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+#app .sidebar .module-card{
+  display:block;
+  padding:14px 12px;
+  margin:0 0 16px;
+  border:1px solid #ffffff1f;
+  border-radius:10px;
+  background:#ffffff10;
+}
+#app .sidebar .module-card strong{display:block;font-size:13px;line-height:1.35;color:#fff}
+#app .sidebar .module-card small{display:block;margin-top:2px;color:#c8dcc0;font-size:11px;line-height:1.4}
+#app .sidebar .nav{
+  display:grid;
+  flex:1 1 auto;
+  align-content:start;
+  gap:4px;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:0 2px 10px 0;
+  scrollbar-width:thin;
+  scrollbar-color:#ffffff55 transparent;
+}
+#app .sidebar .nav button,
+#app .sidebar .nav .nav-group-toggle,
+#app .sidebar .support-sidebar-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  min-width:0;
+  min-height:42px;
+  padding:9px 12px;
+  border:1px solid transparent;
+  border-radius:8px;
+  color:#dfe9da;
+  background:transparent;
+  text-align:left;
+  font-family:inherit;
+  font-size:13px;
+  line-height:1.25;
+  font-weight:600;
+  white-space:normal;
+  box-shadow:none;
+}
+#app .sidebar .nav button:hover,
+#app .sidebar .nav .nav-group-toggle:hover,
+#app .sidebar .support-sidebar-btn:hover{background:#ffffff16;color:#fff}
+#app .sidebar .nav button.active,
+#app .sidebar .nav button[aria-current="page"]{background:#ffffff20;color:#fff;border-color:#ffffff20}
+#app .sidebar .nav .nav-icon,
+#app .sidebar .support-sidebar-btn .nav-icon{flex:0 0 18px;width:18px;text-align:center}
+#app .sidebar .support-sidebar-btn{flex:0 0 auto;margin:4px 0 8px;background:#ffffff12;border-color:#ffffff20}
+#app .sidebar .support-card{flex:0 0 auto;max-height:170px;overflow:auto;margin:0 0 8px;padding:12px;border:1px solid #ffffff25;border-radius:8px;background:#ffffff12;color:#fff;font-size:11px}
+#app .sidebar .support-card h3{margin:0 0 6px;color:#fff;font-size:13px}
+#app .sidebar .support-card p{margin:0;color:#e1eadc;font-size:11px;line-height:1.45}
+#app .sidebar-bottom{
+  display:flex;
+  flex:0 0 auto;
+  flex-direction:column;
+  gap:10px;
+  margin-top:auto;
+  padding-top:10px;
+  border-top:1px solid #ffffff24;
+}
+#app .sidebar-site-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  min-height:42px;
+  padding:10px 12px;
+  border:1px solid #e7bd4a;
+  border-radius:8px;
+  background:#e7bd4a;
+  color:#263d2b!important;
+  text-decoration:none;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:800;
+  box-shadow:0 3px 10px #00000018;
+  transition:filter .15s ease,transform .15s ease;
+}
+#app .sidebar-site-link:hover{filter:brightness(1.05);transform:translateY(-1px)}
+#app .sidebar .sidefoot{
+  display:block;
+  margin:0;
+  padding:0 4px;
+  color:#c8dcc0;
+  font-size:10px;
+  line-height:1.35;
+  text-align:center;
+}
+#app .main{min-width:0}
+#app .top{height:54px;min-height:54px;padding:0 24px}
+#app .top h1{font-size:17px;line-height:1.2}
+#app .content,#app #content{max-width:1500px;padding:24px;gap:18px}
+#app .card,#app #content .card,#app .dashboard-kpi,#app .media-panel,#app .dashboard-mini-item{
+  border-radius:10px;padding:18px
+}
+#app button{border-radius:8px}
+#app input:not([type=checkbox]):not([type=radio]):not([type=file]),
+#app select,#app textarea{
+  min-height:42px;padding:11px 12px;border-radius:8px;font-size:14px
+}
+#app label{font-size:12px}
+#app .formrow,#app .form-grid{gap:14px}
+#app th,#app td{padding:12px}
+
+/* Login compartilhado pelos três módulos */
+.loginwrap{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:linear-gradient(135deg,#3b5a3f 0%,#2f4a33 100%);
+}
+.login{
+  box-sizing:border-box;
+  width:min(440px,100%);
+  padding:30px;
+  border:1px solid #e3e9e0;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 22px 65px #14271935;
+}
+.login .brand{
+  margin:0 0 10px;
+  color:#3b5a3f;
+  font-size:26px;
+  line-height:1.15;
+  font-weight:850;
+  letter-spacing:.045em;
+}
+.login .brand span{color:#b58a1d}
+.login>p:first-of-type{margin:0 0 24px;color:#71856c;font-size:13px;line-height:1.5}
+.login form{display:grid;gap:10px}
+.login label{display:block;margin:4px 0 0;color:#405b43;font-size:12px;line-height:1.3;font-weight:700}
+.login input:not([type=checkbox]):not([type=radio]){
+  box-sizing:border-box;
+  width:100%;
+  min-height:44px;
+  padding:11px 12px;
+  border:1px solid #d7e1d3;
+  border-radius:8px;
+  background:#fff;
+  color:#263d2b;
+  font-family:inherit;font-size:14px;line-height:1.4;
+}
+.login input:focus{outline:none;border-color:#719477;box-shadow:0 0 0 3px #3b5a3f1c}
+.login button{
+  width:100%;
+  min-height:44px;
+  margin-top:8px;
+  padding:11px 14px;
+  border:1px solid #3b5a3f;
+  border-radius:8px;
+  background:#3b5a3f;
+  color:#fff;
+  font-family:inherit;font-size:14px;line-height:1.2;font-weight:700;
+  cursor:pointer;
+}
+.login button:hover{background:#2f4a33}
+.login button.secondary{
+  border:1px solid #d7e1d3;
+  background:#f3f6f1;
+  color:#405b43;
+}
+.login button.secondary:hover{background:#e9efe5}
+.login .actions{display:flex;justify-content:center;gap:8px}
+.login .actions button{width:auto;min-width:190px;margin-top:8px}
+.login #recoveryForm{margin-top:18px;padding-top:18px;border-top:1px solid #e5ebe2}
+.login #recoveryForm h3{margin:0;font-size:17px;color:#405b43}
+.login #recoveryForm .small{margin:0 0 4px}
+.login .small{color:#71856c;font-size:11px;line-height:1.45}
+.login #loginStatus{font-size:12px}
+.login .hidden{display:none!important}
+
+@media(max-width:800px){
+  #app.layout{grid-template-columns:minmax(0,1fr)}
+  #app .sidebar{
+    position:relative;top:auto;width:100%;height:auto;min-height:0;max-height:none;
+    overflow:visible;padding:14px 14px 12px;
+  }
+  #app .sidebar-fixed-head{width:100%}
+  #app .sidebar .brand{font-size:21px}
+  #app .sidebar .subbrand{margin-bottom:12px}
+  #app .sidebar .module-card{margin-bottom:10px}
+  #app .sidebar .nav{
+    display:flex;flex:0 0 auto;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
+    gap:6px;padding:4px 0 8px;
+  }
+  #app .sidebar .nav button,#app .sidebar .nav .nav-group-toggle{
+    width:auto;flex:0 0 auto;min-height:38px;padding:8px 10px;white-space:nowrap;font-size:12px
+  }
+  #app .sidebar .support-sidebar-btn{width:auto;min-height:36px;margin:0 0 8px}
+  #app .sidebar .support-card{max-height:120px}
+  #app .sidebar-bottom{margin-top:0;padding-top:8px;gap:8px}
+  #app .sidebar-site-link{width:auto;align-self:flex-start;min-width:180px;min-height:38px}
+  #app .sidebar .sidefoot{display:block;text-align:left}
+  #app .top{height:auto;min-height:54px;padding:10px 16px;flex-wrap:wrap}
+  #app .content,#app #content{padding:16px;gap:14px}
+}
+@media(max-width:480px){
+  .loginwrap{padding:16px}
+  .login{padding:24px 20px;border-radius:14px}
+  .login .brand{font-size:24px}
+}
 </style>
 </head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localização segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Bem-vindo CEO, Que bom te ver aqui!.</p></div></div>
-<div id="app" class="layout hidden"><aside class="sidebar"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ADMINISTRAÇÃO GERAL</div><div class="module-card"><strong>ADMINISTRAÇÃO GERAL</strong><small>Gestão de usuários, permissões e configurações do sistema</small></div><nav class="nav" id="nav"></nav><div class="sidefoot">Acesso por perfil e condomínio</div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>
+<div id="app" class="layout hidden"><aside class="sidebar"><div class="sidebar-fixed-head"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ADMINISTRAÇÃO GERAL</div><div class="module-card"><strong>ADMINISTRAÇÃO GERAL</strong><small>Gestão de usuários, permissões e configurações do sistema</small></div></div><nav class="nav" id="nav"></nav><div class="sidebar-bottom"><a class="sidebar-site-link" href="https://torneariabh-cyber.github.io/Portaria-Facil/index.html"><span aria-hidden="true">⌂</span><span>Site Acess Port</span></a><div class="sidefoot">Acesso por perfil e condomínio</div></div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="top-actions"><div class="account-menu"><button type="button" class="account-trigger" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta ▾</button><div class="account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></div></header><div class="content" id="content"></div></main></div>
 <div id="publicDisplay" aria-live="polite"><div id="displayMedia" class="media-frame"><div style="font-size:clamp(24px,4vw,54px);font-weight:800">ACESS PORT</div></div><div id="displayPcd" hidden></div><div id="displayQr" class="qr-scene" hidden><h1 id="displayCondoName">ACESS PORT</h1><p id="displayAddress"></p><img id="displayQrImage" alt="QR Code de localização"><div id="displayTimer" class="timer">02:00</div><div class="display-brand">Acess Port • Localização rápida e inteligente</div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 'use strict';
@@ -1126,7 +1378,7 @@ async function renderSupport(){
       if(error)throw error;
       const rows=data||[];
       const categoryLabel={faq:'Pergunta frequente',tutorial:'Passo a passo',video:'Vídeo',aviso:'Aviso',contato:'Contato'};
-      $('supportList').innerHTML=rows.map(x=>`<div class="card" style="margin:10px 0;padding:14px"><div class="row" style="align-items:flex-start"><div style="flex:1;min-width:180px"><strong>${esc(x.titulo)}</strong><div class="muted small">${esc(categoryLabel[x.categoria]||x.categoria)} • Ordem ${Number(x.ordem)||0} • ${x.ativo?'Ativo':'Inativo'}</div><p style="white-space:pre-wrap;margin:8px 0">${esc(x.conteudo)}</p>${x.url?`<p><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">Abrir link associado</a></p>`:''}</div><div class="actions"><button type="button" class="secondary" data-support-edit="${esc(x.id)}">Editar</button><button type="button" class="secondary" data-support-toggle="${esc(x.id)}" data-active="${x.ativo?'true':'false'}">${x.ativo?'Desativar':'Ativar'}</button><button type="button" class="danger" data-support-delete="${esc(x.id)}">Apagar</button></div></div></div>`).join('')||'<div class="empty">Nenhum conteúdo cadastrado ainda.</div>';
+      $('supportList').innerHTML=rows.map(x=>`<div class="card" style="margin:10px 0;padding:14px"><div class="row" style="align-items:flex-start"><div style="flex:1;min-width:180px"><strong>${esc(x.titulo)}</strong><div class="muted small">${esc(categoryLabel[x.categoria]||x.categoria)} • Ordem ${Number(x.ordem)||0} • ${x.ativo?'Ativo':'Inativo'}</div><p style="white-space:pre-wrap;margin:8px 0">${esc(x.conteudo)}</p>${x.url?`<p><a href="${esc(x.url)}">Abrir link associado</a></p>`:''}</div><div class="actions"><button type="button" class="secondary" data-support-edit="${esc(x.id)}">Editar</button><button type="button" class="secondary" data-support-toggle="${esc(x.id)}" data-active="${x.ativo?'true':'false'}">${x.ativo?'Desativar':'Ativar'}</button><button type="button" class="danger" data-support-delete="${esc(x.id)}">Apagar</button></div></div></div>`).join('')||'<div class="empty">Nenhum conteúdo cadastrado ainda.</div>';
       $('supportList').querySelectorAll('[data-support-edit]').forEach(b=>b.onclick=()=>{const x=rows.find(i=>String(i.id)===b.dataset.supportEdit);if(!x)return;$('supportId').value=x.id;$('supportTitle').value=x.titulo||'';$('supportCategory').value=x.categoria||'faq';$('supportContent').value=x.conteudo||'';$('supportUrl').value=x.url||'';$('supportOrder').value=Number(x.ordem)||0;$('supportActive').value=String(!!x.ativo);$('supportFormTitle').textContent='Editar conteúdo';$('supportSaveBtn').textContent='Salvar alterações';$('supportForm').scrollIntoView({behavior:'smooth',block:'start'});});
       $('supportList').querySelectorAll('[data-support-toggle]').forEach(b=>b.onclick=async()=>{const active=b.dataset.active!=='true';try{const {error}=await sb.from('central_ajuda').update({ativo:active,atualizado_em:new Date().toISOString()}).eq('id',b.dataset.supportToggle);if(error)throw error;await loadItems();}catch(err){say('supportListStatus','Não foi possível alterar a publicação: '+friendlyError(err),true);}});
       $('supportList').querySelectorAll('[data-support-delete]').forEach(b=>b.onclick=async()=>{if(!confirm('Tem certeza de que deseja apagar este conteúdo? Esta ação não pode ser desfeita.'))return;try{const {error}=await sb.from('central_ajuda').delete().eq('id',b.dataset.supportDelete);if(error)throw error;await loadItems();say('supportListStatus','Conteúdo apagado.');}catch(err){say('supportListStatus','Não foi possível apagar o conteúdo: '+friendlyError(err),true);}});

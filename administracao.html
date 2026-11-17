@@ -1907,6 +1907,40 @@ function renderPcdReports(){
   #app .top .account-toggle{min-height:36px;padding:8px 10px;font-size:11px}
 }
 
+
+/* Minha conta: réplica exata das regras finais do arquivo Portaria fornecido */
+#app .top .account-toggle{padding:8px 12px;min-height:36px}
+#app .top .account-toggle:hover{background:#ffffff20!important;color:#fff!important}
+#app .top .account-toggle span{font-size:11px;line-height:1}
+#app .top .account-menu{top:calc(100% + 9px);
+  min-width:190px;
+  padding:7px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#fff;
+  box-shadow:0 14px 38px rgba(17,36,59,.15);}
+#app .top .account-menu button{width:100%;
+  min-height:39px;
+  padding:9px 11px;
+  border-radius:8px;
+  background:transparent;
+  color:#405b43;
+  text-align:left;
+  font-size:12px;
+  font-weight:600;}
+#app .top .account-menu button:hover{background:#edf3e9;color:#3b5a3f}
+
+/* Minha conta — visual copiado do padrão funcional da Portaria */
+#app .top .account-toggle{display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:36px;padding:8px 12px;background:#3b5a3f!important;
+  color:#fff!important;border:1px solid #ffffff33!important;
+  border-radius:8px;font-size:12px;font-weight:700;line-height:1.2;box-shadow:none!important;white-space:nowrap;}
+#app .top .account-toggle:hover{background:#2f4a33!important;color:#fff!important;border-color:#ffffff55!important;}
+#app .top .account-toggle span{font-size:11px;line-height:1}
+#app .top .account-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:100;width:210px;min-width:190px;background:#fff;border:1px solid #dfe8da;border-radius:12px;padding:6px;box-shadow:0 12px 32px #10243a1a;overflow:hidden}
+#app .top .account-menu button{display:flex;align-items:center;gap:9px;width:100%;background:transparent;color:var(--ink);text-align:left;padding:10px;border-radius:8px;font-weight:600}
+#app .top .account-menu button:hover{background:#edf3e9}
+#app .top .account-menu.hidden{display:none!important}
 </style></head><body><h1>Relatório BKP Aviso/PCD</h1><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p>${content}</body></html>`);w.document.close();w.focus();w.print();};
     draw();
   }catch(err){say('pcdReportsStatus','Não foi possível carregar o BKP Aviso/PCD. Execute a migração SQL e confira as permissões do Supabase. '+friendlyError(err),true)}})()

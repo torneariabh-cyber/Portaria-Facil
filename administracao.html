@@ -1306,25 +1306,74 @@ $('recoveryForm').addEventListener('submit',async e=>{
 $('cancelRecovery').addEventListener('click',()=>{showNormalLogin();history.replaceState(null,document.title,location.pathname+location.search);});
 
 const accountToggle=$('accountToggle'),accountMenu=$('accountMenu');
+const closeAccountMenu=()=>{
+  if(accountMenu) accountMenu.classList.add('hidden');
+  if(accountToggle) accountToggle.setAttribute('aria-expanded','false');
+};
 if(accountToggle&&accountMenu){
-  accountToggle.onclick=()=>accountMenu.classList.toggle('hidden');
-  document.addEventListener('click',e=>{if(!e.target.closest('.account-wrap'))accountMenu.classList.add('hidden')});
-  accountMenu.querySelectorAll('[data-account-action]').forEach(b=>b.onclick=async()=>{
-    const action=b.dataset.accountAction;
-    accountMenu.classList.add('hidden');
+  accountToggle.setAttribute('aria-controls','accountMenu');
+  accountToggle.setAttribute('aria-expanded','false');
+  accountToggle.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    const willOpen=accountMenu.classList.contains('hidden');
+    accountMenu.classList.toggle('hidden',!willOpen);
+    accountToggle.setAttribute('aria-expanded',String(willOpen));
+  });
+  accountMenu.addEventListener('click',async event=>{
+    const actionButton=event.target.closest('[data-account-action]');
+    if(!actionButton) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const action=actionButton.dataset.accountAction;
+    closeAccountMenu();
     if(action==='password'){
       navigate('minha-conta');
-      setTimeout(()=>{const f=$('accountPasswordForm');if(f)f.classList.remove('hidden')},0);
+      setTimeout(()=>{
+        const form=$('accountPasswordForm');
+        if(form) form.classList.remove('hidden');
+      },0);
       return;
     }
-    if(action==='activities'){navigate('atividades');return;}
+    if(action==='activities'){
+      navigate('relatorios');
+      return;
+    }
     if(action==='logout'){
-      try{const {error}=await sb.auth.signOut();if(error)throw error;}
-      catch(err){say('loginStatus',friendlyError(err),true);}
+      try{
+        const {error}=await sb.auth.signOut();
+        if(error) throw error;
+        session=null;
+        profile=null;
+        showLogin();
+      }catch(err){
+        say('loginStatus',friendlyError(err),true);
+      }
     }
   });
+  document.addEventListener('click',event=>{
+    if(!event.target.closest('.account-wrap')) closeAccountMenu();
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape') closeAccountMenu();
+  });
 }
-$('logoutBtn').onclick=async()=>{try{const {error}=await sb.auth.signOut();if(error)throw error;}catch(err){say('loginStatus',friendlyError(err),true);}};
+const legacyLogoutButton=$('logoutBtn');
+if(legacyLogoutButton){
+  legacyLogoutButton.onclick=async event=>{
+    event.preventDefault();
+    closeAccountMenu();
+    try{
+      const {error}=await sb.auth.signOut();
+      if(error) throw error;
+      session=null;
+      profile=null;
+      showLogin();
+    }catch(err){
+      say('loginStatus',friendlyError(err),true);
+    }
+  };
+}
 async function loadData(){
   const c=await sb.from('condominios').select('id,nome,ativo,created_at,cnpj,telefone,email,cep,endereco,cidade,estado,regras_visitante,razao_social,inscricao_estadual,inscricao_municipal,responsavel_nome,responsavel_cpf,numero,complemento,bairro').order('nome');if(!c.error)condos=c.data||[];else console.warn('Falha ao carregar condomínios:',c.error.message);
   let hq=sb.from('imoveis').select('id,condominio_id,quadra,lote,rua,proprietario,cep,velocidade,url').order('rua').order('quadra').order('lote');if(profile&&profile.papel!=='admin_geral')hq=hq.eq('condominio_id',profile.condominio_id);const h=await hq;if(!h.error)homes=h.data||[];else console.warn('Falha ao carregar imóveis:',h.error.message);
@@ -1826,7 +1875,39 @@ function renderPcdReports(){
     };
     ['pcdSearch','pcdDate'].forEach(id=>$(id).addEventListener('input',draw));
     const csvBtn=$('downloadPcdCsvBtn');if(csvBtn)csvBtn.onclick=()=>{const arr=filtered();downloadCsv('relatorio-bkp-aviso-pcd.csv',[['Cliente/Condomínio','Data/Hora','Categoria','Mensagem exibida','Usuário'],...arr.map(x=>[getCondoName(x.condominio_id),new Date(x.created_at).toLocaleString('pt-BR'),x.categoria||'BKP Aviso/PCD',x.mensagem||'',x.usuario_nome||''])]);};
-    const printBtn=$('printPcdReportBtn');if(printBtn)printBtn.onclick=()=>{const content=$('pcdReportsTable')?.innerHTML||'';const w=window.open('','_blank');if(!w){say('pcdReportsStatus','Permita pop-ups para imprimir ou salvar em PDF.',true);return;}w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Relatório BKP Aviso/PCD</title><style>body{font:12px Arial,sans-serif;padding:20px;color:#222}h1{font-size:20px}h3{margin-top:22px}table{width:100%;border-collapse:collapse;margin-bottom:16px}th,td{border:1px solid #bbb;padding:6px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#eee}section{page-break-inside:avoid}</style></head><body><h1>Relatório BKP Aviso/PCD</h1><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p>${content}</body></html>`);w.document.close();w.focus();w.print();};
+    const printBtn=$('printPcdReportBtn');if(printBtn)printBtn.onclick=()=>{const content=$('pcdReportsTable')?.innerHTML||'';const w=window.open('','_blank');if(!w){say('pcdReportsStatus','Permita pop-ups para imprimir ou salvar em PDF.',true);return;}w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Relatório BKP Aviso/PCD</title><style>body{font:12px Arial,sans-serif;padding:20px;color:#222}h1{font-size:20px}h3{margin-top:22px}table{width:100%;border-collapse:collapse;margin-bottom:16px}th,td{border:1px solid #bbb;padding:6px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#eee}section{page-break-inside:avoid}
+/* Minha conta — padrão visual da Portaria: compacto, verde e texto branco */
+#app .top .account-wrap{position:relative;z-index:80;margin-left:auto;flex:0 0 auto}
+#app .top .account-toggle{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:36px;padding:8px 12px;
+  border:1px solid #ffffff33!important;border-radius:8px;
+  background:#3b5a3f!important;color:#fff!important;
+  font-size:12px;line-height:1.2;font-weight:700;
+  box-shadow:none!important;white-space:nowrap;
+}
+#app .top .account-toggle:hover{
+  border-color:#ffffff55!important;background:#2f4a33!important;color:#fff!important;
+}
+#app .top .account-toggle span{font-size:11px;line-height:1}
+#app .top .account-menu{
+  position:absolute;right:0;top:calc(100% + 8px);z-index:100;
+  width:210px;min-width:190px;padding:7px;overflow:hidden;
+  border:1px solid #dfe8da;border-radius:12px;background:#fff;
+  box-shadow:0 12px 32px rgba(17,36,59,.15);
+}
+#app .top .account-menu button{
+  display:flex;align-items:center;gap:9px;width:100%;min-height:39px;
+  padding:9px 11px;border:0;border-radius:8px;background:transparent;
+  color:#405b43;text-align:left;font-size:12px;font-weight:600;
+}
+#app .top .account-menu button:hover{background:#edf3e9;color:#3b5a3f}
+#app .top .account-menu.hidden{display:none!important}
+@media(max-width:520px){
+  #app .top .account-toggle{min-height:36px;padding:8px 10px;font-size:11px}
+}
+
+</style></head><body><h1>Relatório BKP Aviso/PCD</h1><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p>${content}</body></html>`);w.document.close();w.focus();w.print();};
     draw();
   }catch(err){say('pcdReportsStatus','Não foi possível carregar o BKP Aviso/PCD. Execute a migração SQL e confira as permissões do Supabase. '+friendlyError(err),true)}})()
 }

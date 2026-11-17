@@ -603,6 +603,36 @@ tbody tr:last-child td{border-bottom:0}
 @media(max-width:520px){
   #app .top .account-toggle,#app .top .account-trigger{min-height:38px;padding:8px 10px;font-size:11px}
 }
+
+
+/* Minha conta — cópia exata do ajuste aprovado na Administração Geral */
+#app .top .account-wrap{position:relative;z-index:80;margin-left:auto;flex:0 0 auto}
+#app .top .account-toggle{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:42px;padding:9px 14px;
+  border:1px solid #dfe8da!important;border-radius:11px;
+  background:#fff!important;color:#2e7d32!important;
+  font-size:12px;line-height:1.2;font-weight:750;
+  box-shadow:0 2px 7px rgba(17,36,59,.035);white-space:nowrap;
+}
+#app .top .account-toggle:hover{border-color:#c6d7bf!important;background:#f7faf5!important}
+#app .top .account-toggle span{font-size:11px;line-height:1}
+#app .top .account-menu{
+  position:absolute;right:0;top:calc(100% + 9px);z-index:100;
+  width:210px;min-width:190px;padding:7px;overflow:hidden;
+  border:1px solid #dfe8da;border-radius:13px;background:#fff;
+  box-shadow:0 14px 38px rgba(17,36,59,.15);
+}
+#app .top .account-menu button{
+  display:flex;align-items:center;gap:9px;width:100%;min-height:39px;
+  padding:9px 11px;border:0;border-radius:8px;background:transparent;
+  color:#405b43;text-align:left;font-size:12px;font-weight:600;
+}
+#app .top .account-menu button:hover{background:#edf3e9;color:#3b5a3f}
+#app .top .account-menu.hidden{display:none!important}
+@media(max-width:520px){
+  #app .top .account-toggle{min-height:38px;padding:8px 10px;font-size:11px}
+}
 </style></head><body>
 <div id="loginScreen" class="loginwrap"><div class="login"><div class="brand">ACESS <span>PORT</span></div><p>Localizaçao segura de condomínios e Residenciais</p><form id="loginForm"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><button id="loginButton" type="submit">Entrar no sistema</button></form><div class="actions" style="justify-content:center"><button type="button" id="forgotBtn" class="secondary" style="width:auto;margin-top:8px">Esqueci minha senha</button></div><form id="recoveryForm" class="hidden"><h3>Redefinir senha</h3><p class="small">Digite a nova senha para sua conta.</p><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><label for="confirmPassword">Confirmar nova senha</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required><button type="submit">Salvar nova senha</button><button type="button" id="cancelRecovery" class="secondary">Voltar ao login</button></form><div id="loginStatus" class="status" role="status" aria-live="polite"></div><p class="small">Seja bem-vindo Administrador.</p></div></div>
 <div id="app" class="layout hidden"><aside class="sidebar"><div class="sidebar-fixed-head"><div class="brand">ACESS <span>PORT</span></div><div class="subbrand">ÁREA DO CONDOMÍNIO</div><div class="module-card"><strong>ÁREA DO CONDOMÍNIO</strong><small>Gestão de moradores, unidades e serviços do condomínio</small></div></div><nav class="nav" id="nav"></nav><div class="sidebar-bottom"><a class="sidebar-site-link" href="https://torneariabh-cyber.github.io/Portaria-Facil/index.html"><span aria-hidden="true">⌂</span><span>Site Acess Port</span></a><div class="sidefoot">Acesso por perfil e condomínio</div></div></aside><main class="main"><header class="top"><div><h1 id="pageTitle">Painel</h1><div class="who" id="who"></div></div><div class="account-wrap top-actions"><button class="secondary account-toggle account-trigger" type="button" id="accountMenuBtn" aria-expanded="false" aria-controls="accountDropdown">♟ Minha conta <span>▾</span></button><div class="account-menu account-dropdown" id="accountDropdown" hidden><button type="button" id="changePasswordMenu">🔒 Alterar senha</button><button type="button" id="activitiesMenu">↶ Atividades</button><button type="button" id="logoutBtn">⇥ Logout</button></div></div></header><div class="content" id="content"></div></main></div>
@@ -997,123 +1027,6 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .account-trigger,.account-toggle{display:flex;align-items:center;gap:8px;background:#fff;color:var(--blue);border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-weight:700;white-space:nowrap}
 .account-dropdown,.account-menu{z-index:80}
 @media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}.sidebar{position:sticky;top:0;height:auto;max-height:none;min-height:0;overflow:visible;padding:10px 12px;z-index:40;border-right:0;border-bottom:1px solid #2f4a33}.brand{font-size:20px}.subbrand,.sidefoot,.side-profile{display:none}.nav{display:flex;overflow-x:auto;gap:5px;padding:4px 0 2px;scrollbar-width:thin}.nav button,.support-sidebar-btn{white-space:nowrap;width:auto;flex:0 0 auto;padding:9px 10px;min-height:38px}.top{padding:16px;align-items:flex-start}.content{padding:14px}.grid{grid-template-columns:1fr}.formrow{grid-template-columns:1fr}.top h1{font-size:18px}}
-
-
-
-/* =========================================================
-   MINHA CONTA — MESMO AJUSTE APROVADO NA ADMINISTRAÇÃO GERAL
-   Apenas aparência: estrutura e JavaScript do Condomínio preservados.
-   ========================================================= */
-#app .top .account-wrap{
-  position:relative!important;
-  display:flex!important;
-  align-items:center!important;
-  flex:0 0 auto!important;
-  margin-left:auto!important;
-  z-index:100!important;
-}
-#app .top .account-toggle,
-#app .top .account-trigger{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:8px!important;
-  width:auto!important;
-  min-width:0!important;
-  min-height:36px!important;
-  height:36px!important;
-  padding:8px 12px!important;
-  border:1px solid #ffffff33!important;
-  border-radius:8px!important;
-  background:#ffffff12!important;
-  color:#fff!important;
-  font-size:12px!important;
-  line-height:1.2!important;
-  font-weight:700!important;
-  box-shadow:none!important;
-  white-space:nowrap!important;
-  transform:none!important;
-}
-#app .top .account-toggle:hover,
-#app .top .account-trigger:hover{
-  border-color:#ffffff55!important;
-  background:#ffffff20!important;
-  color:#fff!important;
-  box-shadow:none!important;
-  filter:none!important;
-}
-#app .top .account-toggle:active,
-#app .top .account-trigger:active{transform:none!important}
-#app .top .account-toggle span,
-#app .top .account-trigger span{
-  color:#fff!important;
-  font-size:11px!important;
-  line-height:1!important;
-}
-#app .top .account-menu,
-#app .top .account-dropdown{
-  position:absolute!important;
-  top:calc(100% + 7px)!important;
-  right:0!important;
-  left:auto!important;
-  z-index:120!important;
-  min-width:190px!important;
-  width:210px!important;
-  padding:7px!important;
-  border:1px solid #dfe8da!important;
-  border-radius:10px!important;
-  background:#fff!important;
-  color:#405b43!important;
-  box-shadow:0 14px 35px rgba(17,36,59,.18)!important;
-  overflow:hidden!important;
-}
-#app .top .account-menu[hidden],
-#app .top .account-dropdown[hidden],
-#app .top .account-menu.hidden,
-#app .top .account-dropdown.hidden{display:none!important}
-#app .top .account-menu button,
-#app .top .account-dropdown button{
-  display:flex!important;
-  align-items:center!important;
-  gap:9px!important;
-  width:100%!important;
-  min-height:38px!important;
-  height:auto!important;
-  padding:9px 10px!important;
-  border:0!important;
-  border-radius:8px!important;
-  background:transparent!important;
-  color:#405b43!important;
-  text-align:left!important;
-  font-size:12px!important;
-  font-weight:600!important;
-  box-shadow:none!important;
-  white-space:normal!important;
-}
-#app .top .account-menu button:hover,
-#app .top .account-dropdown button:hover{
-  background:#f1f5fa!important;
-  color:#3b5a3f!important;
-  box-shadow:none!important;
-}
-@media(max-width:800px){
-  #app .top .account-toggle,
-  #app .top .account-trigger{
-    min-height:36px!important;
-    height:36px!important;
-    padding:8px 10px!important;
-    font-size:12px!important;
-  }
-}
-@media(max-width:520px){
-  #app .top .account-toggle,
-  #app .top .account-trigger{
-    min-height:34px!important;
-    height:34px!important;
-    padding:7px 9px!important;
-    font-size:11px!important;
-  }
-}
 
 </style></head><body><h1>${esc(c.nome)}</h1><h2>Leia para informar o destino</h2><img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=${encodeURIComponent(u.toString())}"><p>${esc(u.toString())}</p><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close()});
 }

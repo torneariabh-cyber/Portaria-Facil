@@ -1458,11 +1458,24 @@ $('cancelRecovery').addEventListener('click',()=>{showNormalLogin();history.repl
 
 const accountToggle=$('accountToggle'),accountMenu=$('accountMenu');
 if(accountToggle&&accountMenu){
-  accountToggle.onclick=()=>accountMenu.classList.toggle('hidden');
-  document.addEventListener('click',e=>{if(!e.target.closest('.account-wrap'))accountMenu.classList.add('hidden')});
+  const closeAccountMenu=()=>{
+    accountMenu.classList.add('hidden');
+    accountToggle.setAttribute('aria-expanded','false');
+  };
+  accountToggle.setAttribute('aria-expanded','false');
+  accountToggle.onclick=e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    const willOpen=accountMenu.classList.contains('hidden');
+    accountMenu.classList.toggle('hidden',!willOpen);
+    accountToggle.setAttribute('aria-expanded',String(willOpen));
+  };
+  document.addEventListener('click',e=>{
+    if(!accountToggle.contains(e.target)&&!accountMenu.contains(e.target))closeAccountMenu();
+  });
   accountMenu.querySelectorAll('[data-account-action]').forEach(b=>b.onclick=async()=>{
     const action=b.dataset.accountAction;
-    accountMenu.classList.add('hidden');
+    closeAccountMenu();
     if(action==='password'){
       navigate('minha-conta');
       setTimeout(()=>{const f=$('accountPasswordForm');if(f)f.classList.remove('hidden')},0);

@@ -1483,8 +1483,19 @@ if(accountToggle&&accountMenu){
     }
     if(action==='activities'){navigate('atividades');return;}
     if(action==='logout'){
-      try{const {error}=await sb.auth.signOut();if(error)throw error;}
-      catch(err){say('loginStatus',friendlyError(err),true);}
+      const logoutButton=b;
+      logoutButton.disabled=true;
+      try{
+        const {error}=await sb.auth.signOut({scope:'local'});
+        if(error)throw error;
+        if(refreshDataTimer){clearInterval(refreshDataTimer);refreshDataTimer=null;}
+        if(idleLogoutTimer){clearTimeout(idleLogoutTimer);idleLogoutTimer=null;}
+        profile=null;session=null;currentView='dashboard';dashboardBackContext=false;
+        showLogin();
+        say('loginStatus','Você saiu do Acess Port com segurança.');
+      }catch(err){
+        say('loginStatus','Não foi possível encerrar a sessão: '+friendlyError(err),true);
+      }finally{logoutButton.disabled=false;}
     }
   });
 }
@@ -1494,7 +1505,7 @@ async function loadData(){
   let hq=sb.from('imoveis').select('id,condominio_id,quadra,lote,rua,proprietario,cep,velocidade,url').order('rua').order('quadra').order('lote');if(profile&&profile.papel!=='admin_geral')hq=hq.eq('condominio_id',profile.condominio_id);const h=await hq;if(!h.error)homes=h.data||[];else console.warn('Falha ao carregar imóveis:',h.error.message);
   let sq=sb.from('tipos_servico').select('id,condominio_id,nome,ativo').eq('ativo',true).order('nome');if(profile&&profile.papel!=='admin_geral')sq=sq.eq('condominio_id',profile.condominio_id);const st=await sq;if(!st.error)serviceTypes=st.data||[];else {serviceTypes=[];console.warn('Falha ao carregar tipos de serviço:',st.error.message)}
 }
-function allowedViews(){if(profile.papel==='admin_geral')return [['dashboard','Dashboard'],['condominios','Condomínios'],['usuarios','Usuários'],['imoveis','Mapas / imóveis'],['operacao','Portaria'],['qrcode','QR Code'],['segunda-tela','Configuração'],['relatorios','Relatórios'],['financeiro','Financeiro'],['suporte','Suporte']];if(profile.papel==='admin_condominio')return [['dashboard','Dashboard'],['condominio-dados','Dados do condomínio'],['usuarios','Porteiros'],['imoveis','Mapas / imóveis'],['tipos-servico','Tipos de serviço'],['operacao','Portaria'],['qrcode','QR Code'],['segunda-tela','Segunda tela'],['relatorios','Relatórios']];return [['operacao','Portaria'],['segunda-tela','Segunda tela']]}
+function allowedViews(){if(profile.papel==='admin_geral')return [['dashboard','Dashboard'],['condominios','Condomínios'],['usuarios','Usuários'],['imoveis','Mapas / imóveis'],['operacao','Portaria'],['qrcode','QR Code'],['segunda-tela','Configuração'],['relatorios','Relatórios'],['financeiro','Financeiro'],['suporte','Suporte'],['minha-conta','Minha conta'],['atividades','Atividades']];if(profile.papel==='admin_condominio')return [['dashboard','Dashboard'],['condominio-dados','Dados do condomínio'],['usuarios','Porteiros'],['imoveis','Mapas / imóveis'],['tipos-servico','Tipos de serviço'],['operacao','Portaria'],['qrcode','QR Code'],['segunda-tela','Segunda tela'],['relatorios','Relatórios'],['minha-conta','Minha conta'],['atividades','Atividades']];return [['operacao','Portaria'],['segunda-tela','Segunda tela']]}
 function renderNav(){const icons={dashboard:'▦',condominios:'⌂',usuarios:'♙',imoveis:'⌖',operacao:'⇄',qrcode:'▦','segunda-tela':'⚙',relatorios:'▤',financeiro:'$',suporte:'?', 'condominio-dados':'⌂','tipos-servico':'☷'};const views=allowedViews();const hasAccess=views.some(([id])=>id==='usuarios')&&views.some(([id])=>id==='operacao');const accessOpen=currentView==='usuarios'||currentView==='operacao';let rendered=[];let accessAdded=false;for(const [id,label] of views){if(hasAccess&&(id==='usuarios'||id==='operacao')){if(!accessAdded){const userLabel=views.find(x=>x[0]==='usuarios')?.[1]||'Usuários';const operationLabel=views.find(x=>x[0]==='operacao')?.[1]||'Portaria';rendered.push(`<div class="nav-group ${accessOpen?'open':''}"><button type="button" class="nav-group-toggle ${accessOpen?'active':''}" data-access-toggle data-icon="⇄" aria-expanded="${accessOpen}">Acessos <span class="nav-chevron">${accessOpen?'▾':'▸'}</span></button><div class="nav-submenu" ${accessOpen?'':'hidden'}><button data-view="usuarios" data-icon="♙" class="${currentView==='usuarios'?'active':''}">${userLabel}</button><button data-view="operacao" data-icon="⇄" class="${currentView==='operacao'?'active':''}">${operationLabel}</button></div></div>`);accessAdded=true;}continue;}rendered.push(`<button data-view="${id}" data-icon="${icons[id]||'•'}" class="${id===currentView?'active':''}">${label}</button>`);if(hasAccess&&(id==='condominios'||id==='condominio-dados')){if(!accessAdded){const userLabel=views.find(x=>x[0]==='usuarios')?.[1]||'Usuários';const operationLabel=views.find(x=>x[0]==='operacao')?.[1]||'Portaria';rendered.push(`<div class="nav-group ${accessOpen?'open':''}"><button type="button" class="nav-group-toggle ${accessOpen?'active':''}" data-access-toggle data-icon="⇄" aria-expanded="${accessOpen}">Acessos <span class="nav-chevron">${accessOpen?'▾':'▸'}</span></button><div class="nav-submenu" ${accessOpen?'':'hidden'}><button data-view="usuarios" data-icon="♙" class="${currentView==='usuarios'?'active':''}">${userLabel}</button><button data-view="operacao" data-icon="⇄" class="${currentView==='operacao'?'active':''}">${operationLabel}</button></div></div>`);accessAdded=true;}}}$('nav').innerHTML=rendered.join('');$('nav').querySelectorAll('button[data-view]').forEach(b=>b.onclick=()=>{dashboardBackContext=false;navigate(b.dataset.view)});const toggle=$('nav').querySelector('[data-access-toggle]');if(toggle)toggle.onclick=()=>{const submenu=toggle.nextElementSibling;const open=submenu.hidden;submenu.hidden=!open;toggle.setAttribute('aria-expanded',String(open));toggle.querySelector('.nav-chevron').textContent=open?'▾':'▸';toggle.parentElement.classList.toggle('open',open);};}
 let dashboardBackContext=false;
 function addDashboardBackButton(){
@@ -1659,7 +1670,29 @@ async function renderSupport(){
 }
 function renderAccount(){
   $('content').innerHTML=`<div class="card"><h2 class="sectiontitle">Minha conta</h2><p class="muted">Dados da conta autenticada.</p><div class="formrow"><div><label>Nome</label><input value="${esc(profile.nome||'Não informado')}" readonly></div><div><label>E-mail</label><input value="${esc(profile.email||session?.user?.email||'Não informado')}" readonly></div><div><label>Perfil</label><input value="${esc(roleLabel[profile.papel]||profile.papel)}" readonly></div></div><div class="actions"><button type="button" id="accountChangePassword">Alterar senha</button><button type="button" class="secondary" id="accountActivities">Ver atividades</button></div><div id="accountStatus" class="status" role="status"></div><form id="accountPasswordForm" class="hidden"><h3>Alterar senha</h3><label for="accountNewPassword">Nova senha</label><input id="accountNewPassword" type="password" minlength="8" autocomplete="new-password" required><label for="accountConfirmPassword">Confirmar nova senha</label><input id="accountConfirmPassword" type="password" minlength="8" autocomplete="new-password" required><div class="actions"><button type="submit">Salvar nova senha</button><button type="button" class="secondary" id="cancelAccountPassword">Cancelar</button></div></form></div>`;
-  const form=$('accountPasswordForm');$('accountChangePassword').onclick=()=>form.classList.toggle('hidden');$('cancelAccountPassword').onclick=()=>form.classList.add('hidden');$('accountActivities').onclick=()=>navigate('atividades');form.onsubmit=async e=>{e.preventDefault();const a=$('accountNewPassword').value,b=$('accountConfirmPassword').value;if(a.length<8){say('accountStatus','A senha precisa ter pelo menos 8 caracteres.',true);return}if(a!==b){say('accountStatus','As senhas não são iguais.',true);return}try{const {error}=await sb.auth.updateUser({password:a});if(error)throw error;form.reset();form.classList.add('hidden');say('accountStatus','Senha alterada com sucesso.')}catch(err){say('accountStatus','Não foi possível alterar a senha: '+friendlyError(err),true)}};
+  const form=$('accountPasswordForm');
+  $('accountChangePassword').onclick=()=>form.classList.toggle('hidden');
+  $('cancelAccountPassword').onclick=()=>{form.reset();form.classList.add('hidden');say('accountStatus','');};
+  $('accountActivities').onclick=()=>navigate('atividades');
+  form.onsubmit=async e=>{
+    e.preventDefault();
+    const a=$('accountNewPassword').value,b=$('accountConfirmPassword').value;
+    if(a.length<8){say('accountStatus','A senha precisa ter pelo menos 8 caracteres.',true);return;}
+    if(a!==b){say('accountStatus','As senhas não são iguais.',true);return;}
+    const submit=form.querySelector('button[type="submit"]');
+    submit.disabled=true;say('accountStatus','Atualizando sua senha…');
+    try{
+      const {data:authData,error:sessionError}=await sb.auth.getSession();
+      if(sessionError)throw sessionError;
+      if(!authData?.session)throw new Error('Sua sessão expirou. Faça login novamente para alterar a senha.');
+      const {error}=await sb.auth.updateUser({password:a});
+      if(error)throw error;
+      form.reset();form.classList.add('hidden');
+      say('accountStatus','Senha alterada com sucesso. Sua próxima entrada deverá usar a nova senha.');
+    }catch(err){
+      say('accountStatus','Não foi possível alterar a senha: '+friendlyError(err),true);
+    }finally{submit.disabled=false;}
+  };
 }
 async function renderActivities(){
   $('content').innerHTML=`<div class="card"><div class="row"><div><h2 class="sectiontitle">Atividades</h2><p class="muted">Registros de acessos disponíveis no sistema.</p></div><button type="button" class="secondary" onclick="navigate('dashboard')">Voltar</button></div><div id="activityStatus" class="status">Carregando atividades…</div><div id="activityTable" class="tablewrap"></div></div>`;

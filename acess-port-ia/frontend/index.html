@@ -3,86 +3,94 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101b18">
-  <title>ACESS PORT IA | Central Inteligente</title>
+  <meta name="theme-color" content="#0b0d0c">
+  <title>ACESS PORT IA | Monitoramento</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#" aria-label="ACESS PORT IA início">
-        <span class="brand-mark">A</span>
-        <span class="brand-copy"><strong>ACESS PORT</strong><small>INTELIGÊNCIA ARTIFICIAL</small></span>
-      </a>
-      <div class="side-label">CENTRAL DE OPERAÇÕES</div>
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-copy"><strong>ACESS PORT</strong><span>VEHICLE MONITORING</span></div>
+      </div>
+      <div class="side-label">CENTRAL DE MONITORAMENTO</div>
       <nav class="nav">
-        <a class="nav-item active" href="#overview"><span class="nav-icon">▦</span> Visão geral</a>
-        <a class="nav-item" href="#cameras"><span class="nav-icon">◉</span> Câmeras ao vivo</a>
-        <a class="nav-item" href="#plates"><span class="nav-icon">▤</span> Reconhecimento de placas</a>
-        <a class="nav-item" href="#vehicles"><span class="nav-icon">▰</span> Veículos</a>
-        <a class="nav-item" href="#events"><span class="nav-icon">◷</span> Movimentações</a>
-        <a class="nav-item" href="#security"><span class="nav-icon">⬡</span> Segurança inteligente</a>
-        <a class="nav-item" href="#reports"><span class="nav-icon">▥</span> Relatórios</a>
+        <button class="nav-item active" data-view="camera"><span class="nav-icon">▣</span> Câmeras ao vivo</button>
+        <button class="nav-item" data-view="events"><span class="nav-icon">▤</span> Eventos</button>
+        <button class="nav-item" data-view="plates"><span class="nav-icon">▣</span> Placas e veículos</button>
+        <button class="nav-item" id="settingsButton"><span class="nav-icon">⚙</span> Configurações</button>
       </nav>
       <div class="sidebar-bottom">
-        <div class="property-chip"><span class="status-dot muted"></span><div><strong>Reserva Celeste 3</strong><small>Ambiente de demonstração</small></div></div>
-        <a class="nav-item" href="#settings"><span class="nav-icon">⚙</span> Configurações</a>
+        <div class="connection-mini"><i id="apiDot" class="status-dot"></i><span id="apiStatus">Conectando API...</span></div>
+        <div class="account"><div class="account-avatar">AP</div><div><strong>Administrador</strong><small>Central de monitoramento</small></div></div>
         <div class="sidebar-foot">ACESS PORT IA <span>•</span> V1.0</div>
       </div>
     </aside>
 
-    <main class="main" id="overview">
+    <main class="main">
       <header class="topbar">
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
-        <div class="breadcrumb">ACESS PORT <span>/</span> <strong>Visão geral</strong></div>
+        <div class="breadcrumb">ACESS PORT <span>/</span> <strong id="pageTitle">Câmeras ao vivo</strong></div>
         <div class="top-actions">
-          <span class="system-state"><i class="status-dot muted" id="apiDot"></i><span id="apiStatus">API desconectada</span></span>
-          <button class="icon-button" id="settingsButton" title="Configurar API">⚙</button>
-          <div class="user-avatar" title="Administração">AD</div>
+          <div class="system-state"><i class="status-dot" id="topApiDot"></i><span id="topApiStatus">Verificando conexão</span></div>
+          <button class="icon-button" id="retryButton" title="Atualizar conexão">↻</button>
         </div>
       </header>
 
-      <section class="page-content">
-        <div class="welcome-row">
-          <div><div class="eyebrow">CENTRAL INTELIGENTE DE SEGURANÇA</div><h1>Visão geral</h1><p>Acompanhe câmeras, veículos e movimentações em um só lugar.</p></div>
-          <div class="date-card"><span>DATA DE HOJE</span><strong id="today">—</strong><small id="clock">--:--:--</small></div>
-        </div>
+      <div class="workspace">
+        <section class="camera-area" id="cameraView">
+          <div class="section-head">
+            <div><span class="eyebrow">MONITORAMENTO EM TEMPO REAL</span><h1>Visualização de câmeras</h1><p>Imagens transmitidas diretamente pelo DVR cadastrado.</p></div>
+            <div class="clock"><span id="today"></span><strong id="clock"></strong></div>
+          </div>
+          <div class="camera-grid" id="cameraGrid">
+            <article class="camera-card loading"><div class="camera-card-head"><span><i class="status-dot"></i> CÂMERA 01</span><b>•••</b></div><div class="camera-screen"><span>Aguardando conexão</span></div><div class="camera-meta">CANAL 01 <span>VERIFICANDO</span></div></article>
+            <article class="camera-card loading"><div class="camera-card-head"><span><i class="status-dot"></i> CÂMERA 02</span><b>•••</b></div><div class="camera-screen"><span>Aguardando conexão</span></div><div class="camera-meta">CANAL 02 <span>VERIFICANDO</span></div></article>
+            <article class="camera-card loading"><div class="camera-card-head"><span><i class="status-dot"></i> CÂMERA 03</span><b>•••</b></div><div class="camera-screen"><span>Aguardando conexão</span></div><div class="camera-meta">CANAL 03 <span>VERIFICANDO</span></div></article>
+            <article class="camera-card loading"><div class="camera-card-head"><span><i class="status-dot"></i> CÂMERA 04</span><b>•••</b></div><div class="camera-screen"><span>Aguardando conexão</span></div><div class="camera-meta">CANAL 04 <span>VERIFICANDO</span></div></article>
+          </div>
+          <div class="bottom-status"><span><i class="status-dot green"></i> Fluxo de vídeo</span><span id="cameraSummary">Aguardando dados do DVR</span></div>
+        </section>
 
-        <div class="notice" role="status"><span class="notice-icon">i</span><div><strong>Integração em preparação</strong><p>O painel está pronto para receber os dados do gateway e do DVR. As câmeras só serão exibidas como online após uma conexão validada.</p></div></div>
+        <section class="data-view hidden" id="eventsView">
+          <span class="eyebrow">REGISTROS DO SISTEMA</span><h1>Eventos de acesso</h1>
+          <p class="view-description">Histórico de eventos recebidos pela plataforma.</p>
+          <div class="empty-panel"><span class="empty-icon">▤</span><strong>Nenhum evento recebido</strong><p>Os registros aparecerão aqui quando a integração de eventos estiver configurada.</p></div>
+        </section>
 
-        <div class="section-heading"><div><h2>Monitoramento</h2><p>Status dos canais cadastrados</p></div><span class="live-label"><i class="status-dot muted"></i> STATUS REAL</span></div>
-        <div class="camera-grid" id="cameraGrid">
-          <article class="camera-card"><div class="camera-preview"><span class="camera-number">01</span><span class="camera-symbol">◉</span><span class="camera-pill">AGUARDANDO CONEXÃO</span></div><div class="camera-info"><strong>Câmera 01</strong><small>Canal 1 · DVR Intelbras</small></div></article>
-          <article class="camera-card"><div class="camera-preview"><span class="camera-number">02</span><span class="camera-symbol">◉</span><span class="camera-pill">AGUARDANDO CONEXÃO</span></div><div class="camera-info"><strong>Câmera 02</strong><small>Canal 2 · DVR Intelbras</small></div></article>
-          <article class="camera-card"><div class="camera-preview"><span class="camera-number">03</span><span class="camera-symbol">◉</span><span class="camera-pill">AGUARDANDO CONEXÃO</span></div><div class="camera-info"><strong>Câmera 03</strong><small>Canal 3 · DVR Intelbras</small></div></article>
-          <article class="camera-card"><div class="camera-preview"><span class="camera-number">04</span><span class="camera-symbol">◉</span><span class="camera-pill">AGUARDANDO CONEXÃO</span></div><div class="camera-info"><strong>Câmera 04</strong><small>Canal 4 · DVR Intelbras</small></div></article>
-        </div>
-
-        <div class="section-heading lower"><div><h2>Módulos inteligentes</h2><p>Recursos previstos para as próximas integrações</p></div></div>
-        <div class="module-grid">
-          <article class="module-card"><span class="module-icon green">▤</span><div><strong>Leitura de placas</strong><p>Captura e consulta de placas de veículos.</p><span class="module-state">EM DESENVOLVIMENTO</span></div></article>
-          <article class="module-card"><span class="module-icon amber">▰</span><div><strong>Identificação de veículos</strong><p>Detecção e classificação por tipo.</p><span class="module-state">PLANEJADO</span></div></article>
-          <article class="module-card"><span class="module-icon blue">◷</span><div><strong>Movimentações</strong><p>Histórico de entradas e saídas.</p><span class="module-state">PLANEJADO</span></div></article>
-          <article class="module-card"><span class="module-icon red">⬡</span><div><strong>Segurança inteligente</strong><p>Alertas de possível carona e situações atípicas.</p><span class="module-state">PLANEJADO</span></div></article>
-        </div>
-
-        <div class="bottom-grid">
-          <section class="panel" id="events"><div class="panel-heading"><div><h2>Últimas movimentações</h2><p>Eventos recebidos pela plataforma</p></div><a href="#events">Ver histórico</a></div><div class="empty-state"><span>◷</span><strong>Nenhuma movimentação recebida</strong><p>Os eventos aparecerão aqui após a integração com o gateway.</p></div></section>
-          <section class="panel" id="connection"><div class="panel-heading"><div><h2>Conexão do sistema</h2><p>Diagnóstico da plataforma</p></div></div><div class="connection-row"><span>API ACESS PORT IA</span><strong id="apiDetail">Não conectada</strong></div><div class="connection-row"><span>Gateway da portaria</span><strong class="pending">Não configurado</strong></div><div class="connection-row"><span>DVR / canais</span><strong class="pending">Aguardando teste</strong></div><button class="outline-button" id="retryButton">Testar conexão com API</button></section>
-        </div>
-        <footer>© <span id="year"></span> ACESS PORT IA · Plataforma de segurança inteligente</footer>
-      </section>
+        <section class="data-view hidden" id="platesView">
+          <span class="eyebrow">CONSULTA DE VEÍCULOS</span><h1>Placas e veículos</h1>
+          <p class="view-description">Área preparada para consulta de placas e características dos veículos.</p>
+          <div class="feature-grid">
+            <div class="feature-tile"><span>01</span><strong>Placa</strong><small>Identificação ou lançamento manual</small></div>
+            <div class="feature-tile"><span>02</span><strong>Cor e tipo</strong><small>Características do veículo</small></div>
+            <div class="feature-tile"><span>03</span><strong>Imagem</strong><small>Foto vinculada ao registro</small></div>
+            <div class="feature-tile"><span>04</span><strong>Origem</strong><small>Câmera, data e horário</small></div>
+          </div>
+          <p class="notice-text">A leitura automática de placas e o armazenamento dos registros ainda precisam ser implementados no backend. Nenhum reconhecimento de pessoas será utilizado.</p>
+        </section>
+      </div>
     </main>
+
+    <aside class="event-rail">
+      <div class="rail-head"><div><span class="eyebrow">ATIVIDADE</span><h2>Eventos recentes</h2></div><span class="live-tag"><i class="status-dot green"></i> AO VIVO</span></div>
+      <div class="event-date" id="eventDate"></div>
+      <div class="event-list" id="eventList">
+        <div class="event-empty"><span>◷</span><strong>Aguardando eventos</strong><small>Os acessos registrados serão exibidos aqui.</small></div>
+      </div>
+      <div class="rail-footer"><span>STATUS DA API</span><strong id="apiDetail">Verificando...</strong><button id="railRetry">Testar conexão</button></div>
+    </aside>
   </div>
 
-  <dialog id="apiDialog" class="config-dialog">
-    <form method="dialog" id="apiForm">
-      <div class="dialog-head"><div><span class="eyebrow">CONFIGURAÇÃO</span><h2>Conectar à API</h2></div><button class="close-button" value="cancel" aria-label="Fechar">×</button></div>
-      <p>Informe o endereço da API instalada no servidor. Não coloque senhas ou endereços RTSP aqui.</p>
-      <label for="apiUrl">Endereço base da API</label>
-      <input id="apiUrl" type="url" placeholder="http://127.0.0.1:8000" value="http://127.0.0.1:8000">
-      <div class="dialog-actions"><button class="outline-button" value="cancel">Cancelar</button><button class="primary-button" id="saveApi" value="default">Salvar e testar</button></div>
+  <dialog class="config-dialog" id="apiDialog">
+    <form id="apiForm" method="dialog">
+      <div class="dialog-head"><div><span class="eyebrow">CONFIGURAÇÃO</span><h2>Conexão com API</h2></div><button class="close-button" type="button" id="closeDialog">×</button></div>
+      <p>Informe o endereço do servidor ACESS PORT IA.</p>
+      <label for="apiUrl">Endereço da API</label>
+      <input id="apiUrl" type="url" placeholder="http://127.0.0.1:8000" required>
       <small id="configFeedback" class="feedback"></small>
+      <div class="dialog-actions"><button type="button" class="outline-button" id="cancelDialog">Cancelar</button><button type="submit" class="primary-button" id="saveApi">Salvar e testar</button></div>
     </form>
   </dialog>
   <script src="./app.js"></script>

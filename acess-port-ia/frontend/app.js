@@ -61,7 +61,10 @@
     const dt = dateParts(event.created_at);
     const image = event.image_url ? `${api()}${event.image_url}` : "";
     const dir = String(event.direction || "").toUpperCase();
-    const directionClass = dir === "ENTRADA" ? "entry" : "exit";
+    const isEntry = dir === "ENTRADA";
+    const isExit = dir === "SAÍDA" || dir === "SAIDA";
+    const directionClass = isEntry ? "entry" : "exit";
+    const directionLabel = isEntry ? "ENTROU" : isExit ? "SAIU" : (dir || "SEM DIREÇÃO");
     const type = event.vehicle_type || "Não identificado";
     const color = event.color || "Não identificada";
     const photo = image
@@ -70,7 +73,7 @@
     return `<article class="event-card ${compact ? "compact" : ""}">
       ${photo}
       <div class="event-details">
-        <div class="event-title-row"><strong class="event-plate">${esc(event.plate || "PLACA NÃO LIDA")}</strong><span class="direction-pill ${directionClass}">${esc(dir || "SEM DIREÇÃO")}</span></div>
+        <div class="event-title-row"><strong class="event-plate">${esc(event.plate || "PLACA NÃO LIDA")}</strong><span class="direction-pill ${directionClass}">${esc(directionLabel)}</span></div>
         <div class="event-attributes"><span>${esc(type)}</span><span>Cor: ${esc(color)}</span><span>Câmera ${String(event.channel ?? "—").padStart(2, "0")}</span></div>
         <div class="event-time">${esc(dt.date)} · ${esc(dt.time)}</div>
       </div>
@@ -80,8 +83,9 @@
   function renderEvents(events) {
     const list = $("eventList");
     const valid = Array.isArray(events) ? events : [];
+    // A lateral mostra somente os seis eventos mais recentes; o histórico completo permanece nas outras telas.
     list.innerHTML = valid.length
-      ? valid.slice(0, 20).map(e => eventCard(e, true)).join("")
+      ? valid.slice(0, 6).map(e => eventCard(e, true)).join("")
       : `<div class="event-empty"><span>◷</span><strong>Aguardando eventos</strong><small>Os veículos reconhecidos aparecerão aqui automaticamente.</small></div>`;
 
     const full = $("eventsFullList");

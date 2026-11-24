@@ -59,7 +59,9 @@
 
   function eventCard(event, compact = false) {
     const dt = dateParts(event.created_at);
-    const image = event.image_url ? `${api()}${event.image_url}` : "";
+    const imagePaths = Array.isArray(event.image_urls) && event.image_urls.length
+      ? event.image_urls.slice(0, 4)
+      : (event.image_url ? [event.image_url] : []);
     const dir = String(event.direction || "").toUpperCase();
     const isEntry = dir === "ENTRADA";
     const isExit = dir === "SAÍDA" || dir === "SAIDA";
@@ -67,9 +69,9 @@
     const directionLabel = isEntry ? "ENTROU" : isExit ? "SAIU" : (dir || "SEM DIREÇÃO");
     const type = event.vehicle_type || "Não identificado";
     const color = event.color || "Não identificada";
-    const photo = image
-      ? `<img class="event-photo" src="${esc(image)}" alt="Foto do veículo ${esc(event.plate || "sem placa")}" loading="lazy" onerror="this.classList.add('image-error');this.removeAttribute('src')">`
-      : `<div class="event-photo no-photo">SEM FOTO</div>`;
+    const photo = imagePaths.length
+      ? `<div class="event-photo-grid count-${imagePaths.length}" aria-label="${imagePaths.length} fotos do veículo">${imagePaths.map((path, index) => `<img src="${esc(api() + path)}" alt="Foto ${index + 1} do veículo ${esc(event.plate || "sem placa")}" loading="lazy" onerror="this.classList.add('image-error')">`).join("")}</div>`
+      : `<div class="event-photo-grid no-photo">SEM FOTO</div>`;
     return `<article class="event-card ${compact ? "compact" : ""}">
       ${photo}
       <div class="event-details">

@@ -68,14 +68,14 @@
     const directionClass = isEntry ? "entry" : "exit";
     const directionLabel = isEntry ? "ENTROU" : isExit ? "SAIU" : (dir || "SEM DIREÇÃO");
     const type = event.vehicle_type || "Não identificado";
-    const color = event.color || "Não identificada";
+    const color = event.color || "Não encontrada";
     const photo = imagePaths.length
       ? `<div class="event-photo-grid count-${imagePaths.length}" aria-label="${imagePaths.length} fotos do veículo">${imagePaths.map((path, index) => `<img src="${esc(api() + path)}" alt="Foto ${index + 1} do veículo ${esc(event.plate || "sem placa")}" loading="lazy" onerror="this.classList.add('image-error')">`).join("")}</div>`
       : `<div class="event-photo-grid no-photo">SEM FOTO</div>`;
     return `<article class="event-card ${compact ? "compact" : ""}">
       ${photo}
       <div class="event-details">
-        <div class="event-title-row"><strong class="event-plate">${esc(event.plate || "PLACA NÃO LIDA")}</strong><span class="direction-pill ${directionClass}">${esc(directionLabel)}</span></div>
+        <div class="event-title-row"><strong class="event-plate">Placa: ${esc(event.plate || "Não encontrada")}</strong><span class="direction-pill ${directionClass}">${esc(directionLabel)}</span></div>
         <div class="event-attributes"><span>${esc(type)}</span><span>Cor: ${esc(color)}</span><span>Câmera ${String(event.channel ?? "—").padStart(2, "0")}</span></div>
         <div class="event-time">${esc(dt.date)} · ${esc(dt.time)}</div>
       </div>
@@ -98,10 +98,10 @@
     }
     const plateList = $("platesFullList");
     if (plateList) {
-      const withPlate = valid.filter(e => e.plate);
-      plateList.innerHTML = withPlate.length
-        ? withPlate.map(e => eventCard(e, false)).join("")
-        : `<div class="empty-panel"><span class="empty-icon">▣</span><strong>Nenhuma placa reconhecida</strong><p>As placas identificadas serão listadas aqui.</p></div>`;
+      // Esta tela também mostra veículos registrados sem placa legível.
+      plateList.innerHTML = valid.length
+        ? valid.map(e => eventCard(e, false)).join("")
+        : `<div class="empty-panel"><span class="empty-icon">▣</span><strong>Nenhum veículo registrado</strong><p>Carros e motocicletas aparecerão aqui, mesmo sem placa legível.</p></div>`;
     }
     lastEventIds = new Set(valid.map(e => e.id));
   }
